@@ -1,0 +1,25 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!--Mapeo de la clase Alumno con la tabla alumnos-->
+<hibernate-mapping>
+    <class name="clases.Facturas" table="facturas" catalog="tesGiloM">
+        <id name="id">
+            <column name="id"/>
+            <generator class="increment"/>
+        </id>
+        <property name="serie"/>
+        <property name="numeroFac"/>
+        <property name="fecha"/>
+        <property name="baseImponible"/>
+        <property name="iva"/>
+        <property name="total"/>
+        <property name="pagado"/>
+        <property name="idSocio"/>
+        <property name="idEvento"/>
+        <property name="formaDePago"/>
+        
+    </class>
+</hibernate-mapping>
+        
+        

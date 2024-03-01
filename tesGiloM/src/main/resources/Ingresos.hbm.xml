@@ -1,0 +1,15 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!--Mapeo de la clase Alumno con la tabla alumnos-->
+<hibernate-mapping>
+    <class name="clases.Ingresos" table="Ingresos" catalog="tesGiloM">
+        <id name="id">
+			<column name="id" />
+			<generator class="increment" />
+        </id>
+                <property name="idSocio" />
+                 <property name="idEvento" />
+                 <property name="importe" />
+                 <property name="fecha" />
+                 <property name="concepto" />
+      </class>
+      </hibernate-mapping>

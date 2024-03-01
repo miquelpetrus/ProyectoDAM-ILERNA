@@ -1,0 +1,36 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!--Mapeo de la clase Alumno con la tabla alumnos-->
+<hibernate-mapping>
+    <class name="clases.Socios" table="socios" catalog="tesGiloM">
+        <id name="id">
+			<column name="id" />
+			<generator class="increment" />
+        </id>
+		<property name="name" />
+		<property name="apellido1" />
+		<property name="apellido2" />
+		<property name="nif" />
+		<property name="direccion" />
+		<property name="cp" />
+		<property name="poblacion" />
+		<property name="provincia" />
+		<property name="telefono" />
+		<property name="email" />
+		<property name="edad" type="integer" />
+		<property name="sexo" />
+        
+        <!--Con sultado en https://mkyong.com/hibernate/hibernate-many-to-many-relationship-example/ -->
+        <!--  // ToDo: 2020-07-14 - 2020-07-14 - Revisar el mapeo de la relación muchos a muchos
+              // Aquí hay que arrreglar las relaciones entre las tablas
+         --> 
+
+        <set name="modulos" table="alumno_modulo">
+            <key>
+				<column name="idAlumno" />
+            </key>
+            <many-to-many entity-name="pac.Modulo">
+				<column name="idModulo" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>
