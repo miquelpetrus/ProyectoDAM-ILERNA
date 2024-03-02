@@ -50,6 +50,7 @@ public class MainApp extends javax.swing.JFrame {
         configFrame.getContentPane().add(configuracionView);
         configFrame.pack();
         configFrame.setVisible(true);
+        configFrame.setLocationRelativeTo(null);
         // Cambiar el enfoque después de que la aplicación esté completamente inicializada
         EventQueue.invokeLater(() -> {
             configFrame.toFront();

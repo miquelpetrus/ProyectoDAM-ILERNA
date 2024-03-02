@@ -12,6 +12,7 @@ import org.hibernate.query.Query;
 
 import java.awt.Window;
 import java.util.List;
+import javax.swing.JFrame;
 
 /**
  *
@@ -118,7 +119,7 @@ public class SociosView extends javax.swing.JPanel {
             jTableUsers.getColumnModel().getColumn(0).setResizable(false);
         }
 
-        jButtonCrearNuevo.setText("Crear Usuario");
+        jButtonCrearNuevo.setText("Crear Socio");
         jButtonCrearNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCrearNuevoActionPerformed(evt);
@@ -168,6 +169,25 @@ public class SociosView extends javax.swing.JPanel {
 
     private void jButtonCrearNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearNuevoActionPerformed
         // TODO add your handling code here:
+        try {
+
+            AddSociosView addSociosView = new AddSociosView();
+
+            // Crear un nuevo JFrame para la ventana de socios
+            JFrame addSociosFrame = new JFrame("Añadir nuevo socio");
+            addSociosFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            addSociosFrame.getContentPane().add(addSociosView);
+            addSociosFrame.pack();
+            addSociosFrame.setVisible(true);
+            addSociosFrame.setLocationRelativeTo(null);
+            
+            Window window = SwingUtilities.getWindowAncestor(this);
+            // Cerrar la ventana actual
+            window.dispose();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jButtonCrearNuevoActionPerformed
 
     private void jButtonCerrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrar1ActionPerformed

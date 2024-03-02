@@ -1,6 +1,15 @@
 package clases;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Socios {
+        
+        @Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String nombre;
 	private String apellido1;
@@ -33,6 +42,16 @@ public class Socios {
 		this.fechaBaja = fechaBaja;
 		this.estado = estado;
 	}
+        
+        public Socios(int id, String nombre, String apellido1, String apellido2, String nif, String telefono, String email) {
+		this.id = id;
+		this.nombre = nombre;
+		this.apellido1 = apellido1;
+		this.apellido2 = apellido2;
+		this.nif = nif;
+		this.telefono = telefono;
+		this.email = email;
+        }
 
 	public int getId() {
 		return id;
