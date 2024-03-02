@@ -1,10 +1,16 @@
 package clases;
 
-import jakarta.persistence.Entity;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Users {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 	private String name;
 	private String apellido1;
 	private String apellido2;
@@ -12,7 +18,6 @@ public class Users {
 	private String email;
 	private String nif;
 	private String role;
-    private Long id;
 	
 	public Users(String name, String apellido1, String apellido2, String password, String email, String nif, String role, String status) {
         this.name = name;

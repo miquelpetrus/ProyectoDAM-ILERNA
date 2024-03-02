@@ -1,33 +1,29 @@
-package Views;
+package views;
 
 import java.awt.EventQueue;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Properties;
-
 import javax.swing.*;
-import org.hibernate.Session;
-import org.hibernate.cfg.Configuration;
+import controllers.HibernateUtil;
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 /**
  *
  * @author miquelpetrus
  */
 public class MainApp extends javax.swing.JFrame {
-
-    
-    public MainApp() {
+	
+	private static final long serialVersionUID = 1L;
+	
+	public MainApp() {
         initComponents();
-        // this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
         if (!existeArchivoConfiguracion()) {
             crearArchivoConfiguracion();
             abrirVistaConfiguracion();
         } else {
-            cargarConfiguracionHibernate();
+        	HibernateUtil.buildSessionFactory();
         }
 
     }
@@ -60,29 +56,6 @@ public class MainApp extends javax.swing.JFrame {
             configFrame.repaint();
             configFrame.requestFocus();
         });
-    }
-    
-    private SessionFactory cargarConfiguracionHibernate() {
-        Properties prop = new Properties();
-        try (FileInputStream fis = new FileInputStream("hibernate-config.properties")) {
-            prop.load(fis);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
-        String ip = prop.getProperty("ip");
-        String database = prop.getProperty("database");
-        String user = prop.getProperty("user");
-        String password = prop.getProperty("password");
-
-        // Configuración de Hibernate con la información cargada desde el archivo de propiedades
-        Configuration cfg = new Configuration()
-                .setProperty("hibernate.connection.url", "jdbc:mysql://" + ip + "/" + database)
-                .setProperty("hibernate.connection.username", user)
-                .setProperty("hibernate.connection.password", password)
-                .configure();
-
-        return cfg.buildSessionFactory(new StandardServiceRegistryBuilder().configure().build());
     }
 
     
@@ -218,6 +191,7 @@ public class MainApp extends javax.swing.JFrame {
             configFrame.getContentPane().add(configuracionView);
             configFrame.pack();
             configFrame.setVisible(true);
+            configFrame.setLocationRelativeTo(null);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -236,10 +210,7 @@ public class MainApp extends javax.swing.JFrame {
     private void jMenuUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuUsersActionPerformed
         // TODO add your handling code here:
         try {
-            // Cargar la configuración de Hibernate y obtener la SessionFactory
-            SessionFactory sessionFactory = cargarConfiguracionHibernate();
-
-            SociosView usersView = new SociosView(sessionFactory);
+            UsersView usersView = new UsersView();
 
             // Crear un nuevo JFrame para la ventana de usuarios
             JFrame usersFrame = new JFrame("Usuarios");
@@ -247,6 +218,7 @@ public class MainApp extends javax.swing.JFrame {
             usersFrame.getContentPane().add(usersView);
             usersFrame.pack();
             usersFrame.setVisible(true);
+            usersFrame.setLocationRelativeTo(null);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -255,18 +227,17 @@ public class MainApp extends javax.swing.JFrame {
 
     private void jMenuSociosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSociosActionPerformed
         // TODO add your handling code here:
-                try {
-            // Cargar la configuración de Hibernate y obtener la SessionFactory
-            SessionFactory sessionFactory = cargarConfiguracionHibernate();
+        try {
 
-            SociosView usersView = new SociosView(sessionFactory);
+            SociosView sociosView = new SociosView();
 
             // Crear un nuevo JFrame para la ventana de socios
-            JFrame usersFrame = new JFrame("Socios");
-            usersFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            usersFrame.getContentPane().add(usersView);
-            usersFrame.pack();
-            usersFrame.setVisible(true);
+            JFrame sociosFrame = new JFrame("Socios");
+            sociosFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            sociosFrame.getContentPane().add(sociosView);
+            sociosFrame.pack();
+            sociosFrame.setVisible(true);
+            sociosFrame.setLocationRelativeTo(null);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -313,7 +284,9 @@ public class MainApp extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainApp().setVisible(true);
+                MainApp mainapp = new MainApp(); // instancia de la clase MainApp
+                mainapp.setVisible(true);
+                mainapp.setLocationRelativeTo(null); // para que se muestre en el centro de la pantalla
             }
         });
     }

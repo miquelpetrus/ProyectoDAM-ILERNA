@@ -1,6 +1,7 @@
-package Views;
+package views;
 
-import clases.Users;
+import clases.Socios;
+import controllers.HibernateUtil;
 
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
@@ -16,20 +17,20 @@ import java.util.List;
  *
  * @author miquelpetrus
  */
-public class UsersView extends javax.swing.JPanel {
+public class SociosView extends javax.swing.JPanel {
 
     private DefaultTableModel tableModel;
     private SessionFactory sessionFactory;
 
-    public UsersView(SessionFactory sessionFactory) {
+    public SociosView() {
         initComponents();
-        this.sessionFactory = sessionFactory;
+        this.sessionFactory = HibernateUtil.buildSessionFactory();
         initializeTableModel();
         loadUserData();
     }
 
     private void initializeTableModel() {
-        Object[] columnNames = {"id", "Nombre", "Apellido 1", "Apellido 2", "NIF", "Email", "Rol", "Password"};
+        Object[] columnNames = {"id", "Nombre", "Apellido 1", "Apellido 2", "NIF", "Email"};
         Object[][] data = {};  // Puedes inicializarlo con datos si los tienes al inicio
         tableModel = new DefaultTableModel(data, columnNames) {
             @Override
@@ -49,24 +50,22 @@ public class UsersView extends javax.swing.JPanel {
                 transaction = session.beginTransaction();
 
                 // Utiliza HQL para obtener todos los usuarios de la base de datos
-                String hql = "FROM Users";
-                Query<Users> query = session.createQuery(hql, Users.class);
-                List<Users> users = query.list();
+                String hql = "FROM Socios";
+                Query<Socios> query = session.createQuery(hql, Socios.class);
+                List<Socios> socios = query.list();
 
                 // Limpia la tabla antes de cargar nuevos datos
                 tableModel.setRowCount(0);
 
                 // Agrega los usuarios al modelo de la tabla
-                for (Users user : users) {
+                for (Socios socio : socios) {
                     tableModel.addRow(new Object[]{
-                            user.getId(),
-                            user.getName(),
-                            user.getApellido1(),
-                            user.getApellido2(),
-                            user.getNif(),
-                            user.getEmail(),
-                            user.getRole(),
-                            user.getPassword()
+                            socio.getId(),
+                            socio.getNombre(),
+                            socio.getApellido1(),
+                            socio.getApellido2(),
+                            socio.getNif(),
+                            socio.getEmail(),
                     });
                 }
 
@@ -96,18 +95,28 @@ public class UsersView extends javax.swing.JPanel {
 
             },
             new String [] {
-                "id", "Nombre", "Apellido 1", "Apellido 2", "NIF", "Email", "Rol", "Password"
+                "id", "Nombre", "Apellido 1", "Apellido 2", "NIF", "Email"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Long.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Long.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
         jScrollPane1.setViewportView(jTableUsers);
+        if (jTableUsers.getColumnModel().getColumnCount() > 0) {
+            jTableUsers.getColumnModel().getColumn(0).setResizable(false);
+        }
 
         jButtonCrearNuevo.setText("Crear Usuario");
         jButtonCrearNuevo.addActionListener(new java.awt.event.ActionListener() {

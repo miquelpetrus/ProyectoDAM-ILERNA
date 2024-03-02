@@ -1,6 +1,7 @@
-package Views;
+package views;
 
-import clases.Socios;
+import clases.Users;
+import controllers.HibernateUtil;
 
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
@@ -11,28 +12,32 @@ import org.hibernate.query.Query;
 
 import java.awt.Window;
 import java.util.List;
+import javax.swing.JFrame;
 
 /**
  *
  * @author miquelpetrus
  */
-public class SociosView extends javax.swing.JPanel {
+public class UsersView extends javax.swing.JPanel {
 
-    private DefaultTableModel tableModel;
+    private static final long serialVersionUID = 1L;
+	private DefaultTableModel tableModel;
     private SessionFactory sessionFactory;
 
-    public SociosView(SessionFactory sessionFactory) {
+    public UsersView() {
         initComponents();
-        this.sessionFactory = sessionFactory;
+        this.sessionFactory = HibernateUtil.buildSessionFactory();
         initializeTableModel();
         loadUserData();
     }
 
     private void initializeTableModel() {
-        Object[] columnNames = {"id", "Nombre", "Apellido 1", "Apellido 2", "NIF", "Email"};
+        Object[] columnNames = {"id", "Nombre", "Apellido 1", "Apellido 2", "NIF", "Email", "Rol", "Password"};
         Object[][] data = {};  // Puedes inicializarlo con datos si los tienes al inicio
         tableModel = new DefaultTableModel(data, columnNames) {
-            @Override
+            private static final long serialVersionUID = 1L;
+
+			@Override
             public boolean isCellEditable(int row, int column) {
                 // Deshabilitar la edición directa de celdas
                 return false;
@@ -49,22 +54,24 @@ public class SociosView extends javax.swing.JPanel {
                 transaction = session.beginTransaction();
 
                 // Utiliza HQL para obtener todos los usuarios de la base de datos
-                String hql = "FROM Socios";
-                Query<Socios> query = session.createQuery(hql, Socios.class);
-                List<Socios> socios = query.list();
+                String hql = "FROM Users";
+                Query<Users> query = session.createQuery(hql, Users.class);
+                List<Users> users = query.list();
 
                 // Limpia la tabla antes de cargar nuevos datos
                 tableModel.setRowCount(0);
 
                 // Agrega los usuarios al modelo de la tabla
-                for (Socios socio : socios) {
+                for (Users user : users) {
                     tableModel.addRow(new Object[]{
-                            socio.getId(),
-                            socio.getNombre(),
-                            socio.getApellido1(),
-                            socio.getApellido2(),
-                            socio.getNif(),
-                            socio.getEmail(),
+                            user.getId(),
+                            user.getName(),
+                            user.getApellido1(),
+                            user.getApellido2(),
+                            user.getNif(),
+                            user.getEmail(),
+                            user.getRole(),
+                            user.getPassword()
                     });
                 }
 
@@ -94,28 +101,18 @@ public class SociosView extends javax.swing.JPanel {
 
             },
             new String [] {
-                "id", "Nombre", "Apellido 1", "Apellido 2", "NIF", "Email"
+                "id", "Nombre", "Apellido 1", "Apellido 2", "NIF", "Email", "Rol", "Password"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Long.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, true, true, true, true, true
+                java.lang.Long.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
         });
         jScrollPane1.setViewportView(jTableUsers);
-        if (jTableUsers.getColumnModel().getColumnCount() > 0) {
-            jTableUsers.getColumnModel().getColumn(0).setResizable(false);
-        }
 
         jButtonCrearNuevo.setText("Crear Usuario");
         jButtonCrearNuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -167,6 +164,25 @@ public class SociosView extends javax.swing.JPanel {
 
     private void jButtonCrearNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearNuevoActionPerformed
         // TODO add your handling code here:
+        try {
+
+            AddUsersView addUsersView = new AddUsersView();
+
+            // Crear un nuevo JFrame para la ventana de socios
+            JFrame addUsersFrame = new JFrame("Añadir nuevo usuario");
+            addUsersFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            addUsersFrame.getContentPane().add(addUsersView);
+            addUsersFrame.pack();
+            addUsersFrame.setVisible(true);
+            addUsersFrame.setLocationRelativeTo(null);
+            
+            Window window = SwingUtilities.getWindowAncestor(this);
+            // Cerrar la ventana actual
+            window.dispose();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jButtonCrearNuevoActionPerformed
 
     private void jButtonCerrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrar1ActionPerformed

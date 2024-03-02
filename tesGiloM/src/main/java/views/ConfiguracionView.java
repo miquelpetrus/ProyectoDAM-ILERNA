@@ -1,4 +1,4 @@
-package Views;
+package views;
 
 import java.awt.Window;
 import java.io.FileInputStream;
@@ -203,7 +203,7 @@ public class ConfiguracionView extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextNomPSWActionPerformed
 
-    private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
+    private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {                                               
         // TODO add your handling code here:
         String server = jTextNomSrv.getText();
         String ip = jTextNomIP.getText();
