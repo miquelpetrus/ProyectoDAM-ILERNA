@@ -1,19 +1,19 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!--Mapeo de la clase Alumno con la tabla alumnos-->
 <hibernate-mapping>
-    <class name="clases.Gastos" table="Gastos" catalog="tesGiloM">
-        <id name="id">
-			<column name="id" />
+    <class name="clases.Gastos" table="Gastos" catalog="moliGest">
+        <id name="idGasto">
+			<column name="idGasto" />
 			<generator class="increment" />
         </id>
                 <property name="idProveedor" />
                 <property name="idEvento" />
                 <property name="idFactura" />
+                <property name="concepto" />
                 <property name="fecha" />
                 <property name="importe" />
                 <property name="pagado" />
                 <property name="observaciones" />
-                <property name="idCaja" />
                 <property name="idBanco" />
      </class>
  </hibernate-mapping>

@@ -3,7 +3,7 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!--Mapeo de la clase Alumno con la tabla alumnos-->
 <hibernate-mapping>
-    <class name="clases.Users" table="users" catalog="tesGiloM">
+	<class name="clases.Users" table="users" catalog="moliGest">
         <id name="id">
             <column name="id"/>
             <generator class="increment"/>
@@ -20,7 +20,7 @@
         <!--  // ToDo: 2020-07-14 - 2020-07-14 - Revisar el mapeo de la relación muchos a muchos
               // Aquí hay que arrreglar las relaciones entre las tablas
          --> 
-
+<!-- 
         <set name="modulos" table="alumno_modulo">
             <key>
                 <column name="idAlumno"/>
@@ -28,6 +28,6 @@
             <many-to-many entity-name="pac.Modulo">
                 <column name="idModulo"/>
             </many-to-many>
-        </set>
+        </set> -->
     </class>
 </hibernate-mapping>

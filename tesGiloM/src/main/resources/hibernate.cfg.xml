@@ -2,10 +2,10 @@
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property> <!--Dialecto para la conexión-->
-        <property name="hbm2ddl.auto">create</property><!--como se va a comportar Hibernate con la bbdd-->
+	<property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
+        <property name="hbm2ddl.auto">update</property><!--como se va a comportar Hibernate con la bbdd-->
         <property name="connection.url">jdbc:mysql://192.168.2.10:3306/moliGest</property><!--Definición de a dónde nos vamos a conectar-->
-        <property name="connection.username">admin</property><!--Usuario con el que nos vamos a conectar-->
+        <property name="connection.username">macbabidi</property><!--Usuario con el que nos vamos a conectar-->
         <property name="connection.password">Miquel1979</property><!--contraseña del usuario conectar-->
 
         <!--Mapeo de los ficheros de configuración para cada una de las clases-->
@@ -20,7 +20,8 @@
         <mapping resource="Eventos.hbm.xml"/>
 		<mapping resource="Ingresos.hbm.xml"/>
 		<mapping resource="Gastos.hbm.xml"/>
-		<mapping resource="Bancos.hbm.xml"/>        
+		<mapping resource="Bancos.hbm.xml"/>      
+
 
 
     </session-factory>

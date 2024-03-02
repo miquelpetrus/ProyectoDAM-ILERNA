@@ -3,6 +3,7 @@ package clases;
 public class Roles {
 	private int id;
 	private String nombre;
+    private String descripcion;
 
 	public Roles() {
 	}
@@ -12,10 +13,12 @@ public class Roles {
 		this.nombre = nombre;
 	}
 
-	public Roles(String nombre) {
+	public Roles(int id, String nombre, String descripcion) {
+		this.id = id;
 		this.nombre = nombre;
+		this.descripcion = descripcion;
 	}
-
+	
 	public int getId() {
 		return id;
 	}
@@ -24,12 +27,23 @@ public class Roles {
 		return nombre;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	
+	
 
 }

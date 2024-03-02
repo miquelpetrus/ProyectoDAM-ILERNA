@@ -2,87 +2,39 @@ package clases;
 
 public class Bancos {
 	private String nombre;
-	private String direccion;
-	private String telefono;
-	private String correo;
-	private String web;
-	private String horario;
-	private String logo;
-
-	public Bancos() {
-	}
-
-	public Bancos(String nombre, String direccion, String telefono, String correo, String web, String horario,
-			String logo) {
+    private int id;
+    private int saldo;
+    
+	public Bancos(String nombre, int id, int saldo) {
 		this.nombre = nombre;
-		this.direccion = direccion;
-		this.telefono = telefono;
-		this.correo = correo;
-		this.web = web;
-		this.horario = horario;
-		this.logo = logo;
+		this.id = id;
+		this.saldo = saldo;
 	}
 
 	public String getNombre() {
 		return nombre;
 	}
 
-	public String getDireccion() {
-		return direccion;
-	}
-
-	public String getTelefono() {
-		return telefono;
-	}
-
-	public String getCorreo() {
-		return correo;
-	}
-
-	public String getWeb() {
-		return web;
-	}
-
-	public String getHorario() {
-		return horario;
-	}
-
-	public String getLogo() {
-		return logo;
-	}
-
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
+	public int getId() {
+		return id;
 	}
 
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public void setCorreo(String correo) {
-		this.correo = correo;
+	public int getSaldo() {
+		return saldo;
 	}
 
-	public void setWeb(String web) {
-		this.web = web;
+	public void setSaldo(int saldo) {
+		this.saldo = saldo;
 	}
-
-	public void setHorario(String horario) {
-		this.horario = horario;
-	}
-
-	public void setLogo(String logo) {
-		this.logo = logo;
-	}
-
-	@Override
-	public String toString() {
-		return "Bancos{" + "nombre=" + nombre + ", direccion=" + direccion + ", telefono=" + telefono + ", correo="
-				+ correo + ", web=" + web + ", horario=" + horario + ", logo=" + logo + '}';
-	}
+	
+	
 
 }

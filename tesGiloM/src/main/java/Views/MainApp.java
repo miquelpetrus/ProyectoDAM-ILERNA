@@ -1,12 +1,16 @@
 package Views;
 
+import java.awt.EventQueue;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Properties;
+
 import javax.swing.*;
 import org.hibernate.Session;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 /**
  *
@@ -14,46 +18,73 @@ import org.hibernate.SessionFactory;
  */
 public class MainApp extends javax.swing.JFrame {
 
-    private Configuration hibernateConfiguration;
-    private static SessionFactory sessionFactory;
     
     public MainApp() {
         initComponents();
-        cargarConfiguracionHibernate();
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        // this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
-            try {
-                File configFile = new File("hibernate-config.properties");
-                if (configFile.exists()) {
-                    FileReader reader = new FileReader(configFile);
-                    hibernateConfiguration = new Configuration();
-                    hibernateConfiguration.getProperties().load(reader);
-                    reader.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            
-            try (Session session = sessionFactory.openSession()) {
-            // Aquí puedes realizar operaciones en la base de datos usando la sesión
-            // Por ejemplo, podrías realizar consultas o transacciones
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        if (!existeArchivoConfiguracion()) {
+            crearArchivoConfiguracion();
+            abrirVistaConfiguracion();
+        } else {
+            cargarConfiguracionHibernate();
+        }
+
     }
     
-        private static void cargarConfiguracionHibernate() {
-            try {
-                // Configura y carga la configuración de Hibernate desde hibernate.cfg.xml
-                Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
-                sessionFactory = configuration.buildSessionFactory();
+    private boolean existeArchivoConfiguracion() {
+        File archivoConfiguracion = new File("hibernate-config.properties");
+        return archivoConfiguracion.exists();
+    }
 
-                System.out.println("Configuración de Hibernate cargada correctamente.");
-            } catch (Exception e) {
-                System.err.println("Error al cargar la configuración de Hibernate: " + e.getMessage());
-                e.printStackTrace();
-            }
+    private void crearArchivoConfiguracion() {
+        try {
+            File archivoConfiguracion = new File("hibernate-config.properties");
+            archivoConfiguracion.createNewFile();
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
+    }
+
+    private void abrirVistaConfiguracion() {
+        ConfiguracionView configuracionView = new ConfiguracionView();
+        // Mostrar la vista de configuración...
+        JFrame configFrame = new JFrame("Configuración");
+        configFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        configFrame.getContentPane().add(configuracionView);
+        configFrame.pack();
+        configFrame.setVisible(true);
+        // Cambiar el enfoque después de que la aplicación esté completamente inicializada
+        EventQueue.invokeLater(() -> {
+            configFrame.toFront();
+            configFrame.repaint();
+            configFrame.requestFocus();
+        });
+    }
+    
+    private SessionFactory cargarConfiguracionHibernate() {
+        Properties prop = new Properties();
+        try (FileInputStream fis = new FileInputStream("hibernate-config.properties")) {
+            prop.load(fis);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        String ip = prop.getProperty("ip");
+        String database = prop.getProperty("database");
+        String user = prop.getProperty("user");
+        String password = prop.getProperty("password");
+
+        // Configuración de Hibernate con la información cargada desde el archivo de propiedades
+        Configuration cfg = new Configuration()
+                .setProperty("hibernate.connection.url", "jdbc:mysql://" + ip + "/" + database)
+                .setProperty("hibernate.connection.username", user)
+                .setProperty("hibernate.connection.password", password)
+                .configure();
+
+        return cfg.buildSessionFactory(new StandardServiceRegistryBuilder().configure().build());
+    }
+
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -139,9 +170,19 @@ public class MainApp extends javax.swing.JFrame {
         jMenuMiembros.setText("Miembros");
 
         jMenuUsers.setText("Usuarios");
+        jMenuUsers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuUsersActionPerformed(evt);
+            }
+        });
         jMenuMiembros.add(jMenuUsers);
 
         jMenuSocios.setText("Socios");
+        jMenuSocios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuSociosActionPerformed(evt);
+            }
+        });
         jMenuMiembros.add(jMenuSocios);
 
         jMenuBar1.add(jMenuMiembros);
@@ -166,7 +207,7 @@ public class MainApp extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuFacActionPerformed
 
-    private void jMenuConfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuConfActionPerformed
+    private void jMenuConfActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
         try {
             ConfiguracionView configuracionView = new ConfiguracionView();
@@ -181,7 +222,7 @@ public class MainApp extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }//GEN-LAST:event_jMenuConfActionPerformed
+    }
 
     private void jMenuFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFileActionPerformed
         // TODO add your handling code here:
@@ -191,6 +232,46 @@ public class MainApp extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jMenuSalirActionPerformed
+
+    private void jMenuUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuUsersActionPerformed
+        // TODO add your handling code here:
+        try {
+            // Cargar la configuración de Hibernate y obtener la SessionFactory
+            SessionFactory sessionFactory = cargarConfiguracionHibernate();
+
+            SociosView usersView = new SociosView(sessionFactory);
+
+            // Crear un nuevo JFrame para la ventana de usuarios
+            JFrame usersFrame = new JFrame("Usuarios");
+            usersFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            usersFrame.getContentPane().add(usersView);
+            usersFrame.pack();
+            usersFrame.setVisible(true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jMenuUsersActionPerformed
+
+    private void jMenuSociosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSociosActionPerformed
+        // TODO add your handling code here:
+                try {
+            // Cargar la configuración de Hibernate y obtener la SessionFactory
+            SessionFactory sessionFactory = cargarConfiguracionHibernate();
+
+            SociosView usersView = new SociosView(sessionFactory);
+
+            // Crear un nuevo JFrame para la ventana de socios
+            JFrame usersFrame = new JFrame("Socios");
+            usersFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            usersFrame.getContentPane().add(usersView);
+            usersFrame.pack();
+            usersFrame.setVisible(true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jMenuSociosActionPerformed
 
     /** Esto es una idea para poder mostrar las diferentes vistas en una misma ventana 
     private void mostrarVistaEnPanel(JPanel vista) {

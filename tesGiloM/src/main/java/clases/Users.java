@@ -1,5 +1,8 @@
 package clases;
 
+import jakarta.persistence.Entity;
+
+@Entity
 public class Users {
 	
 	private String name;
@@ -9,7 +12,7 @@ public class Users {
 	private String email;
 	private String nif;
 	private String role;
-	private String status;
+    private Long id;
 	
 	public Users(String name, String apellido1, String apellido2, String password, String email, String nif, String role, String status) {
         this.name = name;
@@ -19,7 +22,6 @@ public class Users {
         this.email = email;
         this.nif = nif;
         this.role = role;
-        this.status = status;
     }
 	
 	public Users() {
@@ -30,8 +32,15 @@ public class Users {
         this.email = "";
         this.nif = "";
         this.role = "";
-        this.status = "";
     }
+	
+    public Long getId() {
+        return id;
+    }
+    
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;
@@ -89,12 +98,6 @@ public class Users {
 		this.role = role;
 	}
 
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
+	
 	
 }

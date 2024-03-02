@@ -3,11 +3,12 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!--Mapeo de la clase Alumno con la tabla alumnos-->
 <hibernate-mapping>
-    <class name="clases.Facturas" table="facturas" catalog="tesGiloM">
-        <id name="id">
-            <column name="id"/>
+    <class name="clases.Facturas" table="facturas" catalog="moliGest">
+        <id name="idFactura">
+            <column name="idFactura"/>
             <generator class="increment"/>
         </id>
+        <property name="idProveedor"/>
         <property name="serie"/>
         <property name="numeroFac"/>
         <property name="fecha"/>

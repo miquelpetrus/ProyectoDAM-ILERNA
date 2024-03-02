@@ -4,36 +4,21 @@ public class Eventos {
 	private int id;
 	private String nombre;
 	private String fecha;
-	private String hora;
-	private String lugar;
-	private String descripcion;
-	private String tipo;
-	private String estado;
-
+    private String descripcion;
+    private String lugar;
+    private String precio;
+    
+    
 	public Eventos() {
 	}
-
-	public Eventos(int id, String nombre, String fecha, String hora, String lugar, String descripcion,
-			String tipo, String estado) {
+	
+	public Eventos(int id, String nombre, String fecha, String descripcion, String lugar, String precio) {
 		this.id = id;
 		this.nombre = nombre;
 		this.fecha = fecha;
-		this.hora = hora;
-		this.lugar = lugar;
 		this.descripcion = descripcion;
-		this.tipo = tipo;
-		this.estado = estado;
-	}
-
-	public Eventos(String nombre, String fecha, String hora, String lugar, String descripcion, 
-			String tipo, String estado) {
-		this.nombre = nombre;
-		this.fecha = fecha;
-		this.hora = hora;
 		this.lugar = lugar;
-		this.descripcion = descripcion;
-		this.tipo = tipo;
-		this.estado = estado;
+		this.precio = precio;
 	}
 
 	public int getId() {
@@ -60,12 +45,12 @@ public class Eventos {
 		this.fecha = fecha;
 	}
 
-	public String getHora() {
-		return hora;
+	public String getDescripcion() {
+		return descripcion;
 	}
 
-	public void setHora(String hora) {
-		this.hora = hora;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 	public String getLugar() {
@@ -76,29 +61,14 @@ public class Eventos {
 		this.lugar = lugar;
 	}
 
-	public String getDescripcion() {
-		return descripcion;
+	public String getPrecio() {
+		return precio;
 	}
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setPrecio(String precio) {
+		this.precio = precio;
 	}
-
-
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-
-	public String getEstado() {
-		return estado;
-	}
-
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
+	
+	
 
 }
