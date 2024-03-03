@@ -5,13 +5,12 @@ import java.io.File;
 import java.io.IOException;
 import javax.swing.*;
 import controllers.HibernateUtil;
-import org.hibernate.SessionFactory;
 
 /**
  *
  * @author miquelpetrus
  */
-public class MainApp extends javax.swing.JFrame {
+public class MainApp extends javax.swing.JFrame{
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -111,6 +110,11 @@ public class MainApp extends javax.swing.JFrame {
         jMenuFile.add(jMenuConf);
 
         jMenuConnect.setText("Conectar");
+        jMenuConnect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuConnectActionPerformed(evt);
+            }
+        });
         jMenuFile.add(jMenuConnect);
 
         jMenuSalir.setText("Salir");
@@ -245,16 +249,26 @@ public class MainApp extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuSociosActionPerformed
 
-    /** Esto es una idea para poder mostrar las diferentes vistas en una misma ventana 
-    private void mostrarVistaEnPanel(JPanel vista) {
-    System.out.println("Mostrando vista en el panel");
-    System.out.println("Tamaño de la vista: " + vista.getSize());
-    System.out.println("Tamaño del panel principal: " + jPanelPrincipal.getSize());
-    jPanelPrincipal.removeAll();
-    jPanelPrincipal.add(vista);
-    jPanelPrincipal.revalidate();
-    jPanelPrincipal.repaint();
-    } */
+    private void jMenuConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuConnectActionPerformed
+        // TODO add your handling code here:
+        try {
+
+            LoginView loginView = new LoginView(this);
+
+            // Crear un nuevo JFrame para la ventana de socios
+            JFrame loginFrame = new JFrame("Login");
+            loginFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            loginFrame.getContentPane().add(loginView);
+            loginFrame.pack();
+            loginFrame.setVisible(true);
+            loginFrame.setLocationRelativeTo(null);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+       
+    }//GEN-LAST:event_jMenuConnectActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -287,10 +301,24 @@ public class MainApp extends javax.swing.JFrame {
             public void run() {
                 MainApp mainapp = new MainApp(); // instancia de la clase MainApp
                 mainapp.setVisible(true);
+                mainapp.setMenuAdminVisibility(true); // muestra las opciones de menú de administrador
+                mainapp.setMenuVisibility(false); // oculta las opciones de menú hasta que el usuario se conecte
+                
                 mainapp.setLocationRelativeTo(null); // para que se muestre en el centro de la pantalla
             }
         });
     }
+    
+    public void setMenuVisibility(boolean visible) {
+        jMenuGest.setVisible(visible);
+        jMenuMiembros.setVisible(visible);
+    }
+    
+	public void setMenuAdminVisibility(boolean visible) {
+		jMenuConf.setVisible(visible);
+		jMenuConnect.setVisible(visible);
+		jMenuSalir.setVisible(visible);
+	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem jMenuBancos;

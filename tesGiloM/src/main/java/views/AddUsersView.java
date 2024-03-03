@@ -17,7 +17,7 @@ import clases.Users;
 public class AddUsersView extends javax.swing.JPanel {
 
     private static final long serialVersionUID = 1L;
-	private SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
     
     public AddUsersView() {
         initComponents();
