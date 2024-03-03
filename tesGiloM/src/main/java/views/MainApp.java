@@ -3,8 +3,12 @@ package views;
 import java.awt.EventQueue;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import javax.swing.*;
 import controllers.HibernateUtil;
+import controllers.UsuarioSesion;
 
 /**
  *
@@ -13,6 +17,8 @@ import controllers.HibernateUtil;
 public class MainApp extends javax.swing.JFrame{
 	
 	private static final long serialVersionUID = 1L;
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	String formattedDateTime = LocalDateTime.now().format(formatter);
 	
 	public MainApp() {
         initComponents();
@@ -57,6 +63,12 @@ public class MainApp extends javax.swing.JFrame{
             configFrame.requestFocus();
         });
     }
+    
+    public void actualizarTextoBienvenida() {
+        jLabelBienvenida.setFont(new java.awt.Font("Helvetica Neue", 0, 18));
+        jLabelBienvenida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelBienvenida.setText("<html>Bienvenido a MolíGest, <br>" + UsuarioSesion.getNombreUsuario() + "<br>" + formattedDateTime + "</html>");
+    }
 
     
     @SuppressWarnings("unchecked")
@@ -64,6 +76,7 @@ public class MainApp extends javax.swing.JFrame{
     private void initComponents() {
 
         jPanelPrincipal = new javax.swing.JPanel();
+        jLabelBienvenida = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuConf = new javax.swing.JMenuItem();
@@ -85,11 +98,17 @@ public class MainApp extends javax.swing.JFrame{
         jPanelPrincipal.setLayout(jPanelPrincipalLayout);
         jPanelPrincipalLayout.setHorizontalGroup(
             jPanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 886, Short.MAX_VALUE)
+            .addGroup(jPanelPrincipalLayout.createSequentialGroup()
+                .addGap(152, 152, 152)
+                .addComponent(jLabelBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(248, Short.MAX_VALUE))
         );
         jPanelPrincipalLayout.setVerticalGroup(
             jPanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 496, Short.MAX_VALUE)
+            .addGroup(jPanelPrincipalLayout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addComponent(jLabelBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(308, Short.MAX_VALUE))
         );
 
         jMenuBar1.setBackground(new java.awt.Color(204, 204, 204));
@@ -321,6 +340,7 @@ public class MainApp extends javax.swing.JFrame{
 	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabelBienvenida;
     private javax.swing.JMenuItem jMenuBancos;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuConf;

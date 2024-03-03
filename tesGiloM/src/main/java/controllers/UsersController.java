@@ -12,6 +12,7 @@ import clases.Users;
 public class UsersController {
 	
     private SessionFactory sessionFactory;
+    private static String nombreUsuario; // Variable de sesión para el nombre del usuario
     
     public static List<Users> getAllUsers() {
         List<Users> usuarios = null;
@@ -29,13 +30,13 @@ public class UsersController {
 	
 	public static String validarUsuario(String usuario, String password) {
 	    List<Users> usuarios = getAllUsers();
-	    System.out.println("Número de usuarios cargados: " + usuarios.size());
 	    
 	    String mensaje = "";
 
 	    for (Users user : usuarios) {
 	        if (user.getEmail().trim().equals(usuario) && user.getPassword().trim().equals(password)) {
 	            mensaje = "Usuario correcto";
+	            UsuarioSesion.setNombreUsuario(user.getName()); // almacena el nombre del usuario en la variable de sesión
 	            break; 
 			} else {
 				mensaje = "Usuario incorrecto";

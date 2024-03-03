@@ -11,6 +11,7 @@ import org.hibernate.SessionFactory;
 
 import controllers.HibernateUtil;
 import controllers.UsersController;
+import controllers.UsuarioSesion;
 
 /**
  *
@@ -150,6 +151,10 @@ public class LoginView extends javax.swing.JPanel {
         
         // Cierra la LoginView si el usuario es correcto
         if (mensaje.equals("Usuario correcto")) {
+            // Guarda el usuario en la sesión
+            // Actualiza el JLabel en tu interfaz gráfica (MainApp)
+            mainApp.actualizarTextoBienvenida();
+
             Window window = SwingUtilities.getWindowAncestor(this);
             window.dispose();
         }
