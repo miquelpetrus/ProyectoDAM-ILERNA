@@ -1,7 +1,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!--Mapeo de la clase Alumno con la tabla alumnos-->
 <hibernate-mapping>
-    <class name="clases.Gastos" table="Gastos" catalog="moliGest">
+    <class name="clases.Gastos" table="gastos" catalog="moliGest">
         <id name="idGasto">
 			<column name="idGasto" />
 			<generator class="increment" />

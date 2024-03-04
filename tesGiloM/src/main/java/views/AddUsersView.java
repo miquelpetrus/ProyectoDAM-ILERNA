@@ -208,7 +208,10 @@ public class AddUsersView extends javax.swing.JPanel {
         } catch (Exception e) {
             e.printStackTrace();
             // Manejar cualquier excepción que pueda ocurrir al guardar datos
-        }
+		} finally {
+			// Cerrar la sesión
+			sessionFactory.close();
+		}
 
         // Cerrar la ventana después de guardar
         cerrarVentana();
@@ -233,6 +236,9 @@ public class AddUsersView extends javax.swing.JPanel {
 
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+        	// Cerrar la sesión
+        	sessionFactory.close();
         }
 	}
     

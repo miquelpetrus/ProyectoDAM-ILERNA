@@ -16,6 +16,7 @@
         <mapping resource="Facturas.hbm.xml"/>
         <mapping resource="LineasFacturas.hbm.xml"/>
         <mapping resource="Productos.hbm.xml"/>
+        <mapping resource="FamiliaProducto.hbm.xml"/>
         <mapping resource="Proveedores.hbm.xml"/>
         <mapping resource="Eventos.hbm.xml"/>
 		<mapping resource="Ingresos.hbm.xml"/>

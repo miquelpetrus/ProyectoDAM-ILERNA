@@ -82,6 +82,8 @@ public class UsersView extends javax.swing.JPanel {
                 }
                 e.printStackTrace();
                 // Maneja cualquier excepción que pueda ocurrir al cargar datos
+            } finally {
+                session.close();
             }
         }
     }
@@ -182,11 +184,14 @@ public class UsersView extends javax.swing.JPanel {
 
         } catch (Exception e) {
             e.printStackTrace();
-        }
+		} finally {
+			this.sessionFactory.close();
+		}
     }//GEN-LAST:event_jButtonCrearNuevoActionPerformed
 
     private void jButtonCerrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrar1ActionPerformed
         // TODO add your handling code here:
+    	this.sessionFactory.close();
         Window window = SwingUtilities.getWindowAncestor(this);
         // Cerrar la ventana actual
         window.dispose();
