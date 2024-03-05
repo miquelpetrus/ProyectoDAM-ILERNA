@@ -37,7 +37,7 @@ public class UsersController {
 	    for (Users user : usuarios) {
 	        if (user.getEmail().trim().equals(usuario) && user.getPassword().trim().equals(password)) {
 	            mensaje = "Usuario correcto";
-	            UsuarioSesion.setNombreUsuario(user.getName()); 
+	            UsuarioSesion.setIdUsuario(user.getId());
 	            break; 
 			} else {
 				mensaje = "Usuario incorrecto";
@@ -45,6 +45,20 @@ public class UsersController {
 	    }
 
 	    return mensaje;
+	}
+	
+	public static String getNombreUsuarioById(int id) {
+        List<Users> usuarios = getAllUsers();
+        String nombreUsuario = "";
+        String apellido1Usuario = "";
+        for (Users user : usuarios) {
+            if (user.getId() == id) {
+                nombreUsuario = user.getName();
+                apellido1Usuario = user.getApellido1();
+                break;
+            }
+        }
+        return nombreUsuario + " " + apellido1Usuario;
 	}
 
 

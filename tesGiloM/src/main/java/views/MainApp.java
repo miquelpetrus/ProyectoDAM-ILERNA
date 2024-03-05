@@ -12,6 +12,7 @@ import java.time.format.DateTimeFormatter;
 import javax.swing.*;
 
 import controllers.HibernateUtil;
+import controllers.UsersController;
 import controllers.UsuarioSesion;
 
 /**
@@ -22,6 +23,10 @@ public class MainApp extends javax.swing.JFrame{
 	
 	DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	String horaFormateada = LocalDateTime.now().format(formatoHora);
+
+	/**
+	 * Creates new form MainApp
+	 */
 	
 	public MainApp() {
         initComponents();
@@ -68,9 +73,11 @@ public class MainApp extends javax.swing.JFrame{
     }
     
     public void actualizarTextoBienvenida() {
+        int idUsuario = UsuarioSesion.getIdUsuario();
+        String nombreUsuario = UsersController.getNombreUsuarioById(idUsuario);
         jLabelBienvenida.setFont(new java.awt.Font("Helvetica Neue", 0, 18));
         jLabelBienvenida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelBienvenida.setText("<html>Bienvenido a MolíGest, <br>" + UsuarioSesion.getNombreUsuario() + "<br>" + horaFormateada + "</html>");
+        jLabelBienvenida.setText("<html>Bienvenido a MolíGest, <br>" + nombreUsuario + "<br>" + horaFormateada + "</html>");
     }
 
     
@@ -389,6 +396,7 @@ public class MainApp extends javax.swing.JFrame{
             }
         });
     }
+    // Muestro y oculto las opciones del menú según el usuario que se conecte
     
     public void setMenuVisibility(boolean visible) {
         jMenuGest.setVisible(visible);

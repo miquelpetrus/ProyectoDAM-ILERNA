@@ -19,8 +19,8 @@ public class UsuarioSesion {
         return idUsuario;
     }
 
-    public static void setIdUsuario(String idUsuario) {
-        UsuarioSesion.idUsuario = Integer.parseInt(idUsuario);
+    public static void setIdUsuario(int idUsuario) {
+        UsuarioSesion.idUsuario = idUsuario;
     }
     
 	public static String getNombreUsuario() {

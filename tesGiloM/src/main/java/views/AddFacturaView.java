@@ -27,6 +27,7 @@ public class AddFacturaView extends javax.swing.JPanel {
 	private SessionFactory sessionFactory;
 	private DefaultTableModel modeloTabla;
 	
+	
 	private double sumaBaseImponible = 0.0;
 	private double sumaIVA = 0.0;
 	private double sumaTotal = 0.0;
@@ -34,8 +35,9 @@ public class AddFacturaView extends javax.swing.JPanel {
     public AddFacturaView() {
         initComponents();
         this.sessionFactory = HibernateUtil.buildSessionFactory();
-        int idUsuario = UsuarioSesion.getIdUsuario();
-        System.out.println("idUsuario: " + idUsuario);
+        UsuarioSesion.getInstancia();
+		int idUsuario = UsuarioSesion.getIdUsuario();
+        System.out.println("El id del usuario es: " + idUsuario);
         cargarProveedores();
         cargarProductos();
         initializeTableModel();
@@ -258,10 +260,14 @@ public class AddFacturaView extends javax.swing.JPanel {
         double baseImponible = Double.parseDouble(jTextFieldBaseImponible.getText());
         double baseIVA = Double.parseDouble(jTextFieldBaseIVA.getText());
         double total = Double.parseDouble(jTextFieldTotal.getText());
-        int idUsuario = UsuarioSesion.getInstancia().getIdUsuario();
+        UsuarioSesion.getInstancia();
+		int idUsuario = UsuarioSesion.getIdUsuario();
 
         // Llamar al método de FacturasController para guardar la factura
         FacturasController.guardarFactura(idFactura, idProveedor, fecha, baseImponible, baseIVA, total, idUsuario);
+        HibernateUtil.abrirVentana(new FacturasView(), "Facturas");
+        HibernateUtil.cerrarVentana(this);
+        
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     private void jButtonAnyadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnyadirActionPerformed
