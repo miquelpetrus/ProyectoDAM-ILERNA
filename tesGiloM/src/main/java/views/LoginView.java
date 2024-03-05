@@ -149,25 +149,26 @@ public class LoginView extends javax.swing.JPanel {
 
         
     private void realizarLogin() {
-    String usuario = jTextUsr.getText();
-    char[] passwordChars = jPasswordPSW.getPassword();
-    String password = String.valueOf(passwordChars);
-
-    String mensaje = UsersController.validarUsuario(usuario, password);
-    jTextAreaMnsj.setText(mensaje);
-
-    // Después de validar al usuario, oculta o muestra las opciones del menú
-    mainApp.setMenuVisibility(mensaje.equals("Usuario correcto"));
-
-    // Cierra la LoginView si el usuario es correcto
-    if (mensaje.equals("Usuario correcto")) {
-        // Guarda el usuario en la sesión
-        // Actualiza el JLabel en tu interfaz gráfica (MainApp)
-        mainApp.actualizarTextoBienvenida();
-
-        Window window = SwingUtilities.getWindowAncestor(this);
-        window.dispose();
-    }
+	    String usuario = jTextUsr.getText();
+	    char[] passwordChars = jPasswordPSW.getPassword();
+	    String password = String.valueOf(passwordChars);
+	
+	    String mensaje = UsersController.validarUsuario(usuario, password);
+	    jTextAreaMnsj.setText(mensaje);
+	
+	    // Después de validar al usuario, oculta o muestra las opciones del menú
+	    mainApp.setMenuVisibility(mensaje.equals("Usuario correcto"));
+	
+	    // Cierra la LoginView si el usuario es correcto
+	    if (mensaje.equals("Usuario correcto")) {
+	        // Guarda el usuario en la sesión
+	        // Actualiza el JLabel en tu interfaz gráfica (MainApp)
+	        mainApp.actualizarTextoBienvenida();
+	
+			HibernateUtil.cerrarVentana(this);
+	        
+	     sessionFactory.close();
+	    }
 
     }//GEN-LAST:event_jButtonLoginActionPerformed
 

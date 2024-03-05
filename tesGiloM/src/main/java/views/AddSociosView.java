@@ -163,12 +163,8 @@ public class AddSociosView extends javax.swing.JPanel {
 
     private void jButtonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarActionPerformed
         // TODO add your handling code here:
-        Window window = SwingUtilities.getWindowAncestor(this);
-        // Cerrar la ventana actual
-        window.dispose();
-        
-        // Volver a cargar los datos de la tabla
-        cerrarVentana();
+    	HibernateUtil.abrirVentana(new SociosView(), "Socios");
+        HibernateUtil.cerrarVentana(this);
         
     }//GEN-LAST:event_jButtonCerrarActionPerformed
 
@@ -216,36 +212,16 @@ public class AddSociosView extends javax.swing.JPanel {
             e.printStackTrace();
             // Manejar cualquier excepción que pueda ocurrir al guardar datos
         }
-
-        // Cerrar la ventana después de guardar
-        Window window = SwingUtilities.getWindowAncestor(this);
-        window.dispose();
         
         // Volver a cargar los datos de la tabla
-        cerrarVentana();
+        HibernateUtil.abrirVentana(new SociosView(), "Socios");
+        HibernateUtil.cerrarVentana(this);
+        sessionFactory.close();
         
     }//GEN-LAST:event_jButtonGuardarActionPerformed
     
     // Método para cerrar la ventana y abrir la anterior
-	public void cerrarVentana() {
-        Window window = SwingUtilities.getWindowAncestor(this);
-        window.dispose();
-        
-        try {
-            SociosView sociosView = new SociosView();
 
-            // Crear un nuevo JFrame para la ventana de usuarios
-            JFrame sociosFrame = new JFrame("Socios");
-            sociosFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            sociosFrame.getContentPane().add(sociosView);
-            sociosFrame.pack();
-            sociosFrame.setVisible(true);
-            sociosFrame.setLocationRelativeTo(null);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-	}
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

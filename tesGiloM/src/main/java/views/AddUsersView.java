@@ -163,7 +163,8 @@ public class AddUsersView extends javax.swing.JPanel {
 
     private void jButtonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarActionPerformed
         // TODO add your handling code here:
-    	cerrarVentana();
+    	HibernateUtil.abrirVentana(new UsersView(), "Usuarios");
+    	HibernateUtil.cerrarVentana(this);
     }//GEN-LAST:event_jButtonCerrarActionPerformed
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
@@ -214,33 +215,10 @@ public class AddUsersView extends javax.swing.JPanel {
 		}
 
         // Cerrar la ventana después de guardar
-        cerrarVentana();
+        HibernateUtil.abrirVentana(new UsersView(), "Usuarios");
+        HibernateUtil.cerrarVentana(this);
         
     }//GEN-LAST:event_jButtonGuardarActionPerformed
-    
-    // Cerrar ventana y volvere a la ventana de usuarios
-	private void cerrarVentana() {
-        Window window = SwingUtilities.getWindowAncestor(this);
-        window.dispose();
-        
-        try {
-            UsersView usersView = new UsersView();
-
-            // Crear un nuevo JFrame para la ventana de usuarios
-            JFrame usersFrame = new JFrame("Usuarios");
-            usersFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            usersFrame.getContentPane().add(usersView);
-            usersFrame.pack();
-            usersFrame.setVisible(true);
-            usersFrame.setLocationRelativeTo(null);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }finally {
-        	// Cerrar la sesión
-        	sessionFactory.close();
-        }
-	}
     
 
 

@@ -1,7 +1,14 @@
 package clases;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class FamiliaProducto {
-	
+	@Id	
+        @GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String nombre;
 	private String descripcion;
@@ -40,5 +47,11 @@ public class FamiliaProducto {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+	
+	@Override
+	public String toString() {
+		return this.nombre;
+	}
+	
 
 }

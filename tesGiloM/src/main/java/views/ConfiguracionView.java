@@ -8,6 +8,8 @@ import java.util.Properties;
 import javax.swing.*;
 import org.hibernate.cfg.Configuration;
 
+import controllers.HibernateUtil;
+
 /**
  *
  * @author miquelpetrus
@@ -229,10 +231,7 @@ public class ConfiguracionView extends javax.swing.JPanel {
     private void jButtonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarActionPerformed
         // TODO add your handling code here:
         // Obtener la ventana padre
-        Window window = SwingUtilities.getWindowAncestor(this);
-
-        // Cerrar la ventana actual
-        window.dispose();
+    	HibernateUtil.cerrarVentana(this);
     }//GEN-LAST:event_jButtonCerrarActionPerformed
 
 

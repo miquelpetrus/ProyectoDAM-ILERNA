@@ -21,7 +21,7 @@ import javax.swing.JFrame;
 public class UsersView extends javax.swing.JPanel {
 
     private static final long serialVersionUID = 1L;
-	private DefaultTableModel tableModel;
+    private DefaultTableModel tableModel;
     private SessionFactory sessionFactory;
 
     public UsersView() {
@@ -178,9 +178,7 @@ public class UsersView extends javax.swing.JPanel {
             addUsersFrame.setVisible(true);
             addUsersFrame.setLocationRelativeTo(null);
             
-            Window window = SwingUtilities.getWindowAncestor(this);
-            // Cerrar la ventana actual
-            window.dispose();
+            HibernateUtil.cerrarVentana(this);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -192,9 +190,7 @@ public class UsersView extends javax.swing.JPanel {
     private void jButtonCerrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrar1ActionPerformed
         // TODO add your handling code here:
     	this.sessionFactory.close();
-        Window window = SwingUtilities.getWindowAncestor(this);
-        // Cerrar la ventana actual
-        window.dispose();
+    	HibernateUtil.cerrarVentana(this);
     }//GEN-LAST:event_jButtonCerrar1ActionPerformed
 
 

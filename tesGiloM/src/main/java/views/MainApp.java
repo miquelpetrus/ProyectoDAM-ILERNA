@@ -54,12 +54,12 @@ public class MainApp extends javax.swing.JFrame{
     private void abrirVistaConfiguracion() {
         ConfiguracionView configuracionView = new ConfiguracionView();
         // Mostrar la vista de configuración...
-        JFrame configFrame = new JFrame("Configuración");
-        configFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        configFrame.getContentPane().add(configuracionView);
-        configFrame.pack();
-        configFrame.setVisible(true);
-        configFrame.setLocationRelativeTo(null);
+	        JFrame configFrame = new JFrame("Configuración");
+	        configFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	        configFrame.getContentPane().add(configuracionView);
+	        configFrame.pack();
+	        configFrame.setVisible(true);
+	        configFrame.setLocationRelativeTo(null);
         // Cambiar el enfoque después de que la aplicación esté completamente inicializada
         EventQueue.invokeLater(() -> {
             configFrame.toFront();
@@ -210,6 +210,11 @@ public class MainApp extends javax.swing.JFrame{
         jMenuProductos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuProductos.setText("Productos");
         jMenuProductos.setPreferredSize(new java.awt.Dimension(102, 32));
+		jMenuProductos.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				jMenuProductosActionPerformed(evt);
+			}
+		});
         jMenuGest.add(jMenuProductos);
 
         jMenuEventos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -274,14 +279,7 @@ public class MainApp extends javax.swing.JFrame{
         // TODO add your handling code here:
         try {
             ConfiguracionView configuracionView = new ConfiguracionView();
-
-            // Crear un nuevo JFrame para la ventana de configuración
-            JFrame configFrame = new JFrame("Configuración");
-            configFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Cierra solo la ventana de configuración al presionar la 'X'
-            configFrame.getContentPane().add(configuracionView);
-            configFrame.pack();
-            configFrame.setVisible(true);
-            configFrame.setLocationRelativeTo(null);
+            HibernateUtil.abrirVentana(configuracionView, "Configuración");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -301,14 +299,7 @@ public class MainApp extends javax.swing.JFrame{
         // TODO add your handling code here:
         try {
             UsersView usersView = new UsersView();
-
-            // Crear un nuevo JFrame para la ventana de usuarios
-            JFrame usersFrame = new JFrame("Usuarios");
-            usersFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            usersFrame.getContentPane().add(usersView);
-            usersFrame.pack();
-            usersFrame.setVisible(true);
-            usersFrame.setLocationRelativeTo(null);
+            HibernateUtil.abrirVentana(usersView, "Usuarios");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -320,15 +311,8 @@ public class MainApp extends javax.swing.JFrame{
         try {
 
             SociosView sociosView = new SociosView();
-
-            // Crear un nuevo JFrame para la ventana de socios
-            JFrame sociosFrame = new JFrame("Socios");
-            sociosFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            sociosFrame.getContentPane().add(sociosView);
-            sociosFrame.pack();
-            sociosFrame.setVisible(true);
-            sociosFrame.setLocationRelativeTo(null);
-
+            HibernateUtil.abrirVentana(sociosView, "Socios");
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -339,20 +323,25 @@ public class MainApp extends javax.swing.JFrame{
         try {
 
             LoginView loginView = new LoginView(this);
-
-            // Crear un nuevo JFrame para la ventana de socios
-            JFrame loginFrame = new JFrame("Login");
-            loginFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            loginFrame.getContentPane().add(loginView);
-            loginFrame.pack();
-            loginFrame.setVisible(true);
-            loginFrame.setLocationRelativeTo(null);
+            HibernateUtil.abrirVentana(loginView, "Conectar");
 
         } catch (Exception e) {
             e.printStackTrace();
         }
        
     }//GEN-LAST:event_jMenuConnectActionPerformed
+    
+    private void jMenuProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuConnectActionPerformed
+        // TODO add your handling code here:
+        try {
+            ProductosView productosView = new ProductosView();
+            HibernateUtil.abrirVentana(productosView, "Productos");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+       
+    }
 
     /**
      * @param args the command line arguments
@@ -405,6 +394,7 @@ public class MainApp extends javax.swing.JFrame{
 		jMenuConnect.setVisible(visible);
 		jMenuSalir.setVisible(visible);
 	}
+	
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabelBienvenida;
