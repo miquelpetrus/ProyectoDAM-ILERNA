@@ -20,7 +20,6 @@ import controllers.UsuarioSesion;
  */
 public class MainApp extends javax.swing.JFrame{
 	
-	private static final long serialVersionUID = 1L;
 	DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	String horaFormateada = LocalDateTime.now().format(formatoHora);
 	
@@ -273,6 +272,12 @@ public class MainApp extends javax.swing.JFrame{
 
     private void jMenuFacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFacActionPerformed
         // TODO add your handling code here:
+    	try {
+			HibernateUtil.abrirVentana(new FacturasView(), "Facturas");
+		} catch (Exception e) {
+			e.printStackTrace();
+    	}
+
     }//GEN-LAST:event_jMenuFacActionPerformed
 
     private void jMenuConfActionPerformed(java.awt.event.ActionEvent evt) {                                          
@@ -380,6 +385,7 @@ public class MainApp extends javax.swing.JFrame{
                 mainapp.setMenuVisibility(false); // oculta las opciones de menú hasta que el usuario se conecte
                 mainapp.setLocationRelativeTo(null); // para que se muestre en el centro de la pantalla
                 mainapp.setIconImage(new ImageIcon("src/main/resources/images/icono.png").getImage());
+                mainapp.setTitle("MolíGest");
             }
         });
     }

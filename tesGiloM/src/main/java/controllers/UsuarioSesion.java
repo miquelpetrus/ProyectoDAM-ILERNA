@@ -4,20 +4,30 @@ import clases.Users;
 
 public class UsuarioSesion {
 	
+    private static UsuarioSesion instancia = new UsuarioSesion();
+    private static int idUsuario;
     private static String nombreUsuario;
-    // Puedes añadir más atributos según sea necesario
 
-    public static String getNombreUsuario() {
-        return nombreUsuario;
+    private UsuarioSesion() {
     }
 
-    public static void setNombreUsuario(String nombreUsuario) {
-        UsuarioSesion.nombreUsuario = nombreUsuario;
+    public static UsuarioSesion getInstancia() {
+        return instancia;
+    }
+
+    public static int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public static void setIdUsuario(String idUsuario) {
+        UsuarioSesion.idUsuario = Integer.parseInt(idUsuario);
     }
     
-    // Guardo el id del usuario que ha iniciado sesión
-    public static void setIdUsuario(String idUsuario) {
-    	UsuarioSesion.nombreUsuario = idUsuario;
-    }
+	public static String getNombreUsuario() {
+		return nombreUsuario;
+	}
 
+	public static void setNombreUsuario(String nombreUsuario) {
+		UsuarioSesion.nombreUsuario = nombreUsuario;
+	}
 }

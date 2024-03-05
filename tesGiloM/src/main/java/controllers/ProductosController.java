@@ -1,11 +1,36 @@
 package controllers;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import clases.Productos;
+import clases.Proveedores;
 
 public class ProductosController {
+	
+    public static List<Productos> getAllProductos() {
+        try (Session session = HibernateUtil.buildSessionFactory().openSession()) {
+            String hql = "FROM Productos";
+            Query<Productos> query = session.createQuery(hql, Productos.class);
+            return query.list();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
+    }
+    
+    public static Productos getProductoById(int id) {
+        try (Session session = HibernateUtil.buildSessionFactory().openSession()) {
+            return session.get(Productos.class, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null; // or throw an exception based on your error handling strategy
+        }
+    }
 	
     public static void crearProducto(String nombre, String descripcion, double precioCompra, int proveedor, int familiaProducto) {
         try (Session session = HibernateUtil.buildSessionFactory().openSession()) {

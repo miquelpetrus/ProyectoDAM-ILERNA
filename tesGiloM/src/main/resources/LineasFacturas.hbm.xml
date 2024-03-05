@@ -10,5 +10,8 @@
 		<property name="idProducto" />
 		<property name="cantidad" />
 		<property name="precio" />
+		<property name="iva" />
+		<property name="descuento" />
+		<property name="total" />
      </class>
 </hibernate-mapping>

@@ -23,5 +23,14 @@ public class FamiliaProductoController {
             return Collections.emptyList();
         }
     }
+    
+	public static FamiliaProducto getFamiliaProductoById(int id) {
+		try (Session session = HibernateUtil.buildSessionFactory().openSession()) {
+			return session.get(FamiliaProducto.class, id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null; // or throw an exception based on your error handling strategy
+		}
+	}
 
 }

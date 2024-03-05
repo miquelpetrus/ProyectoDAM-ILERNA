@@ -46,8 +46,13 @@ public class EditarProductosView extends javax.swing.JPanel {
 		jTextNomP.setText((String) datosFila[1]);
 		jTextDescP.setText((String) datosFila[2]);
 		jTextPrecioC.setText(String.valueOf(datosFila[3]));
-		jComboBoxProv.setSelectedIndex((int) datosFila[4]);
-		jComboBoxFam.setSelectedIndex((int) datosFila[5]);
+	    // Set the selected item based on the Proveedores object
+	    Proveedores proveedorSeleccionado = ProveedoresController.getProveedorById((int) datosFila[4]);
+	    jComboBoxProv.setSelectedItem(proveedorSeleccionado);
+
+	    // Set the selected item based on the FamiliaProducto object
+	    FamiliaProducto familiaSeleccionada = FamiliaProductoController.getFamiliaProductoById((int) datosFila[5]);
+	    jComboBoxFam.setSelectedItem(familiaSeleccionada);
 	}
 
     /**
@@ -182,9 +187,13 @@ public class EditarProductosView extends javax.swing.JPanel {
     	        String nombre = jTextNomP.getText();
     	        String descripcion = jTextDescP.getText();	
     	        double precioCompra = Double.parseDouble(jTextPrecioC.getText());
-    	        int proveedor = jComboBoxProv.getSelectedIndex();
-    	        int familiaProducto = jComboBoxFam.getSelectedIndex();
-    	        ProductosController.actualizarProducto(id, nombre, descripcion, precioCompra, proveedor, familiaProducto);
+    	        // Obtener el proveedor seleccionado y su ID
+    	        Proveedores proveedorSeleccionado = (Proveedores) jComboBoxProv.getSelectedItem();
+    	        int idProveedor = proveedorSeleccionado.getId();
+    	        // Obtener la familia de productos seleccionada y su ID
+    	        FamiliaProducto familiaSeleccionada = (FamiliaProducto) jComboBoxFam.getSelectedItem();
+    	        int idFamilia = familiaSeleccionada.getId();
+    	        ProductosController.actualizarProducto(id, nombre, descripcion, precioCompra, idProveedor, idFamilia);
     	        HibernateUtil.abrirVentana(new ProductosView(), "Productos");
     	        HibernateUtil.cerrarVentana(this);
     	                
@@ -192,7 +201,6 @@ public class EditarProductosView extends javax.swing.JPanel {
 
     private void jButtonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarActionPerformed
         // TODO add your handling code here:
-        this.sessionFactory.close();
         HibernateUtil.cerrarVentana(this);
     }//GEN-LAST:event_jButtonCerrarActionPerformed
 
@@ -206,20 +214,20 @@ public class EditarProductosView extends javax.swing.JPanel {
     // A continuación, se añaden los métodos para cargar los proveedores y las familias de productos
     
     private void cargarProveedores() {
-        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
         
         for (Proveedores proveedor : ProveedoresController.getAllProveedores()) {
-            model.addElement(proveedor.getNombre());
+            model.addElement(proveedor);
         }
         
         jComboBoxProv.setModel(model);
     }
     
     private void cargarFamiliaProducto() {
-        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
         
         for (FamiliaProducto familiaProducto : FamiliaProductoController.getAllFamiliaProducto()) {
-            model.addElement(familiaProducto.getNombre());
+            model.addElement(familiaProducto);
         }
         
         jComboBoxFam.setModel(model);

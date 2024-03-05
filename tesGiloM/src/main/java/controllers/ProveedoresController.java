@@ -11,8 +11,6 @@ import org.hibernate.query.Query;
 
 
 public class ProveedoresController {
-
-    private SessionFactory sessionFactory;
     
     public static List<Proveedores> getAllProveedores() {
         try (Session session = HibernateUtil.buildSessionFactory().openSession()) {
@@ -22,6 +20,15 @@ public class ProveedoresController {
         } catch (Exception e) {
             e.printStackTrace();
             return Collections.emptyList();
+        }
+    }
+    
+    public static Proveedores getProveedorById(int id) {
+        try (Session session = HibernateUtil.buildSessionFactory().openSession()) {
+            return session.get(Proveedores.class, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null; // or throw an exception based on your error handling strategy
         }
     }
 

@@ -1,12 +1,20 @@
 package clases;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Eventos {
+        @Id
+        @GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String nombre;
 	private String fecha;
-    private String descripcion;
-    private String lugar;
-    private String precio;
+        private String descripcion;
+        private String lugar;
+        private String precio;
     
     
 	public Eventos() {

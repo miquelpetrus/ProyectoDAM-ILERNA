@@ -168,16 +168,7 @@ public class UsersView extends javax.swing.JPanel {
         // TODO add your handling code here:
         try {
 
-            AddUsersView addUsersView = new AddUsersView();
-
-            // Crear un nuevo JFrame para la ventana de socios
-            JFrame addUsersFrame = new JFrame("Añadir nuevo usuario");
-            addUsersFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            addUsersFrame.getContentPane().add(addUsersView);
-            addUsersFrame.pack();
-            addUsersFrame.setVisible(true);
-            addUsersFrame.setLocationRelativeTo(null);
-            
+        	HibernateUtil.abrirVentana(new AddUsersView(), "Añadir Usuario");            
             HibernateUtil.cerrarVentana(this);
 
         } catch (Exception e) {

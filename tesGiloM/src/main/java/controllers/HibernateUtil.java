@@ -14,22 +14,11 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.mapping.Component;
 
-import clases.Bancos;
-import clases.Eventos;
-import clases.Facturas;
-import clases.FamiliaProducto;
-import clases.Gastos;
-import clases.Ingresos;
-import clases.LineasFacturas;
-import clases.Productos;
-import clases.Proveedores;
-import clases.Roles;
-import clases.Socios;
 import clases.Users;
 
 public class HibernateUtil {
+	
 	
     public static SessionFactory buildSessionFactory() {
         Properties prop = new Properties();
@@ -54,7 +43,7 @@ public class HibernateUtil {
         return cfg.buildSessionFactory(new StandardServiceRegistryBuilder().configure().build());
 
     }
-    
+    // TODO: Crear método para crear un usuario admin por defecto
     private static void createDefaultAdminUser(SessionFactory sessionFactory) {
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
@@ -93,7 +82,7 @@ public class HibernateUtil {
         Window ventana = SwingUtilities.getWindowAncestor(componente);
         if (ventana != null) {
             ventana.dispose();
-        }
+        } 
     }
 
 }

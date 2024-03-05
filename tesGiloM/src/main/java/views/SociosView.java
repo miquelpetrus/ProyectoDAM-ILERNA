@@ -171,19 +171,9 @@ public class SociosView extends javax.swing.JPanel {
         // TODO add your handling code here:
         try {
 
-            AddSociosView addSociosView = new AddSociosView();
-
-            // Crear un nuevo JFrame para la ventana de socios
-            JFrame addSociosFrame = new JFrame("Añadir nuevo socio");
-            addSociosFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            addSociosFrame.getContentPane().add(addSociosView);
-            addSociosFrame.pack();
-            addSociosFrame.setVisible(true);
-            addSociosFrame.setLocationRelativeTo(null);
+        	HibernateUtil.abrirVentana(new AddSociosView(), "Crear nuevo socio");
             
-            Window window = SwingUtilities.getWindowAncestor(this);
-            // Cerrar la ventana actual
-            window.dispose();
+        	HibernateUtil.cerrarVentana(this);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -192,9 +182,7 @@ public class SociosView extends javax.swing.JPanel {
 
     private void jButtonCerrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrar1ActionPerformed
         // TODO add your handling code here:
-        Window window = SwingUtilities.getWindowAncestor(this);
-        // Cerrar la ventana actual
-        window.dispose();
+        HibernateUtil.cerrarVentana(this);
     }//GEN-LAST:event_jButtonCerrar1ActionPerformed
 
 

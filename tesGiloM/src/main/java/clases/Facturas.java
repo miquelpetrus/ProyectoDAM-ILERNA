@@ -1,39 +1,47 @@
 package clases;
 
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Facturas {
-	private int idFactura;
-	private String fecha;
-	private int idCliente;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	private String idFactura;
+	private Date fecha;
 	private int idProveedor;
 	private String serie;
 	private int numeroFac;
 	private double baseImponible;
 	private double iva;
 	private double total;
-	private double pagado;
-	private int idSocio;
+	private boolean pagado;
+	private int idUser;
 	private int idEvento;
 	private String formaDePago;
 	
 	public Facturas() {
 	}
 	
-	public Facturas(int idFactura, String fecha, int idCliente, int idProveedor, String serie, int numeroFac,
-			double baseImponible, double iva, double total, double pagado, int idSocio, int idEvento,
-			String formaDePago) {
+	public Facturas(int id, String idFactura, Date fecha, int idProveedor, String serie, int numeroFac,
+			double baseImponible, double iva, double total, boolean pagado, int idUser, int idEvento) {
+		this.id = id;
 		this.idFactura = idFactura;
 		this.fecha = fecha;
-		this.idCliente = idCliente;
 		this.idProveedor = idProveedor;
 		this.serie = serie;
 		this.numeroFac = numeroFac;
 		this.baseImponible = baseImponible;
 		this.iva = iva;
 		this.total = total;
-		this.pagado = pagado;
-		this.idSocio = idSocio;
+		this.pagado = false;
+		this.idUser = idUser;
 		this.idEvento = idEvento;
-		this.formaDePago = formaDePago;
 	}
 	
 	public int getIdProveedor() {
@@ -84,20 +92,20 @@ public class Facturas {
 		this.total = total;
 	}
 
-	public double getPagado() {
+	public boolean isPagado() {
 		return pagado;
 	}
-
-	public void setPagado(double pagado) {
+	
+	public void setPagado(boolean pagado) {
 		this.pagado = pagado;
 	}
 
-	public int getIdSocio() {
-		return idSocio;
+	public int getIdUser() {
+		return idUser;
 	}
-
-	public void setIdSocio(int idSocio) {
-		this.idSocio = idSocio;
+	
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
 	}
 
 	public int getIdEvento() {
@@ -116,64 +124,30 @@ public class Facturas {
 		this.formaDePago = formaDePago;
 	}
 
-	public int getIdFactura() {
+	public Date getFecha() {
+		return fecha;
+	}
+	
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getIdFactura() {
 		return idFactura;
 	}
 
-	public String getFecha() {
-		return fecha;
-	}
-
-	public int getIdCliente() {
-		return idCliente;
-	}
-
-	public String toString() {
-		return "ID: " + idFactura + " Fecha: " + fecha + " ID Cliente: " + idCliente;
-	}
-
-	public void setIdFactura(int idFactura) {
+	public void setIdFactura(String idFactura) {
 		this.idFactura = idFactura;
 	}
 
-	public void setFecha(String fecha) {
-		this.fecha = fecha;
-	}
 
-	public void setIdCliente(int idCliente) {
-		this.idCliente = idCliente;
-	}
-
-	public void mostrarDatos() {
-		System.out.println("ID: " + idFactura + " Fecha: " + fecha + " ID Cliente: " + idCliente);
-	}
-
-	public void mostrarDatos(String mensaje) {
-		System.out.println(mensaje + " ID: " + idFactura + " Fecha: " + fecha + " ID Cliente: " + idCliente);
-	}
-
-	public void mostrarDatos(int id) {
-		if (id == idFactura) {
-			System.out.println("ID: " + idFactura + " Fecha: " + fecha + " ID Cliente: " + idCliente);
-		}
-	}
-
-	public void mostrarDatos(String mensaje, int id) {
-		if (id == idFactura) {
-			System.out.println(mensaje + " ID: " + idFactura + " Fecha: " + fecha + " ID Cliente: " + idCliente);
-		}
-	}
-
-	public void mostrarDatos(int id, String mensaje){
-        if(id == idFactura){
-            System.out.println(mensaje + " ID: " + idFactura + " Fecha: " + fecha + " ID Cliente: " + idCliente);
-        }
-    }
-
-	public void mostrarDatos(String mensaje, int id, String mensaje2){
-        if(id == idFactura){
-            System.out.println(mensaje + " ID: " + idFactura + " Fecha: " + fecha + " ID Cliente: " + idCliente + " " + mensaje2);
-        }
-	}
 
 }

@@ -2,27 +2,32 @@ package clases;
 
 public class LineasFacturas {
 	private int id;
-	private int idFactura;
+	private String idFactura;
+	private int idProveedor;
 	private int idProducto;
 	private int cantidad;
 	private double precio;
-	private double importe;
+	private double descuento;
+	private double iva;
+	private double total;
 
-	public LineasFacturas(int id, int idFactura, int idProducto, int cantidad, double precio, double importe) {
+	public LineasFacturas(int id, String idFactura, int idProveedor, int idProducto, int cantidad, double precio, double iva, double total) {
 		this.id = id;
 		this.idFactura = idFactura;
+		this.idProveedor = idProveedor;
 		this.idProducto = idProducto;
 		this.cantidad = cantidad;
 		this.precio = precio;
-		this.importe = importe;
+		this.iva = iva;
+		this.total = total;
 	}
 
-	public LineasFacturas(int idFactura, int idProducto, int cantidad, double precio, double importe) {
+	public LineasFacturas(String idFactura, int idProducto, int cantidad, double precio, double importe) {
 		this.idFactura = idFactura;
 		this.idProducto = idProducto;
 		this.cantidad = cantidad;
 		this.precio = precio;
-		this.importe = importe;
+		this.total = importe;
 	}
 
 	public LineasFacturas() {
@@ -32,7 +37,7 @@ public class LineasFacturas {
 		return id;
 	}
 
-	public int getIdFactura() {
+	public String getIdFactura() {
 		return idFactura;
 	}
 
@@ -49,14 +54,14 @@ public class LineasFacturas {
 	}
 
 	public double getImporte() {
-		return importe;
+		return total;
 	}
 
 	public void setId(int id) {
 		this.id = id;
 	}
 
-	public void setIdFactura(int idFactura) {
+	public void setIdFactura(String idFactura) {
 		this.idFactura = idFactura;
 	}
 
@@ -73,13 +78,40 @@ public class LineasFacturas {
 	}
 
 	public void setImporte(double importe) {
-		this.importe = importe;
+		this.total = importe;
 	}
 
-	@Override
-	public String toString() {
-		return "LineasFacturas{" + "id=" + id + ", idFactura=" + idFactura + ", idProducto=" + idProducto
-				+ ", cantidad=" + cantidad + ", precio=" + precio + ", importe=" + importe + '}';
+	public double getIva() {
+		return iva;
+	}
+	
+	public void setIva(double iva) {
+		this.iva = iva;
 	}
 
+	public int getIdProveedor() {
+		return idProveedor;
+	}
+
+	public void setIdProveedor(int idProveedor) {
+		this.idProveedor = idProveedor;
+	}
+
+	public double getTotal() {
+		return total;
+	}
+
+	public void setTotal(double total) {
+		this.total = total;
+	}
+
+	public double getDescuento() {
+		return descuento;
+	}
+
+	public void setDescuento(double descuento) {
+		this.descuento = descuento;
+	}
+	
+	
 }
