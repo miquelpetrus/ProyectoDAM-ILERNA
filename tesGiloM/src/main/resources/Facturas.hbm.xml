@@ -19,6 +19,12 @@
         <property name="idEvento"/>
         <property name="formaDePago"/>
         
+        <!-- Mapeo de la clase Facturas con la tabla facturas
+	    <set name="lineasFacturas" table="lineas_facturas" cascade="all">
+	        <key column="idFactura" />
+	        <one-to-many class="clases.LineasFacturas" />
+	    </set> -->
+        
     </class>
 </hibernate-mapping>
         

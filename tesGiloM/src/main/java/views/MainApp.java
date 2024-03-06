@@ -123,7 +123,7 @@ public class MainApp extends javax.swing.JFrame{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanelPrincipal.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelPrincipal.setBackground(new java.awt.Color(243, 243, 243));
 
         jLabelBienvenida.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabelBienvenida.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);

@@ -177,7 +177,7 @@ public class AddSociosView extends javax.swing.JPanel {
         String nif = jTextNIF.getText();
         String email = jTextEmail.getText();
         String telefono = jTextTfno.getText();
-        String estado = jTextEstado.getText();
+        boolean estado = Boolean.parseBoolean(jTextEstado.getText());
 
 
         // Validar que los campos obligatorios no estén vacíos (puedes agregar más validaciones según tus requisitos)

@@ -15,19 +15,10 @@
         <property name="password"/>
         <property name="role"/>
         <property name="email"/>
+
+        <!-- Relación muchos a uno con Socios -->
+        <many-to-one name="socio" class="clases.Socios" column="idSocio" not-null="true"/>
+
         
-        <!--Con sultado en https://mkyong.com/hibernate/hibernate-many-to-many-relationship-example/ -->
-        <!--  // ToDo: 2020-07-14 - 2020-07-14 - Revisar el mapeo de la relación muchos a muchos
-              // Aquí hay que arrreglar las relaciones entre las tablas
-         --> 
-<!-- 
-        <set name="modulos" table="alumno_modulo">
-            <key>
-                <column name="idAlumno"/>
-            </key>
-            <many-to-many entity-name="pac.Modulo">
-                <column name="idModulo"/>
-            </many-to-many>
-        </set> -->
     </class>
 </hibernate-mapping>

@@ -1,0 +1,21 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!--Mapeo de la clase Alumno con la tabla alumnos-->
+<hibernate-mapping>
+	<class name="clases.MovimientosBancarios" table="movimientosBancarios" catalog="moliGest">
+        <id name="id">
+            <column name="id"/>
+            <generator class="increment"/>
+        </id>
+        <property name="fecha"/>
+        <property name="concepto"/>
+        <property name="cantidad"/>
+        <property name="tipo"/>
+        <property name="idBanco"/>
+        <property name="idUser"/>
+        
+        </class>
+        
+ </hibernate-mapping>
+        

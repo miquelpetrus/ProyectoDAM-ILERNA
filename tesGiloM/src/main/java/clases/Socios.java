@@ -1,14 +1,29 @@
 package clases;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Socios {
+	
+    @OneToOne
+    @JoinColumn(name = "idUser", foreignKey = @javax.persistence.ForeignKey(name = "fk_users_socios"))
+    private Users user;
+    
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
+    }
         
-        @Id
+    @Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String nombre;
@@ -21,14 +36,15 @@ public class Socios {
 	private String fechaNacimiento;
 	private String fechaAlta;;
 	private String fechaBaja;
-	private String estado;
+	private boolean estado;
+	private int idUser;
 
 
 	public Socios() {
 	}
 	
 	public Socios(int id, String nombre, String apellido1, String apellido2, String nif, String telefono, String email,
-			String direccion, String fechaNacimiento, String fechaAlta, String fechaBaja, String estado) {
+			String direccion, String fechaNacimiento, String fechaAlta, String fechaBaja, boolean estado, int idUser) {
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido1 = apellido1;
@@ -40,7 +56,8 @@ public class Socios {
 		this.fechaNacimiento = fechaNacimiento;
 		this.fechaAlta = fechaAlta;
 		this.fechaBaja = fechaBaja;
-		this.estado = estado;
+		this.estado = false;
+		this.idUser = idUser;
 	}
         
         public Socios(int id, String nombre, String apellido1, String apellido2, String nif, String telefono, String email) {
@@ -141,12 +158,20 @@ public class Socios {
 		this.fechaBaja = fechaBaja;
 	}
 
-	public String getEstado() {
+	public boolean isEstado() {
 		return estado;
 	}
-
-	public void setEstado(String estado) {
+	
+	public void setEstado(boolean estado) {
 		this.estado = estado;
+	}
+
+	public int getIdUser() {
+		return idUser;
+	}
+
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
 	}
 	
 	

@@ -13,5 +13,6 @@
 		<property name="iva" />
 		<property name="descuento" />
 		<property name="total" />
+
      </class>
 </hibernate-mapping>

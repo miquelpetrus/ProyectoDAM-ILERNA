@@ -4,9 +4,25 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Users {
+	
+    @OneToOne
+    @JoinColumn(name = "idSocio", foreignKey = @javax.persistence.ForeignKey(name = "fk_socio_users"))
+    private Socios socio;
+
+    // Otros campos y métodos de la clase
+
+    public Socios getSocio() {
+        return socio;
+    }
+
+    public void setSocio(Socios socio) {
+        this.socio = socio;
+    }
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,6 +34,7 @@ public class Users {
 	private String email;
 	private String nif;
 	private String role;
+	private int idSocio;
 	
 	public Users(String name, String apellido1, String apellido2, String password, String email, String nif, String role, String status) {
         this.name = name;
@@ -27,6 +44,17 @@ public class Users {
         this.email = email;
         this.nif = nif;
         this.role = role;
+    }
+	
+	public Users(String name, String apellido1, String apellido2, String password, String email, String nif, String role, String status, int idSocio) {
+        this.name = name;
+        this.apellido1 = apellido1;
+        this.apellido2 = apellido2;
+        this.password = password;
+        this.email = email;
+        this.nif = nif;
+        this.role = role;
+        this.idSocio = idSocio;
     }
 	
 	public Users() {
@@ -101,6 +129,14 @@ public class Users {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public int getIdSocio() {
+		return idSocio;
+	}
+
+	public void setIdSocio(int idSocio) {
+		this.idSocio = idSocio;
 	}
 
 	
