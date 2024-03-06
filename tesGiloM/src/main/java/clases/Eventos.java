@@ -1,5 +1,7 @@
 package clases;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,7 +13,7 @@ public class Eventos {
         @GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String nombre;
-	private String fecha;
+	private Date fecha;
         private String descripcion;
         private String lugar;
         private String precio;
@@ -20,13 +22,12 @@ public class Eventos {
 	public Eventos() {
 	}
 	
-	public Eventos(int id, String nombre, String fecha, String descripcion, String lugar, String precio) {
+	public Eventos(int id, String nombre, Date fecha, String descripcion, String lugar) {
 		this.id = id;
 		this.nombre = nombre;
 		this.fecha = fecha;
 		this.descripcion = descripcion;
 		this.lugar = lugar;
-		this.precio = precio;
 	}
 
 	public int getId() {
@@ -45,13 +46,14 @@ public class Eventos {
 		this.nombre = nombre;
 	}
 
-	public String getFecha() {
+	public Date getFecha() {
 		return fecha;
 	}
-
-	public void setFecha(String fecha) {
+	
+	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
+
 
 	public String getDescripcion() {
 		return descripcion;

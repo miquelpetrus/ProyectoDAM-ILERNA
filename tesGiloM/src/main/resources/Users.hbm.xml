@@ -17,7 +17,7 @@
         <property name="email"/>
 
         <!-- Relación muchos a uno con Socios -->
-        <many-to-one name="socio" class="clases.Socios" column="idSocio" not-null="true"/>
+        <many-to-one name="socio" class="clases.Socios" column="idSocio" not-null="false"/>
 
         
     </class>

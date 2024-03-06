@@ -32,11 +32,15 @@ public class MainApp extends javax.swing.JFrame{
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
-        if (!existeArchivoConfiguracion()) {
-            crearArchivoConfiguracion();
-            abrirVistaConfiguracion();
-        } else {
-        	HibernateUtil.buildSessionFactory();
+        try {
+            if (!existeArchivoConfiguracion()) {
+                crearArchivoConfiguracion();
+                abrirVistaConfiguracion();
+            } else {
+                HibernateUtil.buildSessionFactory();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
     }
@@ -58,18 +62,7 @@ public class MainApp extends javax.swing.JFrame{
     private void abrirVistaConfiguracion() {
         ConfiguracionView configuracionView = new ConfiguracionView();
         // Mostrar la vista de configuración...
-	        JFrame configFrame = new JFrame("Configuración");
-	        configFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-	        configFrame.getContentPane().add(configuracionView);
-	        configFrame.pack();
-	        configFrame.setVisible(true);
-	        configFrame.setLocationRelativeTo(null);
-        // Cambiar el enfoque después de que la aplicación esté completamente inicializada
-        EventQueue.invokeLater(() -> {
-            configFrame.toFront();
-            configFrame.repaint();
-            configFrame.requestFocus();
-        });
+        HibernateUtil.abrirVentana(configuracionView, "Configuración");
     }
     
     public void actualizarTextoBienvenida() {
@@ -85,26 +78,26 @@ public class MainApp extends javax.swing.JFrame{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-    	ImageIcon backgroundImage = new ImageIcon("src/main/resources/images/FondoJPanel.png");
-    	Image img = backgroundImage.getImage();
+        ImageIcon backgroundImage = new ImageIcon("src/main/resources/images/FondoJPanel.png");
+        Image img = backgroundImage.getImage();
 
-    	jPanelPrincipal = new javax.swing.JPanel() {
-    	    @Override
-    	    protected void paintComponent(Graphics g) {
-    	        super.paintComponent(g);
+        jPanelPrincipal = new javax.swing.JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
 
-    	        // Obtén las dimensiones originales de la imagen
-    	        int imgWidth = img.getWidth((ImageObserver) this);
-    	        int imgHeight = img.getHeight((ImageObserver) this);
+                // Obtén las dimensiones originales de la imagen
+                int imgWidth = img.getWidth((ImageObserver) this);
+                int imgHeight = img.getHeight((ImageObserver) this);
 
-    	        // Calcula las nuevas dimensiones para que ocupe el 50% del espacio
-    	        int newWidth = this.getWidth() / 3;
-    	        int newHeight = (int) ((double) newWidth / imgWidth * imgHeight);
+                // Calcula las nuevas dimensiones para que ocupe el 50% del espacio
+                int newWidth = this.getWidth() / 3;
+                int newHeight = (int) ((double) newWidth / imgWidth * imgHeight);
 
-    	        // Dibuja la imagen ajustada en el centro del JPanel
-    	        g.drawImage(img, (this.getWidth() - newWidth) / 2, (this.getHeight() - newHeight) / 2, newWidth, newHeight, this);
-    	    }
-    	};
+                // Dibuja la imagen ajustada en el centro del JPanel
+                g.drawImage(img, (this.getWidth() - newWidth) / 2, (this.getHeight() - newHeight) / 2, newWidth, newHeight, this);
+            }
+        };
         jLabelBienvenida = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
@@ -112,7 +105,7 @@ public class MainApp extends javax.swing.JFrame{
         jMenuConnect = new javax.swing.JMenuItem();
         jMenuSalir = new javax.swing.JMenuItem();
         jMenuGest = new javax.swing.JMenu();
-        jMenuPed = new javax.swing.JMenuItem();
+        jMenuProv = new javax.swing.JMenuItem();
         jMenuFac = new javax.swing.JMenuItem();
         jMenuProductos = new javax.swing.JMenuItem();
         jMenuEventos = new javax.swing.JMenuItem();
@@ -127,7 +120,7 @@ public class MainApp extends javax.swing.JFrame{
 
         jLabelBienvenida.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabelBienvenida.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabelBienvenida.setText("\n");
+        jLabelBienvenida.setText("Bienvenido, \n");
         jLabelBienvenida.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout jPanelPrincipalLayout = new javax.swing.GroupLayout(jPanelPrincipal);
@@ -142,7 +135,7 @@ public class MainApp extends javax.swing.JFrame{
         jPanelPrincipalLayout.setVerticalGroup(
             jPanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPrincipalLayout.createSequentialGroup()
-                .addContainerGap(391, Short.MAX_VALUE)
+                .addContainerGap(351, Short.MAX_VALUE)
                 .addComponent(jLabelBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29))
         );
@@ -153,7 +146,7 @@ public class MainApp extends javax.swing.JFrame{
         jMenuBar1.setPreferredSize(new java.awt.Dimension(164, 36));
 
         jMenuFile.setText("Archivo");
-        jMenuFile.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuFile.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         jMenuFile.setMargin(new java.awt.Insets(3, 10, 3, 10));
         jMenuFile.setPreferredSize(new java.awt.Dimension(80, 32));
         jMenuFile.addActionListener(new java.awt.event.ActionListener() {
@@ -162,7 +155,7 @@ public class MainApp extends javax.swing.JFrame{
             }
         });
 
-        jMenuConf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuConf.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
         jMenuConf.setText("Configuración");
         jMenuConf.setPreferredSize(new java.awt.Dimension(124, 32));
         jMenuConf.addActionListener(new java.awt.event.ActionListener() {
@@ -172,7 +165,7 @@ public class MainApp extends javax.swing.JFrame{
         });
         jMenuFile.add(jMenuConf);
 
-        jMenuConnect.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuConnect.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
         jMenuConnect.setText("Conectar");
         jMenuConnect.setPreferredSize(new java.awt.Dimension(103, 32));
         jMenuConnect.addActionListener(new java.awt.event.ActionListener() {
@@ -182,7 +175,7 @@ public class MainApp extends javax.swing.JFrame{
         });
         jMenuFile.add(jMenuConnect);
 
-        jMenuSalir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuSalir.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
         jMenuSalir.setText("Salir");
         jMenuSalir.setPreferredSize(new java.awt.Dimension(73, 32));
         jMenuSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -195,15 +188,20 @@ public class MainApp extends javax.swing.JFrame{
         jMenuBar1.add(jMenuFile);
 
         jMenuGest.setText("Gestión");
+        jMenuGest.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
         jMenuGest.setPreferredSize(new java.awt.Dimension(80, 32));
-        jMenuGest.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jMenuPed.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMenuPed.setText("Pedidos");
-        jMenuPed.setPreferredSize(new java.awt.Dimension(90, 32));
-        jMenuGest.add(jMenuPed);
+        jMenuProv.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        jMenuProv.setText("Proveedores");
+        jMenuProv.setPreferredSize(new java.awt.Dimension(90, 32));
+        jMenuProv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuProvActionPerformed(evt);
+            }
+        });
+        jMenuGest.add(jMenuProv);
 
-        jMenuFac.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuFac.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
         jMenuFac.setText("Facturas");
         jMenuFac.setPreferredSize(new java.awt.Dimension(92, 32));
         jMenuFac.addActionListener(new java.awt.event.ActionListener() {
@@ -213,33 +211,43 @@ public class MainApp extends javax.swing.JFrame{
         });
         jMenuGest.add(jMenuFac);
 
-        jMenuProductos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuProductos.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
         jMenuProductos.setText("Productos");
         jMenuProductos.setPreferredSize(new java.awt.Dimension(102, 32));
-		jMenuProductos.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jMenuProductosActionPerformed(evt);
-			}
-		});
+        jMenuProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuProductosActionPerformed(evt);
+            }
+        });
         jMenuGest.add(jMenuProductos);
 
-        jMenuEventos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuEventos.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
         jMenuEventos.setText("Eventos");
         jMenuEventos.setPreferredSize(new java.awt.Dimension(89, 32));
+        jMenuEventos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuEventosActionPerformed(evt);
+            }
+        });
         jMenuGest.add(jMenuEventos);
 
-        jMenuBancos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuBancos.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
         jMenuBancos.setText("Bancos");
         jMenuBancos.setPreferredSize(new java.awt.Dimension(86, 32));
+        jMenuBancos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuBancosActionPerformed(evt);
+            }
+        });
         jMenuGest.add(jMenuBancos);
 
         jMenuBar1.add(jMenuGest);
 
         jMenuMiembros.setText("Miembros");
+        jMenuMiembros.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
         jMenuMiembros.setPreferredSize(new java.awt.Dimension(80, 32));
-        jMenuMiembros.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jMenuUsers.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuUsers.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
         jMenuUsers.setText("Usuarios");
         jMenuUsers.setPreferredSize(new java.awt.Dimension(101, 32));
         jMenuUsers.addActionListener(new java.awt.event.ActionListener() {
@@ -249,7 +257,7 @@ public class MainApp extends javax.swing.JFrame{
         });
         jMenuMiembros.add(jMenuUsers);
 
-        jMenuSocios.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuSocios.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
         jMenuSocios.setText("Socios");
         jMenuSocios.setPreferredSize(new java.awt.Dimension(86, 32));
         jMenuSocios.addActionListener(new java.awt.event.ActionListener() {
@@ -271,12 +279,15 @@ public class MainApp extends javax.swing.JFrame{
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelPrincipal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    // A partir de aquí van las acciones de los botones del menú
+    
     private void jMenuFacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFacActionPerformed
         // TODO add your handling code here:
     	try {
@@ -342,8 +353,34 @@ public class MainApp extends javax.swing.JFrame{
         }
        
     }//GEN-LAST:event_jMenuConnectActionPerformed
-    
-    private void jMenuProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuConnectActionPerformed
+
+    private void jMenuProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuProvActionPerformed
+        // TODO add your handling code here:
+		try {
+			ProveedoresView proveedoresView = new ProveedoresView();
+			HibernateUtil.abrirVentana(proveedoresView, "Proveedores");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }//GEN-LAST:event_jMenuProvActionPerformed
+
+    private void jMenuBancosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuBancosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuBancosActionPerformed
+
+    private void jMenuEventosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEventosActionPerformed
+        // TODO add your handling code here:
+		try {
+			EventosView eventosView = new EventosView();
+			HibernateUtil.abrirVentana(eventosView, "Eventos");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }//GEN-LAST:event_jMenuEventosActionPerformed
+
+    private void jMenuProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuProductosActionPerformed
         // TODO add your handling code here:
         try {
             ProductosView productosView = new ProductosView();
@@ -352,8 +389,8 @@ public class MainApp extends javax.swing.JFrame{
         } catch (Exception e) {
             e.printStackTrace();
         }
-       
-    }
+    }//GEN-LAST:event_jMenuProductosActionPerformed
+    
 
     /**
      * @param args the command line arguments
@@ -421,8 +458,8 @@ public class MainApp extends javax.swing.JFrame{
     private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenu jMenuGest;
     private javax.swing.JMenu jMenuMiembros;
-    private javax.swing.JMenuItem jMenuPed;
     private javax.swing.JMenuItem jMenuProductos;
+    private javax.swing.JMenuItem jMenuProv;
     private javax.swing.JMenuItem jMenuSalir;
     private javax.swing.JMenuItem jMenuSocios;
     private javax.swing.JMenuItem jMenuUsers;

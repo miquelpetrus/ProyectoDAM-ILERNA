@@ -44,18 +44,19 @@ public class HibernateUtil {
 
     }
     // TODO: Crear método para crear un usuario admin por defecto
-    private static void createDefaultAdminUser(SessionFactory sessionFactory) {
+    // Al final haré un botón en Configuración para crear el usuario admin por defecto
+    public static void createDefaultAdminUser(SessionFactory sessionFactory) {
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
 
             // Verificar si el usuario admin ya existe
             Users adminUser = session.createQuery("FROM Users WHERE email = :email", Users.class)
-                    .setParameter("email", "admin@aavvmolidespla.org")
+                    .setParameter("email", "admin@aavv.com")
                     .uniqueResult();
 
             if (adminUser == null) {
                 // Crear el usuario admin si no existe
-                adminUser = new Users("Admin", "", "", "admin", "admin@example.com", "", "admin", "");
+                adminUser = new Users("Admin", "", "", "admin", "admin@aavv.com", "", "admin", "");
                 session.save(adminUser);
                 transaction.commit();
             }

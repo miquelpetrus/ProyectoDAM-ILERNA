@@ -75,7 +75,10 @@ public class LoginView extends javax.swing.JPanel {
         });
 
         jTextAreaMnsj.setEditable(false);
+        jTextAreaMnsj.setBackground(new java.awt.Color(204, 204, 204));
         jTextAreaMnsj.setColumns(20);
+        jTextAreaMnsj.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        jTextAreaMnsj.setForeground(new java.awt.Color(255, 0, 51));
         jTextAreaMnsj.setRows(5);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -133,11 +136,11 @@ public class LoginView extends javax.swing.JPanel {
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jTextAreaMnsj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
+    private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {                                             
         // TODO add your handling code here:
         realizarLogin();
         }
@@ -167,10 +170,10 @@ public class LoginView extends javax.swing.JPanel {
 	
 			HibernateUtil.cerrarVentana(this);
 	        
-	     sessionFactory.close();
+			sessionFactory.close();
 	    }
 
-    }//GEN-LAST:event_jButtonLoginActionPerformed
+    }                                            
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonLogin;

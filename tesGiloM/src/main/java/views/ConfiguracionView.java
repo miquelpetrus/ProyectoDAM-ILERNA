@@ -6,9 +6,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 import javax.swing.*;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import controllers.HibernateUtil;
+import controllers.UsuarioSesion;
 
 /**
  *
@@ -17,8 +21,11 @@ import controllers.HibernateUtil;
 public class ConfiguracionView extends javax.swing.JPanel {
 
     private Configuration hibernateConfiguration;
+	private SessionFactory sessionFactory;
+
     
     public ConfiguracionView() {
+        this.sessionFactory = HibernateUtil.buildSessionFactory();
         initComponents();
         cargarConfiguracion();
         }
@@ -47,6 +54,9 @@ public class ConfiguracionView extends javax.swing.JPanel {
         jTextNomPSW = new javax.swing.JTextField();
         jButtonGuardar = new javax.swing.JButton();
         jButtonCerrar = new javax.swing.JButton();
+        jButtonCrearAdmin = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextAreaNoAdmin = new javax.swing.JTextArea();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -106,6 +116,28 @@ public class ConfiguracionView extends javax.swing.JPanel {
             }
         });
 
+        jButtonCrearAdmin.setText("Crear admin");
+        jButtonCrearAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCrearAdminActionPerformed(evt);
+            }
+        });
+
+        jTextAreaNoAdmin.setBackground(new java.awt.Color(204, 204, 204));
+        jTextAreaNoAdmin.setColumns(20);
+        jTextAreaNoAdmin.setForeground(new java.awt.Color(255, 0, 51));
+        jTextAreaNoAdmin.setRows(5);
+        jTextAreaNoAdmin.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jTextAreaNoAdminAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        jScrollPane1.setViewportView(jTextAreaNoAdmin);
+
         javax.swing.GroupLayout jPanelConfLayout = new javax.swing.GroupLayout(jPanelConf);
         jPanelConf.setLayout(jPanelConfLayout);
         jPanelConfLayout.setHorizontalGroup(
@@ -138,10 +170,14 @@ public class ConfiguracionView extends javax.swing.JPanel {
                                     .addComponent(jTextNomSrv, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelConfLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButtonCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanelConfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButtonCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(390, Short.MAX_VALUE))
+                        .addGroup(jPanelConfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButtonGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonCrearAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE))))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
         jPanelConfLayout.setVerticalGroup(
             jPanelConfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,7 +206,11 @@ public class ConfiguracionView extends javax.swing.JPanel {
                 .addGroup(jPanelConfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addGap(44, 44, 44)
+                .addGroup(jPanelConfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonCrearAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -234,9 +274,20 @@ public class ConfiguracionView extends javax.swing.JPanel {
     	HibernateUtil.cerrarVentana(this);
     }//GEN-LAST:event_jButtonCerrarActionPerformed
 
+    private void jButtonCrearAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearAdminActionPerformed
+        // TODO add your handling code here:
+    	HibernateUtil.createDefaultAdminUser(sessionFactory);
+        jTextAreaNoAdmin.setText("Usuario admin creado");
+    }//GEN-LAST:event_jButtonCrearAdminActionPerformed
+
+    private void jTextAreaNoAdminAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jTextAreaNoAdminAncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextAreaNoAdminAncestorAdded
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCerrar;
+    private javax.swing.JButton jButtonCrearAdmin;
     private javax.swing.JButton jButtonGuardar;
     private javax.swing.JLabel jLblNomBBDD;
     private javax.swing.JLabel jLblNomIP;
@@ -244,6 +295,8 @@ public class ConfiguracionView extends javax.swing.JPanel {
     private javax.swing.JLabel jLblNomSrv;
     private javax.swing.JLabel jLblNomUsr;
     private javax.swing.JPanel jPanelConf;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextAreaNoAdmin;
     private javax.swing.JTextField jTextNomBBDD;
     private javax.swing.JTextField jTextNomIP;
     private javax.swing.JTextField jTextNomPSW;
@@ -263,5 +316,10 @@ public class ConfiguracionView extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
+
+	public Session openSession() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

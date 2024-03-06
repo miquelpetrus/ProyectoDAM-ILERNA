@@ -6,13 +6,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
 public class Socios {
-	
-    @OneToOne
-    @JoinColumn(name = "idUser", foreignKey = @javax.persistence.ForeignKey(name = "fk_users_socios"))
+
+	@OneToOne(mappedBy = "socio")
     private Users user;
     
     public Users getUser() {

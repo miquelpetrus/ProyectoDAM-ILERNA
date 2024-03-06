@@ -19,7 +19,7 @@
 		<property name="estado" />
 		
 		<!-- Relación muchos a uno con Users -->
-        <many-to-one name="user" class="clases.Users" column="idUser" not-null="true"/>
+        <many-to-one name="user" class="clases.Users" column="idUser" not-null="false"/>
         
     </class>
 </hibernate-mapping>

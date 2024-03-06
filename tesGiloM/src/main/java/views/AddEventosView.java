@@ -4,17 +4,27 @@
  */
 package views;
 
+import java.util.Date;
+
+import org.hibernate.SessionFactory;
+
+import controllers.EventosController;
+import controllers.HibernateUtil;
+
 /**
  *
  * @author Miquel
  */
 public class AddEventosView extends javax.swing.JPanel {
 
-    /**
+    private SessionFactory sessionFactory;
+	/**
      * Creates new form AddEventosView
      */
     public AddEventosView() {
         initComponents();
+        this.sessionFactory = HibernateUtil.buildSessionFactory();
+        
     }
 
     /**
@@ -30,21 +40,22 @@ public class AddEventosView extends javax.swing.JPanel {
         jTextField1 = new javax.swing.JTextField();
         jLabelFechaEvento = new javax.swing.JLabel();
         jLabelDescEvento = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabelDescEvento1 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        jTextFieldDesc = new javax.swing.JTextField();
+        jLabelLugar = new javax.swing.JLabel();
+        jTextLugar = new javax.swing.JTextField();
         jButtonCerrar = new javax.swing.JButton();
         jButtonGuardar = new javax.swing.JButton();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         setBackground(new java.awt.Color(204, 204, 204));
 
         jLabelNomEvento.setText("Nombre Evento");
 
-        jLabelFechaEvento.setText("Nombre Evento");
+        jLabelFechaEvento.setText("Fecha del evento");
 
-        jLabelDescEvento.setText("Nombre Evento");
+        jLabelDescEvento.setText("Descripción");
 
-        jLabelDescEvento1.setText("Lugar del evento");
+        jLabelLugar.setText("Lugar del evento");
 
         jButtonCerrar.setText("Cerrar");
         jButtonCerrar.addActionListener(new java.awt.event.ActionListener() {
@@ -72,14 +83,17 @@ public class AddEventosView extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelDescEvento1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelLugar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField3))
-                    .addComponent(jLabelFechaEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextLugar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelFechaEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelDescEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField2))
+                        .addComponent(jTextFieldDesc))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelNomEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -94,15 +108,17 @@ public class AddEventosView extends javax.swing.JPanel {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelNomEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelFechaEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabelFechaEvento, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField2)
+                    .addComponent(jTextFieldDesc)
                     .addComponent(jLabelDescEvento, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField3)
-                    .addComponent(jLabelDescEvento1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextLugar)
+                    .addComponent(jLabelLugar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -113,22 +129,35 @@ public class AddEventosView extends javax.swing.JPanel {
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
         // TODO add your handling code here:
+    	String nombre = jTextField1.getText();
+    	String descripcion = jTextFieldDesc.getText();
+    	String lugar = jTextLugar.getText();
+    	Date fecha = jDateChooser1.getDate();
+    	
+    	EventosController.crearEvento(nombre, fecha, lugar, descripcion);
+    	HibernateUtil.abrirVentana(new EventosView(), "Eventos");
+    	HibernateUtil.cerrarVentana(this);
+    	
+    
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     private void jButtonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarActionPerformed
         // TODO add your handling code here:
+    	HibernateUtil.abrirVentana(new EventosView(), "Eventos");
+    	HibernateUtil.cerrarVentana(this);
     }//GEN-LAST:event_jButtonCerrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCerrar;
     private javax.swing.JButton jButtonGuardar;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabelDescEvento;
-    private javax.swing.JLabel jLabelDescEvento1;
     private javax.swing.JLabel jLabelFechaEvento;
+    private javax.swing.JLabel jLabelLugar;
     private javax.swing.JLabel jLabelNomEvento;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextFieldDesc;
+    private javax.swing.JTextField jTextLugar;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,13 +5,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
 public class Users {
 	
-    @OneToOne
-    @JoinColumn(name = "idSocio", foreignKey = @javax.persistence.ForeignKey(name = "fk_socio_users"))
+    @ManyToOne
+    @JoinColumn(name = "idSocio")
     private Socios socio;
 
     // Otros campos y métodos de la clase
@@ -64,7 +65,6 @@ public class Users {
         this.password = "";
         this.email = "";
         this.nif = "";
-        this.role = "";
     }
 	
     public int getId() {

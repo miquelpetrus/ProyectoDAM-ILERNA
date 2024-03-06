@@ -4,17 +4,24 @@
  */
 package views;
 
+import org.hibernate.SessionFactory;
+
+import controllers.HibernateUtil;
+import controllers.ProveedoresController;
+
 /**
  *
  * @author miquelpetrus
  */
 public class AddProveedorView extends javax.swing.JPanel {
 
-    /**
+    private SessionFactory sessionFactory;
+	/**
      * Creates new form AddProveedorView
      */
     public AddProveedorView() {
         initComponents();
+        this.sessionFactory = HibernateUtil.buildSessionFactory();
     }
 
     /**
@@ -144,10 +151,20 @@ public class AddProveedorView extends javax.swing.JPanel {
 
     private void jButtonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarActionPerformed
         // TODO add your handling code here:
+    	HibernateUtil.cerrarVentana(this);
     }//GEN-LAST:event_jButtonCerrarActionPerformed
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
         // TODO add your handling code here:
+    	String nombre = jTextNombre.getText();
+    	String cif = jTextCIF.getText();
+    	String telefono = jTextTelefono.getText();
+    	String email = jTextEmail.getText();
+    	String direccion = jTextDireccion.getText();
+    	
+    	ProveedoresController.crearProveedor(nombre, cif, telefono, email, direccion);
+    	HibernateUtil.abrirVentana(new ProveedoresView(), "Proveedores");
+    	HibernateUtil.cerrarVentana(this);
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
 

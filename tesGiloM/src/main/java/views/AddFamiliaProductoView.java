@@ -1,16 +1,25 @@
 package views;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
+import clases.FamiliaProducto;
+import controllers.HibernateUtil;
+
 /**
  *
  * @author miquelpetrus
  */
-public class AddFamiliaProducto extends javax.swing.JPanel {
+public class AddFamiliaProductoView extends javax.swing.JPanel {
 
-    /**
+    private SessionFactory sessionFactory;
+	/**
      * Creates new form FamiliaProducto
      */
-    public AddFamiliaProducto() {
+    public AddFamiliaProductoView() {
         initComponents();
+        this.sessionFactory = HibernateUtil.buildSessionFactory();
     }
 
     @SuppressWarnings("unchecked")
@@ -83,11 +92,40 @@ public class AddFamiliaProducto extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarActionPerformed
-        // TODO add your handling code here:
+
+        HibernateUtil.cerrarVentana(this);
+    	
+    	
     }//GEN-LAST:event_jButtonCerrarActionPerformed
 
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
         // TODO add your handling code here:
+        // Guardar los datos
+    	String nombre = jTextNombre.getText();
+    	String desc = jTextDesc.getText();
+    	
+    	FamiliaProducto familiaProducto = new FamiliaProducto();
+    	familiaProducto.setNombre(nombre);
+    	familiaProducto.setDescripcion(desc);
+    	
+        try (Session session = sessionFactory.openSession()) {
+            // Iniciar una transacción
+            Transaction tx = session.beginTransaction();
+
+            // Guardar la nueva entidad en la base de datos
+            session.save(familiaProducto);
+
+            // Confirmar la transacción
+            tx.commit();
+
+            // Cerrar la sesión
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Manejar cualquier excepción que pueda ocurrir al guardar datos
+        }
+        sessionFactory.close();
+    	HibernateUtil.cerrarVentana(this);
+    	HibernateUtil.abrirVentana(new ProductosView(), "Productos");
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
 
