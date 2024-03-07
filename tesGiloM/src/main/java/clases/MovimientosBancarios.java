@@ -6,9 +6,23 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class MovimientosBancarios {
+	
+    @ManyToOne
+    @JoinColumn(name = "idEvento")
+    private Eventos evento;
+    
+	public Eventos getEvento() {
+		return evento;
+	}
+	
+	public void setEvento(Eventos evento) {
+		this.evento = evento;
+	}
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

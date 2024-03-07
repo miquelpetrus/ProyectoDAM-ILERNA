@@ -7,6 +7,9 @@
 			<generator class="increment" />
         </id>
                 <property name="nombre" />
+                <property name="entidad" />           
+                <property name="iban" /> 
+                <property name="contacto" />           
                 <property name="saldo" />
      </class>
      </hibernate-mapping>

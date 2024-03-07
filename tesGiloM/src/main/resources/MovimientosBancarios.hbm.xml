@@ -15,6 +15,9 @@
         <property name="idBanco"/>
         <property name="idUser"/>
         
+        <!-- Relación muchos a uno con Eventos -->
+        <many-to-one name="evento" class="clases.Eventos" column="idSEvento" not-null="false"/>
+        
         </class>
         
  </hibernate-mapping>

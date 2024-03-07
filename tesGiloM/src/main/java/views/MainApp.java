@@ -1,6 +1,5 @@
 package views;
 
-import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.ImageObserver;
@@ -78,26 +77,7 @@ public class MainApp extends javax.swing.JFrame{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ImageIcon backgroundImage = new ImageIcon("src/main/resources/images/FondoJPanel.png");
-        Image img = backgroundImage.getImage();
-
-        jPanelPrincipal = new javax.swing.JPanel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-
-                // Obtén las dimensiones originales de la imagen
-                int imgWidth = img.getWidth((ImageObserver) this);
-                int imgHeight = img.getHeight((ImageObserver) this);
-
-                // Calcula las nuevas dimensiones para que ocupe el 50% del espacio
-                int newWidth = this.getWidth() / 3;
-                int newHeight = (int) ((double) newWidth / imgWidth * imgHeight);
-
-                // Dibuja la imagen ajustada en el centro del JPanel
-                g.drawImage(img, (this.getWidth() - newWidth) / 2, (this.getHeight() - newHeight) / 2, newWidth, newHeight, this);
-            }
-        };
+        jPanelPrincipal = new javax.swing.JPanel();
         jLabelBienvenida = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
@@ -109,7 +89,10 @@ public class MainApp extends javax.swing.JFrame{
         jMenuFac = new javax.swing.JMenuItem();
         jMenuProductos = new javax.swing.JMenuItem();
         jMenuEventos = new javax.swing.JMenuItem();
+        jMenuCuentas = new javax.swing.JMenu();
         jMenuBancos = new javax.swing.JMenuItem();
+        jMenuIngresos = new javax.swing.JMenuItem();
+        jMenuGastos = new javax.swing.JMenuItem();
         jMenuMiembros = new javax.swing.JMenu();
         jMenuUsers = new javax.swing.JMenuItem();
         jMenuSocios = new javax.swing.JMenuItem();
@@ -231,6 +214,10 @@ public class MainApp extends javax.swing.JFrame{
         });
         jMenuGest.add(jMenuEventos);
 
+        jMenuCuentas.setText("Cuentas");
+        jMenuCuentas.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jMenuCuentas.setPreferredSize(new java.awt.Dimension(101, 32));
+
         jMenuBancos.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
         jMenuBancos.setText("Bancos");
         jMenuBancos.setPreferredSize(new java.awt.Dimension(86, 32));
@@ -239,7 +226,29 @@ public class MainApp extends javax.swing.JFrame{
                 jMenuBancosActionPerformed(evt);
             }
         });
-        jMenuGest.add(jMenuBancos);
+        jMenuCuentas.add(jMenuBancos);
+
+        jMenuIngresos.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        jMenuIngresos.setText("Ingresos");
+        jMenuIngresos.setPreferredSize(new java.awt.Dimension(86, 32));
+        jMenuIngresos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuIngresosActionPerformed(evt);
+            }
+        });
+        jMenuCuentas.add(jMenuIngresos);
+
+        jMenuGastos.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        jMenuGastos.setText("Gastos");
+        jMenuGastos.setPreferredSize(new java.awt.Dimension(86, 32));
+        jMenuGastos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuGastosActionPerformed(evt);
+            }
+        });
+        jMenuCuentas.add(jMenuGastos);
+
+        jMenuGest.add(jMenuCuentas);
 
         jMenuBar1.add(jMenuGest);
 
@@ -367,6 +376,12 @@ public class MainApp extends javax.swing.JFrame{
 
     private void jMenuBancosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuBancosActionPerformed
         // TODO add your handling code here:
+    	 try {
+    	      BancosView bancosView = new BancosView();
+    	      HibernateUtil.abrirVentana(bancosView, "Bancos");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
     }//GEN-LAST:event_jMenuBancosActionPerformed
 
     private void jMenuEventosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEventosActionPerformed
@@ -390,6 +405,14 @@ public class MainApp extends javax.swing.JFrame{
             e.printStackTrace();
         }
     }//GEN-LAST:event_jMenuProductosActionPerformed
+
+    private void jMenuIngresosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuIngresosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuIngresosActionPerformed
+
+    private void jMenuGastosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuGastosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuGastosActionPerformed
     
 
     /**
@@ -453,10 +476,13 @@ public class MainApp extends javax.swing.JFrame{
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuConf;
     private javax.swing.JMenuItem jMenuConnect;
+    private javax.swing.JMenu jMenuCuentas;
     private javax.swing.JMenuItem jMenuEventos;
     private javax.swing.JMenuItem jMenuFac;
     private javax.swing.JMenu jMenuFile;
+    private javax.swing.JMenuItem jMenuGastos;
     private javax.swing.JMenu jMenuGest;
+    private javax.swing.JMenuItem jMenuIngresos;
     private javax.swing.JMenu jMenuMiembros;
     private javax.swing.JMenuItem jMenuProductos;
     private javax.swing.JMenuItem jMenuProv;
