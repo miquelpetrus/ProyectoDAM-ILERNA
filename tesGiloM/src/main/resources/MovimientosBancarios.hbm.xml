@@ -10,13 +10,15 @@
         </id>
         <property name="fecha"/>
         <property name="concepto"/>
+        <property name="idSocio"/>
+        <property name="idTercero"/>
         <property name="cantidad"/>
         <property name="tipo"/>
         <property name="idBanco"/>
         <property name="idUser"/>
         
         <!-- Relación muchos a uno con Eventos -->
-        <many-to-one name="evento" class="clases.Eventos" column="idSEvento" not-null="false"/>
+        <many-to-one name="evento" class="clases.Eventos" column="idEvento" not-null="false"/>
         
         </class>
         

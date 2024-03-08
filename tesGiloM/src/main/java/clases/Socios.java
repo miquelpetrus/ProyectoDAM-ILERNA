@@ -174,7 +174,9 @@ public class Socios {
 		this.idUser = idUser;
 	}
 	
-	
-	
+    @Override
+    public String toString() {
+        return this.nombre + " " + this.apellido1 + " " + this.apellido2;
+    }
 
 }

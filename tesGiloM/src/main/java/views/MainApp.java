@@ -382,6 +382,13 @@ public class MainApp extends javax.swing.JFrame{
 
     private void jMenuGastosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuGastosActionPerformed
         // TODO add your handling code here:
+		try {
+			AddGastoView gastoView = new AddGastoView();
+			HibernateUtil.abrirVentana(gastoView, "Ingresos");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
     }//GEN-LAST:event_jMenuGastosActionPerformed
     
 

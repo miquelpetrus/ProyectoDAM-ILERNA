@@ -104,11 +104,14 @@ public class BancosView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonVerMovActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerMovActionPerformed
-        // TODO add your handling code here:
+        // Obtener el banco seleccionado
+    	int idBanco = ((Bancos) jComboBoxBanco.getSelectedItem()).getId();
+    	HibernateUtil.abrirVentana(new MovBancariosView(idBanco), "Movimientos Bancarios");
     }//GEN-LAST:event_jButtonVerMovActionPerformed
 
     private void jButtonEditarBancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarBancoActionPerformed
         // TODO add your handling code here:
+    	HibernateUtil.cerrarVentana(this);
     }//GEN-LAST:event_jButtonEditarBancoActionPerformed
 
     private void jButtonCrearBancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearBancoActionPerformed

@@ -79,6 +79,9 @@ public class Eventos {
 		this.precio = precio;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return this.nombre;
+	}
 
 }

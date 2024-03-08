@@ -29,6 +29,9 @@ public class MovimientosBancarios {
 	private int id;
 	private Date fecha;
 	private String concepto;
+	private int idEvento;
+	private int idSocio;
+	private int idTercero;
 	private double cantidad;
 	private String tipo;
 	private int idBanco;
@@ -39,7 +42,7 @@ public class MovimientosBancarios {
 	}
 	
 	public MovimientosBancarios(int id, Date fecha, String concepto, double cantidad, String tipo, int idBanco,
-			int idUser) {
+		int idUser) {
 		super();
 		this.id = id;
 		this.fecha = fecha;
@@ -48,6 +51,49 @@ public class MovimientosBancarios {
 		this.tipo = tipo;
 		this.idBanco = idBanco;
 		this.idUser = idUser;
+	}
+	
+	public MovimientosBancarios(int id, Date fecha, int idEvento, int idSocio, int idBanco, double cantidad) {
+		this.id = id;
+		this.fecha = fecha;
+		this.idEvento = idEvento;
+		this.idSocio = idSocio;
+		this.idBanco = idBanco;
+		this.cantidad = cantidad;
+	}
+	
+	public MovimientosBancarios(int id, Date fecha, int idEvento, int idTercero,  int idSocio, int idBanco, double cantidad, String tipo) {
+		this.id = id;
+		this.fecha = fecha;
+		this.idEvento = idEvento;
+		this.idTercero = idTercero;
+		this.idSocio = idSocio;
+		this.idBanco = idBanco;
+		this.cantidad = cantidad;
+		this.tipo = tipo;
+	}
+	public int getIdEvento() {
+		return idEvento;
+	}
+
+	public void setIdEvento(int idEvento) {
+		this.idEvento = idEvento;
+	}
+
+	public int getIdSocio() {
+		return idSocio;
+	}
+	
+	public void setIdSocio(int idSocio) {
+		this.idSocio = idSocio;
+	}
+
+	public int getIdTercero() {
+		return idTercero;
+	}
+
+	public void setIdTercero(int idTercero) {
+		this.idTercero = idTercero;
 	}
 
 	public int getId() {

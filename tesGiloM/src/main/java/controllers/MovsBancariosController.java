@@ -10,7 +10,7 @@ import clases.Ingresos;
 import clases.MovimientosBancarios;
 
 
-public class IngresosController {
+public class MovsBancariosController {
 	
 	public static List<MovimientosBancarios> getAllIngresos() {
 		try (Session session = HibernateUtil.buildSessionFactory().openSession()) {
@@ -23,7 +23,7 @@ public class IngresosController {
 		}
 	}
 
-	public static void crearIngreso(Date fecha, int idTercero, int idSocio, int idEvento, double importe) {
+	public static void crearIngreso(Date fecha, int idTercero, int idBanco, int idSocio, int idEvento, double importe, String tipo) {
 		// TODO Auto-generated method stub
 		try (Session session = HibernateUtil.buildSessionFactory().openSession()) {
 			Transaction transaction = null;
@@ -31,16 +31,45 @@ public class IngresosController {
 			try {
 				transaction = session.beginTransaction();
 
-				// Aquí debes realizar la lógica para crear un nuevo producto
-				// Puedes utilizar la entidad de productos y persistirla en la base de datos
-
 				// Ejemplo (debes adaptarlo a tu modelo de datos):
-				Ingresos nuevoIngreso = new Ingresos();
+				MovimientosBancarios nuevoIngreso = new MovimientosBancarios();
                 nuevoIngreso.setFecha(fecha);
                 nuevoIngreso.setIdTercero(idTercero);
+                nuevoIngreso.setIdBanco(idBanco);
                 nuevoIngreso.setIdSocio(idSocio);
                 nuevoIngreso.setIdEvento(idEvento);
-                nuevoIngreso.setImporte(importe);
+                nuevoIngreso.setCantidad(importe);
+                nuevoIngreso.setTipo(tipo);
+
+				session.save(nuevoIngreso);
+
+				transaction.commit();
+			} catch (Exception e) {
+				if (transaction != null) {
+					transaction.rollback();
+				}
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public static void crearGasto(Date fecha, int idTercero, int idBanco, int idSocio, int idEvento, double importe, String tipo) {
+		// TODO Auto-generated method stub
+		try (Session session = HibernateUtil.buildSessionFactory().openSession()) {
+			Transaction transaction = null;
+
+			try {
+				transaction = session.beginTransaction();
+
+				// Ejemplo (debes adaptarlo a tu modelo de datos):
+				MovimientosBancarios nuevoIngreso = new MovimientosBancarios();
+                nuevoIngreso.setFecha(fecha);
+                nuevoIngreso.setIdTercero(idTercero);
+                nuevoIngreso.setIdBanco(idBanco);
+                nuevoIngreso.setIdSocio(idSocio);
+                nuevoIngreso.setIdEvento(idEvento);
+                nuevoIngreso.setCantidad(importe);
+                nuevoIngreso.setTipo(tipo);
 
 				session.save(nuevoIngreso);
 
