@@ -4,9 +4,14 @@
  */
 package views;
 
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
@@ -34,9 +39,10 @@ public class MovBancariosView extends javax.swing.JPanel {
     public MovBancariosView(int idBanco) {
         initComponents();
         this.sessionFactory = HibernateUtil.buildSessionFactory();
+        int bancoId = idBanco;
         initializeTableModel();      
         loadBancosData(idBanco);
-        jLabelNomBanco.setText(BancosController.getNomBancoById(idBanco));
+        jLabelNomBanco.setText(BancosController.getBancosById(idBanco).getNombre() + " " + BancosController.getBancosById(idBanco).getIban());
     }
     
     private void initializeTableModel() {
@@ -222,11 +228,44 @@ public class MovBancariosView extends javax.swing.JPanel {
 
     private void jButtonFiltrarAnioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltrarAnioActionPerformed
         // TODO add your handling code here:
+        // Obtener el año seleccionado por el usuario
+        int year = jYearChooser1.getYear();
+        
+        // Filtrar los movimientos bancarios por el año seleccionado
+        filterMovimientosByYear(year);
+        
     }//GEN-LAST:event_jButtonFiltrarAnioActionPerformed
 
     private void jButtonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarActionPerformed
         // TODO add your handling code here:
+    	HibernateUtil.cerrarVentana(this);
     }//GEN-LAST:event_jButtonCerrarActionPerformed
+    
+    private void filterMovimientosByYear(int year) {
+        DefaultTableModel filteredModel = new DefaultTableModel(0, tableModel.getColumnCount());
+        
+        // Recorrer cada fila de la tabla actual
+        for (int i = 0; i < tableModel.getRowCount(); i++) {
+            // Obtener la fecha de la fila actual
+            Timestamp timestamp = (Timestamp) tableModel.getValueAt(i, 0); // Suponiendo que la fecha está almacenada como Timestamp
+            
+            // Convertir la fecha a LocalDate para obtener el año
+            LocalDate localDate = timestamp.toLocalDateTime().toLocalDate();
+            int rowYear = localDate.getYear();
+
+            // Si la fecha corresponde al año seleccionado, agregar la fila al modelo filtrado
+            if (rowYear == year) {
+                Object[] rowData = new Object[tableModel.getColumnCount()];
+                for (int j = 0; j < rowData.length; j++) {
+                    rowData[j] = tableModel.getValueAt(i, j);
+                }
+                filteredModel.addRow(rowData);
+            }
+        }
+        
+        // Establecer el modelo filtrado en la tabla
+        jTableMovs.setModel(filteredModel);
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

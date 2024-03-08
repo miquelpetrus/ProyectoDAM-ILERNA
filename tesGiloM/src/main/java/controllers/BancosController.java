@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import clases.Bancos;
+import clases.Productos;
 
 
 public class BancosController {
@@ -22,32 +23,13 @@ public class BancosController {
         }
     }
     
-    public static String getNomBancoById(int idBanco) {
-        String nomBanco = null;
-        
+    public static Bancos getBancosById(int id) {
         try (Session session = HibernateUtil.buildSessionFactory().openSession()) {
-            Transaction transaction = null;
-            
-            try {
-                transaction = session.beginTransaction();
-                
-                // Utiliza HQL para obtener el nombre del banco
-                String hql = "SELECT nombre FROM Banco WHERE id = :idBanco";
-                Query<String> query = session.createQuery(hql, String.class);
-                query.setParameter("idBanco", idBanco);
-                nomBanco = query.uniqueResult();
-                
-                transaction.commit();
-            } catch (Exception e) {
-                if (transaction != null) {
-                    transaction.rollback();
-                }
-                e.printStackTrace();
-                // Maneja cualquier excepción que pueda ocurrir al obtener el nombre del banco
-            }
+            return session.get(Bancos.class, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null; // or throw an exception based on your error handling strategy
         }
-        
-        return nomBanco;
     }
     
     public static void crearBanco(String nombre, String entidad, String iban, String contacto) {

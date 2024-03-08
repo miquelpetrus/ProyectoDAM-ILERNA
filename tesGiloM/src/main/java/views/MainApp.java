@@ -36,7 +36,6 @@ public class MainApp extends javax.swing.JFrame{
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
     }
     
     public void actualizarTextoBienvenida() {
