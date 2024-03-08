@@ -32,36 +32,11 @@ public class MainApp extends javax.swing.JFrame{
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
         try {
-            if (!existeArchivoConfiguracion()) {
-                crearArchivoConfiguracion();
-                abrirVistaConfiguracion();
-            } else {
-                HibernateUtil.buildSessionFactory();
-            }
+        	HibernateUtil.buildSessionFactory();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
 
-    }
-    
-    private boolean existeArchivoConfiguracion() {
-        File archivoConfiguracion = new File("hibernate-config.properties");
-        return archivoConfiguracion.exists();
-    }
-
-    private void crearArchivoConfiguracion() {
-        try {
-            File archivoConfiguracion = new File("hibernate-config.properties");
-            archivoConfiguracion.createNewFile();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    private void abrirVistaConfiguracion() {
-        ConfiguracionView configuracionView = new ConfiguracionView();
-        // Mostrar la vista de configuración...
-        HibernateUtil.abrirVentana(configuracionView, "Configuración");
     }
     
     public void actualizarTextoBienvenida() {
@@ -81,11 +56,10 @@ public class MainApp extends javax.swing.JFrame{
         jLabelBienvenida = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
-        jMenuConf = new javax.swing.JMenuItem();
         jMenuConnect = new javax.swing.JMenuItem();
         jMenuSalir = new javax.swing.JMenuItem();
         jMenuGest = new javax.swing.JMenu();
-        jMenuProv = new javax.swing.JMenuItem();
+        jMenuTerceros = new javax.swing.JMenuItem();
         jMenuFac = new javax.swing.JMenuItem();
         jMenuProductos = new javax.swing.JMenuItem();
         jMenuEventos = new javax.swing.JMenuItem();
@@ -103,7 +77,6 @@ public class MainApp extends javax.swing.JFrame{
 
         jLabelBienvenida.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabelBienvenida.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabelBienvenida.setText("Bienvenido, \n");
         jLabelBienvenida.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout jPanelPrincipalLayout = new javax.swing.GroupLayout(jPanelPrincipal);
@@ -138,16 +111,6 @@ public class MainApp extends javax.swing.JFrame{
             }
         });
 
-        jMenuConf.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-        jMenuConf.setText("Configuración");
-        jMenuConf.setPreferredSize(new java.awt.Dimension(124, 32));
-        jMenuConf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuConfActionPerformed(evt);
-            }
-        });
-        jMenuFile.add(jMenuConf);
-
         jMenuConnect.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
         jMenuConnect.setText("Conectar");
         jMenuConnect.setPreferredSize(new java.awt.Dimension(103, 32));
@@ -174,15 +137,15 @@ public class MainApp extends javax.swing.JFrame{
         jMenuGest.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
         jMenuGest.setPreferredSize(new java.awt.Dimension(80, 32));
 
-        jMenuProv.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-        jMenuProv.setText("Proveedores");
-        jMenuProv.setPreferredSize(new java.awt.Dimension(90, 32));
-        jMenuProv.addActionListener(new java.awt.event.ActionListener() {
+        jMenuTerceros.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        jMenuTerceros.setText("Terceros");
+        jMenuTerceros.setPreferredSize(new java.awt.Dimension(90, 32));
+        jMenuTerceros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuProvActionPerformed(evt);
+                jMenuTercerosActionPerformed(evt);
             }
         });
-        jMenuGest.add(jMenuProv);
+        jMenuGest.add(jMenuTerceros);
 
         jMenuFac.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
         jMenuFac.setText("Facturas");
@@ -363,16 +326,16 @@ public class MainApp extends javax.swing.JFrame{
        
     }//GEN-LAST:event_jMenuConnectActionPerformed
 
-    private void jMenuProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuProvActionPerformed
+    private void jMenuTercerosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuTercerosActionPerformed
         // TODO add your handling code here:
 		try {
-			ProveedoresView proveedoresView = new ProveedoresView();
+			TercerosView proveedoresView = new TercerosView();
 			HibernateUtil.abrirVentana(proveedoresView, "Proveedores");
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-    }//GEN-LAST:event_jMenuProvActionPerformed
+    }//GEN-LAST:event_jMenuTercerosActionPerformed
 
     private void jMenuBancosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuBancosActionPerformed
         // TODO add your handling code here:
@@ -408,6 +371,13 @@ public class MainApp extends javax.swing.JFrame{
 
     private void jMenuIngresosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuIngresosActionPerformed
         // TODO add your handling code here:
+		try {
+			AddIngresoView ingresoView = new AddIngresoView();
+			HibernateUtil.abrirVentana(ingresoView, "Ingresos");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
     }//GEN-LAST:event_jMenuIngresosActionPerformed
 
     private void jMenuGastosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuGastosActionPerformed
@@ -464,7 +434,6 @@ public class MainApp extends javax.swing.JFrame{
     }
     
 	public void setMenuAdminVisibility(boolean visible) {
-		jMenuConf.setVisible(visible);
 		jMenuConnect.setVisible(visible);
 		jMenuSalir.setVisible(visible);
 	}
@@ -474,7 +443,6 @@ public class MainApp extends javax.swing.JFrame{
     private javax.swing.JLabel jLabelBienvenida;
     private javax.swing.JMenuItem jMenuBancos;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuConf;
     private javax.swing.JMenuItem jMenuConnect;
     private javax.swing.JMenu jMenuCuentas;
     private javax.swing.JMenuItem jMenuEventos;
@@ -485,9 +453,9 @@ public class MainApp extends javax.swing.JFrame{
     private javax.swing.JMenuItem jMenuIngresos;
     private javax.swing.JMenu jMenuMiembros;
     private javax.swing.JMenuItem jMenuProductos;
-    private javax.swing.JMenuItem jMenuProv;
     private javax.swing.JMenuItem jMenuSalir;
     private javax.swing.JMenuItem jMenuSocios;
+    private javax.swing.JMenuItem jMenuTerceros;
     private javax.swing.JMenuItem jMenuUsers;
     private javax.swing.JPanel jPanelPrincipal;
     // End of variables declaration//GEN-END:variables

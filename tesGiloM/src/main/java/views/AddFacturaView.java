@@ -10,12 +10,12 @@ import javax.swing.table.DefaultTableModel;
 import org.hibernate.SessionFactory;
 
 import clases.Productos;
-import clases.Proveedores;
+import clases.Terceros;
 import clases.LineasFacturas;
 import controllers.FacturasController;
 import controllers.HibernateUtil;
 import controllers.ProductosController;
-import controllers.ProveedoresController;
+import controllers.TercerosController;
 import controllers.UsuarioSesion;
 
 /**
@@ -252,7 +252,7 @@ public class AddFacturaView extends javax.swing.JPanel {
         // TODO add your handling code here:
         // Obtener la información necesaria para la factura
         String idFactura = jTextFieldIdFac.getText();
-        Proveedores proveedorSeleccionado = (Proveedores) jComboBoxProv.getSelectedItem();
+        Terceros proveedorSeleccionado = (Terceros) jComboBoxProv.getSelectedItem();
         int idProveedor = proveedorSeleccionado.getId();
         // Otros datos necesarios para la factura (fecha, etc.)
         Date fecha = jDateChooser1.getDate();
@@ -273,7 +273,7 @@ public class AddFacturaView extends javax.swing.JPanel {
     private void jButtonAnyadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnyadirActionPerformed
         // TODO add your handling code here:
 		String idFactura = jTextFieldIdFac.getText();
-	    Proveedores proveedorSeleccionado = (Proveedores) jComboBoxProv.getSelectedItem();
+	    Terceros proveedorSeleccionado = (Terceros) jComboBoxProv.getSelectedItem();
         int idProveedor = proveedorSeleccionado.getId();
 	    Productos productoSeleccionado = (Productos) jComboBoxProd.getSelectedItem();
         int idProducto = productoSeleccionado.getId();
@@ -327,7 +327,7 @@ public class AddFacturaView extends javax.swing.JPanel {
     private void cargarProveedores() {
         DefaultComboBoxModel model = new DefaultComboBoxModel();
         
-        for (Proveedores proveedor : ProveedoresController.getAllProveedores()) {
+        for (Terceros proveedor : TercerosController.getAllProveedores()) {
             model.addElement(proveedor);
         }
         

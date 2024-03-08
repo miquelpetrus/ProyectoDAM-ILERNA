@@ -1,10 +1,13 @@
 package controllers;
 
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import clases.Eventos;
 import clases.Productos;
@@ -16,6 +19,17 @@ public class EventosController {
 	public EventosController() {
 		this.sessionFactory = HibernateUtil.buildSessionFactory();
 	}
+	
+    public static List<Eventos> getAllEventos() {
+        try (Session session = HibernateUtil.buildSessionFactory().openSession()) {
+            String hql = "FROM Eventos";
+            Query<Eventos> query = session.createQuery(hql, Eventos.class);
+            return query.list();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
+    }
 	
 	public static void crearEvento(String nombre, Date fecha, String lugar, String descripcion) {
 		// TODO Auto-generated method stub
@@ -49,6 +63,34 @@ public class EventosController {
 				session.close();
 			}
         }
+	}
+	
+	public static void eliminarEvento(int id) {
+		// TODO Auto-generated method stub
+		try (Session session = HibernateUtil.buildSessionFactory().openSession()) {
+			Transaction transaction = null;
+
+			try {
+				transaction = session.beginTransaction();
+
+				// Aquí debes realizar la lógica para eliminar un producto
+				// Puedes utilizar la entidad de productos y eliminarla de la base de datos
+
+				// Ejemplo (debes adaptarlo a tu modelo de datos):
+				Eventos evento = session.get(Eventos.class, id);
+				session.delete(evento);
+
+				transaction.commit();
+			} catch (Exception e) {
+				if (transaction != null) {
+					transaction.rollback();
+				}
+				e.printStackTrace();
+				// Maneja cualquier excepción que pueda ocurrir al eliminar el producto
+			} finally {
+				session.close();
+			}
+		}
 	}
 
 }

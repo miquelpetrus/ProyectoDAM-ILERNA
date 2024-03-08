@@ -1,27 +1,50 @@
 package clases;
 
+import java.util.Date;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 public class Ingresos {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idIngreso;
-	private String fecha;
+	private Date fecha;
 	private String concepto;
 	private double importe;
+	private int idTercero;
 	private int idSocio;
+	private int idUser;
 	private int idEvento;
 	
 	public Ingresos() {
 	}
 	
-	public Ingresos(int idIngreso, String fecha, String concepto, double importe, int idSocio, int idEvento) {
+	public Ingresos(int idIngreso, Date fecha, String concepto, int idTercero, double importe, int idUser, int idEvento) {
 		this.idIngreso = idIngreso;
 		this.fecha = fecha;
 		this.concepto = concepto;
 		this.importe = importe;
-		this.idSocio = idSocio;
+		this.idTercero = idTercero;
 		this.idEvento = idEvento;
+		this.idUser = idUser;
 	}
 
-	public String getFecha() {
+	public Date getFecha() {
 		return fecha;
+	}
+	
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
+	
+	public int getIdTercero() {
+		return idTercero;
+	}
+	
+	public void setIdTercero(int idTercero) {
+		this.idTercero = idTercero;
 	}
 	
 	public int getIdIngreso() {
@@ -32,9 +55,6 @@ public class Ingresos {
 		this.idIngreso = idIngreso;
 	}
 
-	public void setFecha(String fecha) {
-		this.fecha = fecha;
-	}
 
 	public String getConcepto() {
 		return concepto;
@@ -68,5 +88,12 @@ public class Ingresos {
 		this.idEvento = idEvento;
 	}
 	
+	public int getIdUser() {
+		return idUser;
+	}
+	
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
+	}
 	
 }

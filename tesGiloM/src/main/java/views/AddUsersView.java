@@ -1,6 +1,8 @@
 package views;
 
 import java.awt.Window;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -8,6 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import controllers.HibernateUtil;
+import controllers.UsersController;
 import clases.Users;
 
 /**
@@ -44,7 +47,7 @@ public class AddUsersView extends javax.swing.JPanel {
         jLabelEmail = new javax.swing.JLabel();
         jTextEmail = new javax.swing.JTextField();
         jLabelPSW = new javax.swing.JLabel();
-        jTextPSW = new javax.swing.JTextField();
+        jPasswordField = new javax.swing.JPasswordField();
         jButtonCerrar = new javax.swing.JButton();
         jButtonGuardar = new javax.swing.JButton();
         jLabelRol = new javax.swing.JLabel();
@@ -86,11 +89,11 @@ public class AddUsersView extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(89, 89, 89)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabelPSW, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextPSW, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jPasswordField))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -146,14 +149,17 @@ public class AddUsersView extends javax.swing.JPanel {
                     .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelPSW, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextPSW, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelPSW, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPasswordField)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelRol, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextRol, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -175,7 +181,7 @@ public class AddUsersView extends javax.swing.JPanel {
         String apellido2 = jTextApellido2.getText();
         String nif = jTextNIF.getText();
         String email = jTextEmail.getText();
-        String password = jTextPSW.getText();
+        String password = jPasswordField.getText();
         String rol = jTextRol.getText();
 
         // Validar que los campos obligatorios no estén vacíos (puedes agregar más validaciones según tus requisitos)
@@ -192,7 +198,7 @@ public class AddUsersView extends javax.swing.JPanel {
         newUser.setApellido2(apellido2);
         newUser.setNif(nif);
         newUser.setEmail(email);
-        newUser.setPassword(password);
+        newUser.setPassword(UsersController.encriptarPassword(jPasswordField.getText().toString()));
         newUser.setRole(rol);
 
         try (Session session = sessionFactory.openSession()) {
@@ -219,7 +225,6 @@ public class AddUsersView extends javax.swing.JPanel {
         HibernateUtil.cerrarVentana(this);
         
     }//GEN-LAST:event_jButtonGuardarActionPerformed
-    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -232,12 +237,12 @@ public class AddUsersView extends javax.swing.JPanel {
     private javax.swing.JLabel jLabelNombre;
     private javax.swing.JLabel jLabelPSW;
     private javax.swing.JLabel jLabelRol;
+    private javax.swing.JPasswordField jPasswordField;
     private javax.swing.JTextField jTextApellido1;
     private javax.swing.JTextField jTextApellido2;
     private javax.swing.JTextField jTextEmail;
     private javax.swing.JTextField jTextNIF;
     private javax.swing.JTextField jTextNombre;
-    private javax.swing.JTextField jTextPSW;
     private javax.swing.JTextField jTextRol;
     // End of variables declaration//GEN-END:variables
 }

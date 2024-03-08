@@ -13,9 +13,9 @@ import org.hibernate.SessionFactory;
 import controllers.FamiliaProductoController;
 import controllers.HibernateUtil;
 import controllers.ProductosController;
-import controllers.ProveedoresController;
+import controllers.TercerosController;
 import clases.FamiliaProducto;
-import clases.Proveedores;
+import clases.Terceros;
 
 /**
  *
@@ -31,7 +31,7 @@ public class AddProductosView extends javax.swing.JPanel {
     public AddProductosView() {
         initComponents();
         this.sessionFactory = HibernateUtil.buildSessionFactory();
-        cargarProveedores();
+        cargarTerceros();
         cargarFamiliaProducto();
     }
 
@@ -66,7 +66,7 @@ public class AddProductosView extends javax.swing.JPanel {
 
         jLabelPrecioC.setText("Precio compra:");
 
-        jLabelProducto.setText("Proveedor:");
+        jLabelProducto.setText("Tercero:");
 
         jComboBoxFam.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -166,7 +166,7 @@ public class AddProductosView extends javax.swing.JPanel {
     	        String descripcion = jTextDescP.getText();	
     	        double precioCompra = Double.parseDouble(jTextPrecioC.getText());
     	        // Obtener el proveedor seleccionado y su ID
-    	        Proveedores proveedorSeleccionado = (Proveedores) jComboBoxProv.getSelectedItem();
+    	        Terceros proveedorSeleccionado = (Terceros) jComboBoxProv.getSelectedItem();
     	        int idProveedor = proveedorSeleccionado.getId();
     	        // Obtener la familia de productos seleccionada y su ID
     	        FamiliaProducto familiaSeleccionada = (FamiliaProducto) jComboBoxFam.getSelectedItem();
@@ -191,11 +191,11 @@ public class AddProductosView extends javax.swing.JPanel {
     
     // A continuación, se añaden los métodos para cargar los proveedores y las familias de productos
     
-    private void cargarProveedores() {
+    private void cargarTerceros() {
         DefaultComboBoxModel model = new DefaultComboBoxModel();
         
-        for (Proveedores proveedor : ProveedoresController.getAllProveedores()) {
-            model.addElement(proveedor);
+        for (Terceros tercero: TercerosController.getAllProveedores()) {
+            model.addElement(tercero);
         }
         
         jComboBoxProv.setModel(model);

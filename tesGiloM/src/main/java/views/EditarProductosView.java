@@ -13,9 +13,9 @@ import org.hibernate.SessionFactory;
 import controllers.FamiliaProductoController;
 import controllers.HibernateUtil;
 import controllers.ProductosController;
-import controllers.ProveedoresController;
+import controllers.TercerosController;
 import clases.FamiliaProducto;
-import clases.Proveedores;
+import clases.Terceros;
 
 /**
  *
@@ -47,7 +47,7 @@ public class EditarProductosView extends javax.swing.JPanel {
 		jTextDescP.setText((String) datosFila[2]);
 		jTextPrecioC.setText(String.valueOf(datosFila[3]));
 	    // Set the selected item based on the Proveedores object
-	    Proveedores proveedorSeleccionado = ProveedoresController.getProveedorById((int) datosFila[4]);
+	    Terceros proveedorSeleccionado = TercerosController.getProveedorById((int) datosFila[4]);
 	    jComboBoxProv.setSelectedItem(proveedorSeleccionado);
 
 	    // Set the selected item based on the FamiliaProducto object
@@ -188,7 +188,7 @@ public class EditarProductosView extends javax.swing.JPanel {
     	        String descripcion = jTextDescP.getText();	
     	        double precioCompra = Double.parseDouble(jTextPrecioC.getText());
     	        // Obtener el proveedor seleccionado y su ID
-    	        Proveedores proveedorSeleccionado = (Proveedores) jComboBoxProv.getSelectedItem();
+    	        Terceros proveedorSeleccionado = (Terceros) jComboBoxProv.getSelectedItem();
     	        int idProveedor = proveedorSeleccionado.getId();
     	        // Obtener la familia de productos seleccionada y su ID
     	        FamiliaProducto familiaSeleccionada = (FamiliaProducto) jComboBoxFam.getSelectedItem();
@@ -216,7 +216,7 @@ public class EditarProductosView extends javax.swing.JPanel {
     private void cargarProveedores() {
         DefaultComboBoxModel model = new DefaultComboBoxModel();
         
-        for (Proveedores proveedor : ProveedoresController.getAllProveedores()) {
+        for (Terceros proveedor : TercerosController.getAllProveedores()) {
             model.addElement(proveedor);
         }
         

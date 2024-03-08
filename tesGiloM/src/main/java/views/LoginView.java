@@ -21,9 +21,10 @@ public class LoginView extends javax.swing.JPanel {
     
     
     public LoginView(MainApp mainApp) {
+        this.sessionFactory = HibernateUtil.buildSessionFactory();
+        UsersController.createDefaultAdminUser(sessionFactory);
         initComponents();
         this.mainApp = mainApp;
-        this.sessionFactory = HibernateUtil.buildSessionFactory();
     }
 
     @SuppressWarnings("unchecked")

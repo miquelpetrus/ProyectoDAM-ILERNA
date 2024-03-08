@@ -1,7 +1,7 @@
 package controllers;
 
 import clases.Productos;
-import clases.Proveedores;
+import clases.Terceros;
 
 import java.util.Collections;
 import java.util.List;
@@ -12,12 +12,12 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 
-public class ProveedoresController {
+public class TercerosController {
     
-    public static List<Proveedores> getAllProveedores() {
+    public static List<Terceros> getAllProveedores() {
         try (Session session = HibernateUtil.buildSessionFactory().openSession()) {
-            String hql = "FROM Proveedores";
-            Query<Proveedores> query = session.createQuery(hql, Proveedores.class);
+            String hql = "FROM Terceros";
+            Query<Terceros> query = session.createQuery(hql, Terceros.class);
             return query.list();
         } catch (Exception e) {
             e.printStackTrace();
@@ -25,16 +25,16 @@ public class ProveedoresController {
         }
     }
     
-    public static Proveedores getProveedorById(int id) {
+    public static Terceros getProveedorById(int id) {
         try (Session session = HibernateUtil.buildSessionFactory().openSession()) {
-            return session.get(Proveedores.class, id);
+            return session.get(Terceros.class, id);
         } catch (Exception e) {
             e.printStackTrace();
             return null; // or throw an exception based on your error handling strategy
         }
     }
     
-    public static void crearProveedor(String nombre, String cif, String direccion, String telefono, String email) {
+    public static void crearTercero(String nombre, String cif, String direccion, String telefono, String email) {
         try (Session session = HibernateUtil.buildSessionFactory().openSession()) {
             Transaction transaction = null;
 
@@ -45,14 +45,14 @@ public class ProveedoresController {
                 // Puedes utilizar la entidad de productos y persistirla en la base de datos
 
                 // Ejemplo (debes adaptarlo a tu modelo de datos):
-                Proveedores nuevoProveedor = new Proveedores();
-                nuevoProveedor.setCif(cif);
-                nuevoProveedor.setNombre(nombre);
-                nuevoProveedor.setDireccion(direccion);
-                nuevoProveedor.setTelefono(telefono);
-                nuevoProveedor.setEmail(email);
+                Terceros nuevoTercero = new Terceros();
+                nuevoTercero.setCif(cif);
+                nuevoTercero.setNombre(nombre);
+                nuevoTercero.setDireccion(direccion);
+                nuevoTercero.setTelefono(telefono);
+                nuevoTercero.setEmail(email);
 
-                session.save(nuevoProveedor);
+                session.save(nuevoTercero);
 
                 transaction.commit();
             } catch (Exception e) {

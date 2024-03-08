@@ -3,9 +3,9 @@
 <hibernate-configuration>
     <session-factory>
 	<property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
-        <property name="hbm2ddl.auto">create</property><!--como se va a comportar Hibernate con la bbdd-->
+        <property name="hbm2ddl.auto">update</property><!--como se va a comportar Hibernate con la bbdd-->
         <property name="connection.url">jdbc:mysql://127.0.0.1:3306/moliGest</property><!--Definición de a dónde nos vamos a conectar-->
-        <property name="connection.username">root</property><!--Usuario con el que nos vamos a conectar-->
+        <property name="connection.username">admin</property><!--Usuario con el que nos vamos a conectar-->
         <property name="connection.password">1234</property><!--contraseña del usuario conectar-->
 
         <!--Mapeo de los ficheros de configuración para cada una de las clases-->
@@ -17,7 +17,7 @@
         <mapping resource="LineasFacturas.hbm.xml"/>
         <mapping resource="Productos.hbm.xml"/>
         <mapping resource="FamiliaProducto.hbm.xml"/>
-        <mapping resource="Proveedores.hbm.xml"/>
+        <mapping resource="Terceros.hbm.xml"/>
         <mapping resource="Eventos.hbm.xml"/>
 		<mapping resource="Ingresos.hbm.xml"/>
 		<mapping resource="Gastos.hbm.xml"/>

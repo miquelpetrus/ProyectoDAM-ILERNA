@@ -1,6 +1,12 @@
 package clases;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 public class Gastos {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idGasto;
 	private String fecha;
 	private String concepto;

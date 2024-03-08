@@ -14,14 +14,14 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import clases.Productos;
-import clases.Proveedores;
+import clases.Terceros;
 import controllers.HibernateUtil;
 
 /**
  *
  * @author miquelpetrus
  */
-public class ProveedoresView extends javax.swing.JPanel {
+public class TercerosView extends javax.swing.JPanel {
 
     /**
      * Creates new form ProveedoresView
@@ -29,7 +29,7 @@ public class ProveedoresView extends javax.swing.JPanel {
     private DefaultTableModel tableModel;
     private SessionFactory sessionFactory;
     
-    public ProveedoresView() {
+    public TercerosView() {
         initComponents();
         this.sessionFactory = HibernateUtil.buildSessionFactory();
         initializeTableModel();
@@ -59,25 +59,25 @@ public class ProveedoresView extends javax.swing.JPanel {
                 transaction = session.beginTransaction();
 
                 // Utiliza HQL para obtener todos los usuarios de la base de datos
-                String hql = "FROM Proveedores";
-                Query<Proveedores> query = session.createQuery(hql, Proveedores.class);
-                List<Proveedores> proveedores = query.list();
+                String hql = "FROM Terceros";
+                Query<Terceros> query = session.createQuery(hql, Terceros.class);
+                List<Terceros> terceros = query.list();
 
                 // Limpia la tabla antes de cargar nuevos datos
                 tableModel.setRowCount(0);
 
                 // Agrega los usuarios al modelo de la tabla
-                for (Proveedores proveedor : proveedores) {
+                for (Terceros tercero : terceros) {
                     tableModel.addRow(new Object[]{
-                    		proveedor.getId(),
-                    		proveedor.getNombre(),
-                    		proveedor.getCif(),
-                    		proveedor.getDireccion(),
-                    		proveedor.getPoblacion(),
-                    		proveedor.getTelefono(),
-                    		proveedor.getEmail(),
-                    		proveedor.getWeb(),
-                    		proveedor.getContacto(),
+                    		tercero.getId(),
+                    		tercero.getNombre(),
+                    		tercero.getCif(),
+                    		tercero.getDireccion(),
+                    		tercero.getPoblacion(),
+                    		tercero.getTelefono(),
+                    		tercero.getEmail(),
+                    		tercero.getWeb(),
+                    		tercero.getContacto(),
                     });
                 }
 
@@ -126,7 +126,7 @@ public class ProveedoresView extends javax.swing.JPanel {
             }
         });
 
-        jButtonCrearProv.setText("Crear Proveedor");
+        jButtonCrearProv.setText("Crear Tercero");
         jButtonCrearProv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCrearProvActionPerformed(evt);
@@ -169,7 +169,7 @@ public class ProveedoresView extends javax.swing.JPanel {
 
     private void jButtonCrearProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearProvActionPerformed
         // TODO add your handling code here:
-    	HibernateUtil.abrirVentana(new AddProveedorView(), "Crear Proveedor");
+    	HibernateUtil.abrirVentana(new AddTercerosView(), "Crear Tercero");
     	HibernateUtil.cerrarVentana(this);
     }//GEN-LAST:event_jButtonCrearProvActionPerformed
 

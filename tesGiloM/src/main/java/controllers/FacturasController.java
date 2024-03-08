@@ -12,7 +12,7 @@ import org.hibernate.query.Query;
 import clases.Facturas;
 import clases.LineasFacturas;
 import clases.Productos;
-import clases.Proveedores;
+import clases.Terceros;
 
 public class FacturasController {
 	
@@ -52,7 +52,7 @@ public class FacturasController {
             Session session = HibernateUtil.buildSessionFactory().openSession();
             Transaction transaction = session.beginTransaction();
             Productos producto = ProductosController.getProductoById(IdProducto);
-            Proveedores proveedor = ProveedoresController.getProveedorById(idProveedor);
+            Terceros proveedor = TercerosController.getProveedorById(idProveedor);
 
             // Obtener el precio y el porcentaje de IVA del producto
             double precioProducto = producto.getPrecio();

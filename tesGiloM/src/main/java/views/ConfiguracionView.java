@@ -12,6 +12,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import controllers.HibernateUtil;
+import controllers.UsersController;
 import controllers.UsuarioSesion;
 
 /**
@@ -276,7 +277,7 @@ public class ConfiguracionView extends javax.swing.JPanel {
 
     private void jButtonCrearAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearAdminActionPerformed
         // TODO add your handling code here:
-    	HibernateUtil.createDefaultAdminUser(sessionFactory);
+    	UsersController.createDefaultAdminUser(sessionFactory);
         jTextAreaNoAdmin.setText("Usuario admin creado");
     }//GEN-LAST:event_jButtonCrearAdminActionPerformed
 

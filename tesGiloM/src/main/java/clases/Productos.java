@@ -14,25 +14,25 @@ public class Productos {
 	private String descripcion;
 	private double precio;
 	private int idFamilia;
-	private int idProveedor;
+	private int idTercero;
 	
 	
-	public Productos(int id, String nombre, String descripcion, double precio, int idFamilia, int idProveedor) {
+	public Productos(int id, String nombre, String descripcion, double precio, int idFamilia, int idTercero) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.precio = precio;
 		this.idFamilia = idFamilia;
-		this.idProveedor = idProveedor;
+		this.idTercero = idTercero;
 	}
 	
 	public int getIdProveedor() {
-		return idProveedor;
+		return idTercero;
 	}
 	
 	public void setIdProveedor(int idProveedor) {
-		this.idProveedor = idProveedor;
+		this.idTercero = idProveedor;
 	}
 
 	public int getIdFamilia() {

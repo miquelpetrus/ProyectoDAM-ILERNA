@@ -122,7 +122,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelProducto">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Proveedor:"/>
+        <Property name="text" type="java.lang.String" value="Tercero:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="jComboBoxFam">

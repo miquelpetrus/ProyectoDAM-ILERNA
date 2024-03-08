@@ -11,7 +11,7 @@ import javax.persistence.Id;
 public class Facturas {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String idFactura;
 	private Date fecha;

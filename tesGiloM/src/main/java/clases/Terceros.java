@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Proveedores {
+public class Terceros {
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
@@ -22,10 +22,10 @@ public class Proveedores {
 	private String email;
 	private String web;
 	
-	public Proveedores() {
+	public Terceros() {
 	}
 	
-	public Proveedores(int id, String nombre, String direccion, String telefono, String correo, String contacto,
+	public Terceros(int id, String nombre, String direccion, String telefono, String correo, String contacto,
 			String cif, String poblacion, String cp, String provincia, String email, String web) {
 		this.id = id;
 		this.nombre = nombre;

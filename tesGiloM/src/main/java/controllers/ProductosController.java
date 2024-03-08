@@ -8,7 +8,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import clases.Productos;
-import clases.Proveedores;
+import clases.Terceros;
 
 public class ProductosController {
 	
