@@ -4,9 +4,9 @@
     <session-factory>
 	<property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
         <property name="hbm2ddl.auto">update</property><!--como se va a comportar Hibernate con la bbdd-->
-        <property name="connection.url">jdbc:mysql://127.0.0.1:3306/moliGest</property><!--Definición de a dónde nos vamos a conectar-->
-        <property name="connection.username">root</property><!--Usuario con el que nos vamos a conectar-->
-        <property name="connection.password">1234</property><!--contraseña del usuario conectar-->
+        <property name="connection.url">jdbc:mysql://192.168.2.10:3306/moliGest</property><!--Definición de a dónde nos vamos a conectar-->
+        <property name="connection.username">macbabidi</property><!--Usuario con el que nos vamos a conectar-->
+        <property name="connection.password">Miquel1979</property><!--contraseña del usuario conectar-->
 
         <!--Mapeo de los ficheros de configuración para cada una de las clases-->
 

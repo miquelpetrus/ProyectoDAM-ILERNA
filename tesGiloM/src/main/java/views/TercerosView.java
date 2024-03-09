@@ -7,6 +7,7 @@ package views;
 import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -37,7 +38,7 @@ public class TercerosView extends javax.swing.JPanel {
     }
     
     private void initializeTableModel() {
-        Object[] columnNames = {"id", "Nombre", "CIF", "Dirección", "Población", "Provincia", "Teléfono", "Email", "Web", "Contacto"};
+        Object[] columnNames = {"Id", "Nombre", "CIF", "Dirección", "Población", "Provincia", "Teléfono", "Email", "Web", "Contacto"};
         Object[][] data = {};  // Puedes inicializarlo con datos si los tienes al inicio
         tableModel = new DefaultTableModel(data, columnNames) {
             private static final long serialVersionUID = 1L;
@@ -49,6 +50,14 @@ public class TercerosView extends javax.swing.JPanel {
             }
         };
         jTable1.setModel(tableModel);
+        
+        // Establecer el tamaño de las columnas
+        int[] columnWidths = {30, 150, 80, 150, 70, 70, 90, 150, 150, 120}; // Ajusta los tamaños según tus necesidades
+
+        for (int i = 0; i < columnWidths.length; i++) {
+            TableColumn column = jTable1.getColumnModel().getColumn(i);
+            column.setPreferredWidth(columnWidths[i]);
+        }
     }
     
     private void loadProductData() {

@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -22,6 +23,8 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import clases.MovimientosBancarios;
+import clases.Socios;
+import clases.Terceros;
 import controllers.BancosController;
 import controllers.HibernateUtil;
 
@@ -56,6 +59,14 @@ public class MovBancariosView extends javax.swing.JPanel {
             }
         };
         jTableMovs.setModel(tableModel);
+        
+        // Establecer el tamaño de las columnas
+        int[] columnWidths = {80, 150, 180, 100, 100}; // Ajusta los tamaños según tus necesidades
+
+        for (int i = 0; i < columnWidths.length; i++) {
+            TableColumn column = jTableMovs.getColumnModel().getColumn(i);
+            column.setPreferredWidth(columnWidths[i]);
+        }
     }
     
     private void loadBancosData(int idBanco) {
@@ -85,23 +96,26 @@ public class MovBancariosView extends javax.swing.JPanel {
 
                 // Limpia la tabla antes de cargar nuevos datos
                 tableModel.setRowCount(0);
+                
 
                 // Agrega los movimientos bancarios al modelo de la tabla
                 for (MovimientosBancarios movbanc : allMovsbancos) {
+                	Terceros tercero = session.get(Terceros.class, movbanc.getIdTercero());
+                	Socios socio = session.get(Socios.class, movbanc.getIdSocio());
                     // Determina si es un ingreso o un gasto
                     if (movbanc.getTipo().equals("Ingreso")) {
                         tableModel.addRow(new Object[]{
                             movbanc.getFecha(),
-                            movbanc.getIdTercero(),
-                            movbanc.getIdSocio(),
+                            (tercero != null) ? tercero.getNombre() : "",
+                            (socio != null) ? socio.getNombre() : "",
                             movbanc.getCantidad(),
                             0 // Gasto será 0 ya que es un ingreso
                         });
                     } else {
                         tableModel.addRow(new Object[]{
                             movbanc.getFecha(),
-                            movbanc.getIdTercero(),
-                            movbanc.getIdSocio(),
+                            (tercero != null) ? tercero.getNombre() : "",
+                            (socio != null) ? socio.getNombre() : "",
                             0, // Ingreso será 0 ya que es un gasto
                             movbanc.getCantidad()
                         });
@@ -242,20 +256,29 @@ public class MovBancariosView extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonCerrarActionPerformed
     
     private void filterMovimientosByYear(int year) {
-        DefaultTableModel filteredModel = new DefaultTableModel(0, tableModel.getColumnCount());
+        // Definir nombres de las columnas
+        String[] columnNames = {"Fecha", "Tercero", "Socio", "Ingreso", "Gasto"};
+
+        // Crear un nuevo modelo filtrado con los nombres de las columnas definidos
+        DefaultTableModel filteredModel = new DefaultTableModel(null, columnNames) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         
         // Recorrer cada fila de la tabla actual
         for (int i = 0; i < tableModel.getRowCount(); i++) {
             // Obtener la fecha de la fila actual
             Timestamp timestamp = (Timestamp) tableModel.getValueAt(i, 0); // Suponiendo que la fecha está almacenada como Timestamp
-            
+
             // Convertir la fecha a LocalDate para obtener el año
             LocalDate localDate = timestamp.toLocalDateTime().toLocalDate();
             int rowYear = localDate.getYear();
 
             // Si la fecha corresponde al año seleccionado, agregar la fila al modelo filtrado
             if (rowYear == year) {
-                Object[] rowData = new Object[tableModel.getColumnCount()];
+                Object[] rowData = new Object[columnNames.length];
                 for (int j = 0; j < rowData.length; j++) {
                     rowData[j] = tableModel.getValueAt(i, j);
                 }
@@ -265,6 +288,14 @@ public class MovBancariosView extends javax.swing.JPanel {
         
         // Establecer el modelo filtrado en la tabla
         jTableMovs.setModel(filteredModel);
+        
+        // Establecer el tamaño de las columnas
+        int[] columnWidths = {80, 150, 180, 100, 100}; // Ajusta los tamaños según tus necesidades
+
+        for (int i = 0; i < columnWidths.length; i++) {
+            TableColumn column = jTableMovs.getColumnModel().getColumn(i);
+            column.setPreferredWidth(columnWidths[i]);
+        }
     }
 
 

@@ -5,6 +5,8 @@ import controllers.HibernateUtil;
 
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -41,6 +43,14 @@ public class SociosView extends javax.swing.JPanel {
             }
         };
         jTableUsers.setModel(tableModel);
+        
+        // Establecer el tamaño de las columnas
+        int[] columnWidths = {30, 150, 150, 150, 90, 170}; // Ajusta los tamaños según tus necesidades
+
+        for (int i = 0; i < columnWidths.length; i++) {
+            TableColumn column = jTableUsers.getColumnModel().getColumn(i);
+            column.setPreferredWidth(columnWidths[i]);
+        }
     }
     
     private void loadUserData() {

@@ -192,14 +192,26 @@ public class AddIngresoView extends javax.swing.JPanel {
         // TODO add your handling code here:
         Date fecha = jDateChooser1.getDate();
         Terceros terceroSeleccionado = (Terceros) jComboBox1.getSelectedItem();
-        int idTercero = terceroSeleccionado.getId();
+        int idTercero = 0;
+		if (terceroSeleccionado != null) {
+			idTercero = terceroSeleccionado.getId();
+		}
         Bancos bancoSeleccionado = (Bancos) jComboBoxBanco.getSelectedItem();
-        int banco= bancoSeleccionado.getId();
+        int banco = 0;
+		if (bancoSeleccionado != null) {
+			banco = bancoSeleccionado.getId();
+		}
         double importe = Double.parseDouble(jTextFieldImporte.getText());
         Eventos eventoSeleccionado = (Eventos) jComboBoxEvento.getSelectedItem();
-        int idEvento = eventoSeleccionado.getId();
+        int idEvento = 0;
+		if (eventoSeleccionado != null) {
+			idEvento = eventoSeleccionado.getId();
+		}
         Socios socioSeleccionado = (Socios) jComboBoxSocio.getSelectedItem();
-        int idSocio = socioSeleccionado.getId();
+        int idSocio = 0;
+		if (socioSeleccionado != null) {
+			idSocio = socioSeleccionado.getId();
+		}
         String tipo = "Ingreso";
     	
     	System.out.println("Fecha: " + fecha + " Tercero: " + idTercero + " Banco: " + banco + " Importe: " + importe + " Evento: " + idEvento + " Socio: " + idSocio);
@@ -211,6 +223,9 @@ public class AddIngresoView extends javax.swing.JPanel {
     private void cargarTerceros() {
         DefaultComboBoxModel model = new DefaultComboBoxModel();
         
+        // Añadir opción vacía
+        model.addElement(null); 
+        
         for (Terceros tercero: TercerosController.getAllProveedores()) {
             model.addElement(tercero);
         }
@@ -220,6 +235,9 @@ public class AddIngresoView extends javax.swing.JPanel {
     
     private void cargarEventos() {
         DefaultComboBoxModel model = new DefaultComboBoxModel();
+        
+        // Añadir opción vacía
+        model.addElement(null); 
         
         for (Eventos evento: EventosController.getAllEventos()) {
             model.addElement(evento);
@@ -231,6 +249,9 @@ public class AddIngresoView extends javax.swing.JPanel {
     private void cargarSocios() {
         DefaultComboBoxModel model = new DefaultComboBoxModel();
         
+        // Añadir opción vacía
+        model.addElement(null); 
+        
         for (Socios socio: SociosController.getAllSocios()) {
             model.addElement(socio);
         }
@@ -240,6 +261,9 @@ public class AddIngresoView extends javax.swing.JPanel {
     
     private void cargarBancos() {
         DefaultComboBoxModel model = new DefaultComboBoxModel();
+        
+        // Añadir opción vacía
+        model.addElement(null); 
         
         for (Bancos banco: BancosController.getAllBancos()) {
             model.addElement(banco);

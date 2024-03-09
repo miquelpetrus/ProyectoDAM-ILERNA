@@ -10,6 +10,8 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -47,6 +49,14 @@ public class ProductosView extends javax.swing.JPanel {
             }
         };
         jTableProducts.setModel(tableModel);
+        
+        // Establecer el tamaño de las columnas
+        int[] columnWidths = {30, 150, 180, 70, 100, 150}; // Ajusta los tamaños según tus necesidades
+
+        for (int i = 0; i < columnWidths.length; i++) {
+            TableColumn column = jTableProducts.getColumnModel().getColumn(i);
+            column.setPreferredWidth(columnWidths[i]);
+        }
     }
     
     private void loadProductData() {

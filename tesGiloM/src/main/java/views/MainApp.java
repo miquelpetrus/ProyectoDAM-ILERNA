@@ -372,7 +372,7 @@ public class MainApp extends javax.swing.JFrame{
         // TODO add your handling code here:
 		try {
 			AddIngresoView ingresoView = new AddIngresoView();
-			HibernateUtil.abrirVentana(ingresoView, "Ingresos");
+			HibernateUtil.abrirVentana(ingresoView, "Introducir Ingreso");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -383,7 +383,7 @@ public class MainApp extends javax.swing.JFrame{
         // TODO add your handling code here:
 		try {
 			AddGastoView gastoView = new AddGastoView();
-			HibernateUtil.abrirVentana(gastoView, "Ingresos");
+			HibernateUtil.abrirVentana(gastoView, "Introducir Gasto");
 
 		} catch (Exception e) {
 			e.printStackTrace();
