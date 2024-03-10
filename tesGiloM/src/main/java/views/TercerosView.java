@@ -85,7 +85,6 @@ public class TercerosView extends javax.swing.JPanel {
                     		tercero.getPoblacion(),
                     		tercero.getTelefono(),
                     		tercero.getEmail(),
-                    		tercero.getWeb(),
                     		tercero.getContacto(),
                     });
                 }

@@ -40,7 +40,7 @@ public class BancosView extends javax.swing.JPanel {
         jLabelSelecBanco = new javax.swing.JLabel();
         jComboBoxBanco = new javax.swing.JComboBox<>();
         jButtonVerMov = new javax.swing.JButton();
-        jButtonEditarBanco = new javax.swing.JButton();
+        jButtonCerrar = new javax.swing.JButton();
         jButtonCrearBanco = new javax.swing.JButton();
 
         jLabelSelecBanco.setText("Seleccionar Banco:");
@@ -54,10 +54,10 @@ public class BancosView extends javax.swing.JPanel {
             }
         });
 
-        jButtonEditarBanco.setText("Editar Banco");
-        jButtonEditarBanco.addActionListener(new java.awt.event.ActionListener() {
+        jButtonCerrar.setText("Cerrar");
+        jButtonCerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEditarBancoActionPerformed(evt);
+                jButtonCerrarActionPerformed(evt);
             }
         });
 
@@ -81,7 +81,7 @@ public class BancosView extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboBoxBanco, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButtonEditarBanco, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonCrearBanco, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(26, Short.MAX_VALUE))
@@ -98,7 +98,7 @@ public class BancosView extends javax.swing.JPanel {
                 .addGap(78, 78, 78)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCrearBanco, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonEditarBanco, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -109,10 +109,10 @@ public class BancosView extends javax.swing.JPanel {
     	HibernateUtil.abrirVentana(new MovBancariosView(idBanco), "Movimientos Bancarios");
     }//GEN-LAST:event_jButtonVerMovActionPerformed
 
-    private void jButtonEditarBancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarBancoActionPerformed
+    private void jButtonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarActionPerformed
         // TODO add your handling code here:
     	HibernateUtil.cerrarVentana(this);
-    }//GEN-LAST:event_jButtonEditarBancoActionPerformed
+    }//GEN-LAST:event_jButtonCerrarActionPerformed
 
     private void jButtonCrearBancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearBancoActionPerformed
         // TODO add your handling code here:
@@ -132,8 +132,8 @@ public class BancosView extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonCerrar;
     private javax.swing.JButton jButtonCrearBanco;
-    private javax.swing.JButton jButtonEditarBanco;
     private javax.swing.JButton jButtonVerMov;
     private javax.swing.JComboBox<String> jComboBoxBanco;
     private javax.swing.JLabel jLabelSelecBanco;

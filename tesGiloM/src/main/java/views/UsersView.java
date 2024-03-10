@@ -80,7 +80,6 @@ public class UsersView extends javax.swing.JPanel {
                             user.getApellido2(),
                             user.getNif(),
                             user.getEmail(),
-                            user.getRole(),
                             user.getPassword()
                     });
                 }

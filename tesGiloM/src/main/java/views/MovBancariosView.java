@@ -27,6 +27,7 @@ import clases.Socios;
 import clases.Terceros;
 import controllers.BancosController;
 import controllers.HibernateUtil;
+import controllers.MovsBancariosController;
 
 /**
  *
@@ -36,6 +37,7 @@ public class MovBancariosView extends javax.swing.JPanel {
 
     private SessionFactory sessionFactory;
     private DefaultTableModel tableModel;
+    private MovsBancariosController movsBancariosController;
 	/**
      * Creates new form MovBancariosView
      */
@@ -46,6 +48,7 @@ public class MovBancariosView extends javax.swing.JPanel {
         initializeTableModel();      
         loadBancosData(idBanco);
         jLabelNomBanco.setText(BancosController.getBancosById(idBanco).getNombre() + " " + BancosController.getBancosById(idBanco).getIban());
+        actualizaSaldos();
     }
     
     private void initializeTableModel() {
@@ -108,7 +111,7 @@ public class MovBancariosView extends javax.swing.JPanel {
                             movbanc.getFecha(),
                             (tercero != null) ? tercero.getNombre() : "",
                             (socio != null) ? socio.getNombre() : "",
-                            movbanc.getCantidad(),
+                            movbanc.getImporte(),
                             0 // Gasto será 0 ya que es un ingreso
                         });
                     } else {
@@ -117,7 +120,7 @@ public class MovBancariosView extends javax.swing.JPanel {
                             (tercero != null) ? tercero.getNombre() : "",
                             (socio != null) ? socio.getNombre() : "",
                             0, // Ingreso será 0 ya que es un gasto
-                            movbanc.getCantidad()
+                            movbanc.getImporte()
                         });
                     }
                 }
@@ -149,9 +152,13 @@ public class MovBancariosView extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableMovs = new javax.swing.JTable();
         jButtonCerrar = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTableTotals = new javax.swing.JTable();
         jLabelNomBanco = new javax.swing.JLabel();
+        jLabelIngresos = new javax.swing.JLabel();
+        jLabelGastos = new javax.swing.JLabel();
+        jLabelSaldo = new javax.swing.JLabel();
+        jLabelIngresosR = new javax.swing.JLabel();
+        jLabelGastosR = new javax.swing.JLabel();
+        jLabelSaldoR = new javax.swing.JLabel();
 
         jLabelEjercicio.setText("Ejercicio:");
 
@@ -182,18 +189,11 @@ public class MovBancariosView extends javax.swing.JPanel {
             }
         });
 
-        jTableTotals.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(jTableTotals);
+        jLabelIngresos.setText("Ingresos");
+
+        jLabelGastos.setText("Gastos");
+
+        jLabelSaldo.setText("Saldo");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -201,22 +201,32 @@ public class MovBancariosView extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 932, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelEjercicio, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jYearChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonFiltrarAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(119, 119, 119)
+                                .addComponent(jLabelNomBanco, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(45, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 932, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabelEjercicio, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jYearChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jButtonFiltrarAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(119, 119, 119)
-                            .addComponent(jLabelNomBanco, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(29, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelIngresos, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelGastos, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelIngresosR, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelSaldoR, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelGastosR, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(198, 198, 198))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,15 +238,28 @@ public class MovBancariosView extends javax.swing.JPanel {
                     .addComponent(jButtonFiltrarAnio, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                     .addComponent(jLabelNomBanco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(41, 41, 41)
+                                .addComponent(jButtonCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabelIngresos, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabelGastos, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabelSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addComponent(jButtonCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(34, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabelIngresosR, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabelGastosR, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabelSaldoR, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -244,7 +267,6 @@ public class MovBancariosView extends javax.swing.JPanel {
         // TODO add your handling code here:
         // Obtener el año seleccionado por el usuario
         int year = jYearChooser1.getYear();
-        
         // Filtrar los movimientos bancarios por el año seleccionado
         filterMovimientosByYear(year);
         
@@ -296,18 +318,46 @@ public class MovBancariosView extends javax.swing.JPanel {
             TableColumn column = jTableMovs.getColumnModel().getColumn(i);
             column.setPreferredWidth(columnWidths[i]);
         }
+        
+        // Calcular los saldos después de filtrar los movimientos por año
+        double sumaIngresos = movsBancariosController.calcularSumaIngresos(year);
+        double sumaGastos = movsBancariosController.calcularSumaGastos(year);
+        double saldo = movsBancariosController.calcularSaldo(year);
+
+        // Actualizar las etiquetas con los nuevos saldos
+        jLabelIngresosR.setText(String.valueOf(sumaIngresos));
+        jLabelGastosR.setText(String.valueOf(sumaGastos));
+        jLabelSaldoR.setText(String.valueOf(saldo));
+
     }
+    
+	private void actualizaSaldos() {
+	    movsBancariosController = new MovsBancariosController();
+
+	    double sumaIngresos = movsBancariosController.calcularSumaIngresos();
+	    double sumaGastos = movsBancariosController.calcularSumaGastos();
+	    double saldo = movsBancariosController.calcularSaldo();
+
+	    jLabelIngresosR.setText(String.valueOf(sumaIngresos));
+	    jLabelGastosR.setText(String.valueOf(sumaGastos));
+	    jLabelSaldoR.setText(String.valueOf(saldo));
+	}
+	
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCerrar;
     private javax.swing.JButton jButtonFiltrarAnio;
     private javax.swing.JLabel jLabelEjercicio;
+    private javax.swing.JLabel jLabelGastos;
+    private javax.swing.JLabel jLabelGastosR;
+    private javax.swing.JLabel jLabelIngresos;
+    private javax.swing.JLabel jLabelIngresosR;
     private javax.swing.JLabel jLabelNomBanco;
+    private javax.swing.JLabel jLabelSaldo;
+    private javax.swing.JLabel jLabelSaldoR;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableMovs;
-    private javax.swing.JTable jTableTotals;
     private com.toedter.calendar.JYearChooser jYearChooser1;
     // End of variables declaration//GEN-END:variables
 }

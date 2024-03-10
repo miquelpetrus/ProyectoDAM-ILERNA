@@ -76,7 +76,7 @@ public class FacturasView extends javax.swing.JPanel {
                     tableModel.addRow(new Object[]{
                             factura.getIdFactura(),
                             factura.getFecha(),
-                            factura.getIdProveedor(),
+                            factura.getIdTercero(),
                             factura.getBaseImponible(),
                             factura.getIva(),
                             factura.getTotal(),

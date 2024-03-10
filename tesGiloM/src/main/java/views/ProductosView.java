@@ -82,7 +82,7 @@ public class ProductosView extends javax.swing.JPanel {
                             producto.getDescripcion(),
                             producto.getPrecio(),
                             producto.getIdFamilia(),
-                            producto.getIdProveedor(),
+                            producto.getIdTercero(),
                     });
                 }
 

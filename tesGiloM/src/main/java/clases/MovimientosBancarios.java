@@ -32,7 +32,7 @@ public class MovimientosBancarios {
 	private int idEvento;
 	private int idSocio;
 	private int idTercero;
-	private double cantidad;
+	private double importe;
 	private String tipo;
 	private int idBanco;
 	private int idUser;
@@ -41,35 +41,35 @@ public class MovimientosBancarios {
 		super();
 	}
 	
-	public MovimientosBancarios(int id, Date fecha, String concepto, double cantidad, String tipo, int idBanco,
+	public MovimientosBancarios(int id, Date fecha, String concepto, double importe, String tipo, int idBanco,
 		int idUser) {
 		super();
 		this.id = id;
 		this.fecha = fecha;
 		this.concepto = concepto;
-		this.cantidad = cantidad;
+		this.importe = importe;
 		this.tipo = tipo;
 		this.idBanco = idBanco;
 		this.idUser = idUser;
 	}
 	
-	public MovimientosBancarios(int id, Date fecha, int idEvento, int idSocio, int idBanco, double cantidad) {
+	public MovimientosBancarios(int id, Date fecha, int idEvento, int idSocio, int idBanco, double importe) {
 		this.id = id;
 		this.fecha = fecha;
 		this.idEvento = idEvento;
 		this.idSocio = idSocio;
 		this.idBanco = idBanco;
-		this.cantidad = cantidad;
+		this.importe = importe;
 	}
 	
-	public MovimientosBancarios(int id, Date fecha, int idEvento, int idTercero,  int idSocio, int idBanco, double cantidad, String tipo) {
+	public MovimientosBancarios(int id, Date fecha, int idEvento, int idTercero,  int idSocio, int idBanco, double importe, String tipo) {
 		this.id = id;
 		this.fecha = fecha;
 		this.idEvento = idEvento;
 		this.idTercero = idTercero;
 		this.idSocio = idSocio;
 		this.idBanco = idBanco;
-		this.cantidad = cantidad;
+		this.importe = importe;
 		this.tipo = tipo;
 	}
 	public int getIdEvento() {
@@ -116,16 +116,16 @@ public class MovimientosBancarios {
 		return concepto;
 	}
 
-	public void setConcepto(String concepto) {
-		this.concepto = concepto;
+	public void setConcepto(String importe) {
+		this.concepto = importe;
 	}
 
-	public double getCantidad() {
-		return cantidad;
+	public double getImporte() {
+		return importe;
 	}
 
-	public void setCantidad(double cantidad) {
-		this.cantidad = cantidad;
+	public void setImporte(double importe) {
+		this.importe = importe;
 	}
 
 	public String getTipo() {

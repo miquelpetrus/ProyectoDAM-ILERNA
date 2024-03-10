@@ -26,7 +26,7 @@
                       <Component id="jComboBoxBanco" min="-2" pref="199" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="jButtonEditarBanco" min="-2" pref="143" max="-2" attributes="0"/>
+                      <Component id="jButtonCerrar" min="-2" pref="143" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jButtonCrearBanco" min="-2" pref="143" max="-2" attributes="0"/>
                   </Group>
@@ -48,7 +48,7 @@
               <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jButtonCrearBanco" alignment="3" min="-2" pref="52" max="-2" attributes="0"/>
-                  <Component id="jButtonEditarBanco" alignment="3" min="-2" pref="52" max="-2" attributes="0"/>
+                  <Component id="jButtonCerrar" alignment="3" min="-2" pref="52" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="33" max="32767" attributes="0"/>
           </Group>
@@ -84,12 +84,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonVerMovActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButtonEditarBanco">
+    <Component class="javax.swing.JButton" name="jButtonCerrar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Editar Banco"/>
+        <Property name="text" type="java.lang.String" value="Cerrar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonEditarBancoActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCerrarActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonCrearBanco">

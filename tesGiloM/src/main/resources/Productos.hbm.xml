@@ -9,7 +9,7 @@
         <property name="nombre" />
         <property name="precio" />
         <property name="idFamilia" />
-        <property name="idProveedor" />
+        <property name="idTercero" />
         <property name="descripcion" />
     </class>
 </hibernate-mapping>

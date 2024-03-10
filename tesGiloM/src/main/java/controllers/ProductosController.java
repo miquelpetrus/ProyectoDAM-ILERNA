@@ -32,7 +32,7 @@ public class ProductosController {
         }
     }
 	
-    public static void crearProducto(String nombre, String descripcion, double precioCompra, int proveedor, int familiaProducto) {
+    public static void crearProducto(String nombre, String descripcion, double precioCompra, int tercero, int familiaProducto) {
         try (Session session = HibernateUtil.buildSessionFactory().openSession()) {
             Transaction transaction = null;
 
@@ -47,7 +47,7 @@ public class ProductosController {
                 nuevoProducto.setNombre(nombre);
                 nuevoProducto.setDescripcion(descripcion);
                 nuevoProducto.setPrecio(precioCompra);
-                nuevoProducto.setIdProveedor(proveedor);
+                nuevoProducto.setIdTercero(tercero);
                 nuevoProducto.setIdFamilia(familiaProducto);
 
                 session.save(nuevoProducto);
@@ -65,7 +65,7 @@ public class ProductosController {
         }
     }
     
-    public static void actualizarProducto(int id, String nombre, String descripcion, double precioCompra, int proveedor, int familiaProducto) {
+    public static void actualizarProducto(int id, String nombre, String descripcion, double precioCompra, int tercero, int familiaProducto) {
         try (Session session = HibernateUtil.buildSessionFactory().openSession()) {
             Transaction transaction = null;
 
@@ -77,7 +77,7 @@ public class ProductosController {
                 producto.setNombre(nombre);
                 producto.setDescripcion(descripcion);
                 producto.setPrecio(precioCompra);
-                producto.setIdProveedor(proveedor);
+                producto.setIdTercero(tercero);
                 producto.setIdFamilia(familiaProducto);
 
                 session.update(producto);

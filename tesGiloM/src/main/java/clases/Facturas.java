@@ -15,9 +15,7 @@ public class Facturas {
 	private int id;
 	private String idFactura;
 	private Date fecha;
-	private int idProveedor;
-	private String serie;
-	private int numeroFac;
+	private int idTercero;
 	private double baseImponible;
 	private double iva;
 	private double total;
@@ -29,14 +27,12 @@ public class Facturas {
 	public Facturas() {
 	}
 	
-	public Facturas(int id, String idFactura, Date fecha, int idProveedor, String serie, int numeroFac,
+	public Facturas(int id, String idFactura, Date fecha, int idTercero,
 			double baseImponible, double iva, double total, boolean pagado, int idUser, int idEvento) {
 		this.id = id;
 		this.idFactura = idFactura;
 		this.fecha = fecha;
-		this.idProveedor = idProveedor;
-		this.serie = serie;
-		this.numeroFac = numeroFac;
+		this.idTercero = idTercero;
 		this.baseImponible = baseImponible;
 		this.iva = iva;
 		this.total = total;
@@ -45,28 +41,12 @@ public class Facturas {
 		this.idEvento = idEvento;
 	}
 	
-	public int getIdProveedor() {
-		return idProveedor;
+	public int getIdTercero() {
+		return idTercero;
 	}
 
-	public void setIdProveedor(int idProveedor) {
-		this.idProveedor = idProveedor;
-	}
-
-	public String getSerie() {
-		return serie;
-	}
-
-	public void setSerie(String serie) {
-		this.serie = serie;
-	}
-
-	public int getNumeroFac() {
-		return numeroFac;
-	}
-
-	public void setNumeroFac(int numeroFac) {
-		this.numeroFac = numeroFac;
+	public void setIdTercero(int idTercero) {
+		this.idTercero = idTercero;
 	}
 
 	public double getBaseImponible() {

@@ -52,7 +52,7 @@ public class FacturasController {
             Session session = HibernateUtil.buildSessionFactory().openSession();
             Transaction transaction = session.beginTransaction();
             Productos producto = ProductosController.getProductoById(IdProducto);
-            Terceros proveedor = TercerosController.getProveedorById(idProveedor);
+            Terceros tercero = TercerosController.getProveedorById(idProveedor);
 
             // Obtener el precio y el porcentaje de IVA del producto
             double precioProducto = producto.getPrecio();
@@ -70,7 +70,7 @@ public class FacturasController {
             // Crear una nueva instancia de LineasFacturas
             LineasFacturas lineaFactura = new LineasFacturas();
             lineaFactura.setIdFactura(idFactura);
-            lineaFactura.setIdProveedor(proveedor.getId());
+            lineaFactura.setIdTercero(tercero.getId());
             lineaFactura.setIdProducto(producto.getId());
             lineaFactura.setCantidad(cantidad);
             lineaFactura.setPrecio(precioProducto);
@@ -112,7 +112,7 @@ public class FacturasController {
         return lineasFacturas;
     }
 
-    public static void guardarFactura(String idFactura, int idProveedor, Date fecha, double baseImponible, double baseIVA, double total, int idUser) {
+    public static void guardarFactura(String idFactura, int idTercero, Date fecha, double baseImponible, double baseIVA, double total, int idUser) {
         // Obtén la sesión de Hibernate (asegúrate de tener la configuración adecuada)
         Session session = HibernateUtil.buildSessionFactory().openSession();
 
@@ -126,7 +126,7 @@ public class FacturasController {
             // Crea la entidad Facturas con los datos proporcionados
             Facturas factura = new Facturas();
             factura.setIdFactura(idFactura);
-            factura.setIdProveedor(idProveedor);
+            factura.setIdTercero(idTercero);
             factura.setFecha(fecha);
             factura.setBaseImponible(baseImponible);
             factura.setIva(baseIVA);

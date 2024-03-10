@@ -12,7 +12,7 @@
         <property name="concepto"/>
         <property name="idSocio"/>
         <property name="idTercero"/>
-        <property name="cantidad"/>
+        <property name="importe"/>
         <property name="tipo"/>
         <property name="idBanco"/>
         <property name="idUser"/>

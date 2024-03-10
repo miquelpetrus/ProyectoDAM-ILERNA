@@ -1,9 +1,17 @@
 package clases;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class LineasFacturas {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String idFactura;
-	private int idProveedor;
+	private int idTercero;
 	private int idProducto;
 	private int cantidad;
 	private double precio;
@@ -11,10 +19,10 @@ public class LineasFacturas {
 	private double iva;
 	private double total;
 
-	public LineasFacturas(int id, String idFactura, int idProveedor, int idProducto, int cantidad, double precio, double iva, double total) {
+	public LineasFacturas(int id, String idFactura, int idTercero, int idProducto, int cantidad, double precio, double iva, double total) {
 		this.id = id;
 		this.idFactura = idFactura;
-		this.idProveedor = idProveedor;
+		this.idTercero = idTercero;
 		this.idProducto = idProducto;
 		this.cantidad = cantidad;
 		this.precio = precio;
@@ -89,12 +97,12 @@ public class LineasFacturas {
 		this.iva = iva;
 	}
 
-	public int getIdProveedor() {
-		return idProveedor;
+	public int getIdTercero() {
+		return idTercero;
 	}
-
-	public void setIdProveedor(int idProveedor) {
-		this.idProveedor = idProveedor;
+	
+	public void setIdTercero(int idTercero) {
+		this.idTercero = idTercero;
 	}
 
 	public double getTotal() {

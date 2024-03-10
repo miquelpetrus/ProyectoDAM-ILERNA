@@ -11,9 +11,9 @@ import javax.persistence.Id;
 public class Eventos {
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
-	private String nombre;
-	private Date fecha;
+		private int id;
+		private String nombre;
+		private Date fecha;
         private String descripcion;
         private String lugar;
         private String precio;

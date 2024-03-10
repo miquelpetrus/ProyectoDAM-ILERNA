@@ -13,7 +13,6 @@
         <property name="apellido2"/>
         <property name="nif"/>
         <property name="password"/>
-        <property name="role"/>
         <property name="email"/>
 
         <!-- Relación muchos a uno con Socios -->

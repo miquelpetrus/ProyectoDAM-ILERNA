@@ -27,12 +27,12 @@ public class Productos {
 		this.idTercero = idTercero;
 	}
 	
-	public int getIdProveedor() {
+	public int getIdTercero() {
 		return idTercero;
 	}
 	
-	public void setIdProveedor(int idProveedor) {
-		this.idTercero = idProveedor;
+	public void setIdTercero(int idTercero) {
+		this.idTercero = idTercero;
 	}
 
 	public int getIdFamilia() {

@@ -14,7 +14,6 @@
         <property name="provincia" />
         <property name="telefono" />
         <property name="email" />
-        <property name="web" />
         <property name="contacto" />
      </class>
  </hibernate-mapping>

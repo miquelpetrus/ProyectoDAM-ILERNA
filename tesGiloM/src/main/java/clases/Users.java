@@ -34,27 +34,24 @@ public class Users {
 	private String password;
 	private String email;
 	private String nif;
-	private String role;
 	private int idSocio;
 	
-	public Users(String name, String apellido1, String apellido2, String password, String email, String nif, String role, String status) {
+	public Users(String name, String apellido1, String apellido2, String password, String email, String nif, String status) {
         this.name = name;
         this.apellido1 = apellido1;
         this.apellido2 = apellido2;
         this.password = password;
         this.email = email;
         this.nif = nif;
-        this.role = role;
     }
 	
-	public Users(String name, String apellido1, String apellido2, String password, String email, String nif, String role, String status, int idSocio) {
+	public Users(String name, String apellido1, String apellido2, String password, String email, String nif, String status, int idSocio) {
         this.name = name;
         this.apellido1 = apellido1;
         this.apellido2 = apellido2;
         this.password = password;
         this.email = email;
         this.nif = nif;
-        this.role = role;
         this.idSocio = idSocio;
     }
 	
@@ -123,13 +120,6 @@ public class Users {
 		this.nif = nif;
 	}
 
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
 
 	public int getIdSocio() {
 		return idSocio;
