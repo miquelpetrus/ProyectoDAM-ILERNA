@@ -1,10 +1,5 @@
 package views;
 
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.image.ImageObserver;
-import java.io.File;
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -82,7 +77,6 @@ public class MainApp extends javax.swing.JFrame{
 
         jLabelLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FondoJPanel.png"))); // NOI18N
-        jLabelLogo.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout jPanelPrincipalLayout = new javax.swing.GroupLayout(jPanelPrincipal);
         jPanelPrincipal.setLayout(jPanelPrincipalLayout);

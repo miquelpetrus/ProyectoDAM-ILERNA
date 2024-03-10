@@ -34,6 +34,11 @@ public class FacturasView extends javax.swing.JPanel {
         this.sessionFactory = HibernateUtil.buildSessionFactory();
         initializeTableModel();
         loadFacturasData();
+		jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
+				jTable1MouseClicked(evt);
+			}
+		});
     }
     
     private void initializeTableModel() {
@@ -120,6 +125,11 @@ public class FacturasView extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jButtonCerrar.setText("Cerrar");
@@ -177,6 +187,43 @@ public class FacturasView extends javax.swing.JPanel {
         // TODO add your handling code here:
     	HibernateUtil.cerrarVentana(this);
     }//GEN-LAST:event_jButtonCerrarActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+                // Obtén la fila y columna en la que se hizo clic
+        int row = jTable1.getSelectedRow();
+        int column = jTable1.getSelectedColumn();
+
+        // Verifica que el clic sea en una fila válida
+        if (row != -1 && column != -1) {
+            // Obtén el número de factura de la fila seleccionada
+            String numeroFactura = (String) jTable1.getValueAt(row, 0);
+
+            // Muestra un menú emergente con opciones, por ejemplo, "Pagar Factura"
+            javax.swing.JPopupMenu popupMenu = new javax.swing.JPopupMenu();
+            javax.swing.JMenuItem pagarMenuItem = new javax.swing.JMenuItem("Pagar Factura");
+            pagarMenuItem.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    // Aquí puedes llamar al método para procesar el pago de la factura
+                    pagarFactura(numeroFactura);
+                }
+            });
+            popupMenu.add(pagarMenuItem);
+
+            // Muestra el menú emergente en la posición del clic
+            popupMenu.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
+
+    // Método para procesar el pago de la factura
+    private void pagarFactura(String numeroFactura) {
+        System.out.println("Factura pagada: " + numeroFactura);
+
+        // Actualiza la tabla después de pagar la factura
+        loadFacturasData();
+    }
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
