@@ -197,10 +197,7 @@ public class AddIngresoView extends javax.swing.JPanel {
 			idTercero = terceroSeleccionado.getId();
 		}
         Bancos bancoSeleccionado = (Bancos) jComboBoxBanco.getSelectedItem();
-        int banco = 0;
-		if (bancoSeleccionado != null) {
-			banco = bancoSeleccionado.getId();
-		}
+        int banco = bancoSeleccionado.getId();
         double importe = Double.parseDouble(jTextFieldImporte.getText());
         Eventos eventoSeleccionado = (Eventos) jComboBoxEvento.getSelectedItem();
         int idEvento = 0;
@@ -262,8 +259,6 @@ public class AddIngresoView extends javax.swing.JPanel {
     private void cargarBancos() {
         DefaultComboBoxModel model = new DefaultComboBoxModel();
         
-        // Añadir opción vacía
-        model.addElement(null); 
         
         for (Bancos banco: BancosController.getAllBancos()) {
             model.addElement(banco);

@@ -41,9 +41,9 @@ public class MainApp extends javax.swing.JFrame{
     public void actualizarTextoBienvenida() {
         int idUsuario = UsuarioSesion.getIdUsuario();
         String nombreUsuario = UsersController.getNombreUsuarioById(idUsuario);
-        jLabelBienvenida.setFont(new java.awt.Font("Helvetica Neue", 0, 18));
+        jLabelBienvenida.setFont(new java.awt.Font("Helvetica Neue", 0, 20));
         jLabelBienvenida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelBienvenida.setText("<html>Bienvenido a MolíGest, <br>" + nombreUsuario + "<br>" + horaFormateada + "</html>");
+        jLabelBienvenida.setText("<html><br>Bienvenido a MolíGest, " + "<br>" + "<strong>" + nombreUsuario + "</strong>" + " " + horaFormateada + "</html>");
     }
 
     
@@ -53,6 +53,7 @@ public class MainApp extends javax.swing.JFrame{
 
         jPanelPrincipal = new javax.swing.JPanel();
         jLabelBienvenida = new javax.swing.JLabel();
+        jLabelLogo = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuConnect = new javax.swing.JMenuItem();
@@ -74,25 +75,34 @@ public class MainApp extends javax.swing.JFrame{
 
         jPanelPrincipal.setBackground(new java.awt.Color(243, 243, 243));
 
-        jLabelBienvenida.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        jLabelBienvenida.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabelBienvenida.setFont(new java.awt.Font("Helvetica Neue", 1, 36)); // NOI18N
+        jLabelBienvenida.setForeground(new java.awt.Color(51, 102, 255));
+        jLabelBienvenida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelBienvenida.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        jLabelLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FondoJPanel.png"))); // NOI18N
+        jLabelLogo.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout jPanelPrincipalLayout = new javax.swing.GroupLayout(jPanelPrincipal);
         jPanelPrincipal.setLayout(jPanelPrincipalLayout);
         jPanelPrincipalLayout.setHorizontalGroup(
             jPanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPrincipalLayout.createSequentialGroup()
-                .addContainerGap(420, Short.MAX_VALUE)
-                .addComponent(jLabelBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(113, 113, 113))
+            .addGroup(jPanelPrincipalLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelBienvenida, javax.swing.GroupLayout.DEFAULT_SIZE, 866, Short.MAX_VALUE)
+                    .addGroup(jPanelPrincipalLayout.createSequentialGroup()
+                        .addComponent(jLabelLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         jPanelPrincipalLayout.setVerticalGroup(
             jPanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPrincipalLayout.createSequentialGroup()
-                .addContainerGap(351, Short.MAX_VALUE)
-                .addComponent(jLabelBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
+            .addGroup(jPanelPrincipalLayout.createSequentialGroup()
+                .addComponent(jLabelBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 532, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jMenuBar1.setBackground(new java.awt.Color(204, 204, 204));
@@ -447,6 +457,7 @@ public class MainApp extends javax.swing.JFrame{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabelBienvenida;
+    private javax.swing.JLabel jLabelLogo;
     private javax.swing.JMenuItem jMenuBancos;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuConnect;
