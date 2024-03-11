@@ -1,11 +1,14 @@
 package clases;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "terceros")
 public class Terceros {
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
@@ -14,10 +17,12 @@ public class Terceros {
 	private String direccion;
 	private String telefono;
 	private String contacto;
+	@Column(unique = true)
 	private String cif;
 	private String poblacion;
 	private String cp;
 	private String provincia;
+	@Column(unique = true)
 	private String email;
 	
 	public Terceros() {

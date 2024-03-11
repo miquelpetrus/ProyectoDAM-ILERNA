@@ -180,6 +180,11 @@ public class MovBancariosView extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTableMovs.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableMovsMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableMovs);
 
         jButtonCerrar.setText("Cerrar");
@@ -279,6 +284,10 @@ public class MovBancariosView extends javax.swing.JPanel {
         // TODO add your handling code here:
     	HibernateUtil.cerrarVentana(this);
     }//GEN-LAST:event_jButtonCerrarActionPerformed
+
+    private void jTableMovsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMovsMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTableMovsMouseClicked
     
     private void filterMovimientosByYear(int year) {
         // Definir nombres de las columnas

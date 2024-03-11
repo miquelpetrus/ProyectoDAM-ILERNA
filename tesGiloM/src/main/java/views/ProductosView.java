@@ -2,6 +2,8 @@ package views;
 
 import clases.Productos;
 import controllers.HibernateUtil;
+import controllers.ProductosController;
+
 import java.awt.Window;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -117,23 +119,9 @@ public class ProductosView extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTableProducts.addMouseListener((MouseListener) new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2) { // Doble clic
-                    int filaSeleccionada = jTableProducts.getSelectedRow();
-                    if (filaSeleccionada != -1) { // Asegúrate de que se haya seleccionado una fila
-                        // Obtén los datos de la fila seleccionada
-                        Object[] datosFila = new Object[tableModel.getColumnCount()];
-                        for (int i = 0; i < tableModel.getColumnCount(); i++) {
-                            datosFila[i] = tableModel.getValueAt(filaSeleccionada, i);
-                        }
-
-                        // Abre la vista de edición pasando los datos de la fila
-                        abrirVistaEdicion(datosFila);
-                        HibernateUtil.cerrarVentana(jTableProducts);
-                    }
-                }
+        jTableProducts.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableProductsMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jTableProducts);
@@ -198,7 +186,45 @@ public class ProductosView extends javax.swing.JPanel {
 		} 
     }//GEN-LAST:event_jButtonAddActionPerformed
 
-    private void jButtonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarActionPerformed
+    private void jTableProductsMouseClicked(java.awt.event.MouseEvent evt) {
+        int row = jTableProducts.getSelectedRow();
+        int column = jTableProducts.getSelectedColumn();
+
+        // Verifica que el clic sea en una fila válida
+        if (row != -1 && column != -1) {
+            // Obtén los datos de la fila seleccionada
+            Object[] datosFila = new Object[tableModel.getColumnCount()];
+            for (int i = 0; i < tableModel.getColumnCount(); i++) {
+                datosFila[i] = tableModel.getValueAt(row, i);
+            }
+
+            // Muestra un menú emergente con opciones
+            javax.swing.JPopupMenu popupMenu = new javax.swing.JPopupMenu();
+
+            // Opción para editar el producto
+            javax.swing.JMenuItem editarMenuItem = new javax.swing.JMenuItem("Editar Producto");
+            editarMenuItem.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    abrirVistaEdicion(datosFila);
+                }
+            });
+            popupMenu.add(editarMenuItem);
+
+            // Opción para eliminar el producto
+            javax.swing.JMenuItem eliminarMenuItem = new javax.swing.JMenuItem("Eliminar Producto");
+            eliminarMenuItem.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    // Aquí puedes llamar al método para procesar la eliminación del producto
+                    eliminarProducto(datosFila);
+                }
+            });
+            popupMenu.add(eliminarMenuItem);
+
+            // Muestra el menú emergente en la posición del clic
+            popupMenu.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    }
+    private void jButtonCerrarActionPerformed(java.awt.event.ActionEvent evt) {                                              
         // TODO add your handling code here:
         HibernateUtil.cerrarVentana(this);
     }
@@ -208,6 +234,22 @@ public class ProductosView extends javax.swing.JPanel {
         // Crea una nueva instancia de la vista de edición y pásale los datos
         HibernateUtil.abrirVentana(new EditarProductosView(datosFila), "Editar Producto");
     }
+    
+	private void eliminarProducto(Object[] datosFila) {
+	    try {
+	        // Obtén el ID del producto a partir de los datos de la fila
+	        int idProducto = (int) datosFila[0]; // Ajusta según la posición del ID en tus datos
+
+	        // Llama al método del controlador para eliminar el producto
+	        ProductosController.eliminarProducto(idProducto);
+
+	        // Actualiza la tabla después de eliminar el producto
+	        loadProductData();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        // Maneja cualquier excepción que pueda ocurrir al eliminar el producto
+	    }
+	}
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -8,12 +8,12 @@
             <column name="id"/>
             <generator class="increment"/>
         </id>
-        <property name="name"/>
-        <property name="apellido1"/>
-        <property name="apellido2"/>
-        <property name="nif"/>
+        <property name="name" column="name" length="50" />
+        <property name="apellido1" column="apellido1" length="50" />
+        <property name="apellido2" column="apellido2" length="50" />
+        <property name="nif" column="nif" unique="true" length="10"/>
         <property name="password"/>
-        <property name="email"/>
+        <property name="email" column="email" length="100" />
 
         <!-- Relación muchos a uno con Socios -->
         <many-to-one name="socio" class="clases.Socios" column="idSocio" not-null="false"/>

@@ -190,7 +190,7 @@ public class FacturasView extends javax.swing.JPanel {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
-                // Obtén la fila y columna en la que se hizo clic
+        // Obtengo la fila y columna en la que se hizo clic
         int row = jTable1.getSelectedRow();
         int column = jTable1.getSelectedColumn();
 

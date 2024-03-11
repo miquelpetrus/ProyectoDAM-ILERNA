@@ -1,6 +1,7 @@
 package clases;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,8 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "socios")
 public class Socios {
 
 	@OneToOne(mappedBy = "socio")
@@ -29,8 +32,10 @@ public class Socios {
 	private String nombre;
 	private String apellido1;
 	private String apellido2;
+	@Column(unique = true, length = 9)
 	private String nif;
 	private String telefono;
+	@Column(unique = true)
 	private String email;
 	private String direccion;
 	private String fechaNacimiento;
