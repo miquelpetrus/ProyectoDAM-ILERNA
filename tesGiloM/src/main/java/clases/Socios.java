@@ -1,5 +1,7 @@
 package clases;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -39,8 +41,8 @@ public class Socios {
 	private String email;
 	private String direccion;
 	private String fechaNacimiento;
-	private String fechaAlta;;
-	private String fechaBaja;
+	private Date fechaAlta;;
+	private Date fechaBaja;
 	private boolean estado;
 	private int idUser;
 
@@ -49,7 +51,7 @@ public class Socios {
 	}
 	
 	public Socios(int id, String nombre, String apellido1, String apellido2, String nif, String telefono, String email,
-			String direccion, String fechaNacimiento, String fechaAlta, String fechaBaja, boolean estado, int idUser) {
+			String direccion, String fechaNacimiento, Date fechaAlta, Date fechaBaja, boolean estado, int idUser) {
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido1 = apellido1;
@@ -147,19 +149,19 @@ public class Socios {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
-	public String getFechaAlta() {
+	public Date getFechaAlta() {
 		return fechaAlta;
 	}
-
-	public void setFechaAlta(String fechaAlta) {
+	
+	public void setFechaAlta(Date fechaAlta) {
 		this.fechaAlta = fechaAlta;
 	}
-
-	public String getFechaBaja() {
+	
+	public Date getFechaBaja() {
 		return fechaBaja;
 	}
-
-	public void setFechaBaja(String fechaBaja) {
+	
+	public void setFechaBaja(Date fechaBaja) {
 		this.fechaBaja = fechaBaja;
 	}
 

@@ -6,13 +6,13 @@
 			<column name="id" />
 			<generator class="increment" />
         </id>
-		<property name="nombre" />
-		<property name="apellido1" />
-		<property name="apellido2" />
-		<property name="nif" />
+        <property name="nombre" column="nombre" length="50" />
+        <property name="apellido1" column="apellido1" length="50" />
+        <property name="apellido2" column="apellido2" length="50" />
+		<property name="nif" column="nif" unique="true" length="10"/>
 		<property name="direccion" />
-		<property name="telefono" />
-		<property name="email" />
+		<property name="telefono" column="telefono" length="9"/>
+		<property name="email" column="email" unique="true"/>
 		<property name="fechaNacimiento" />
 		<property name="fechaAlta" />
 		<property name="fechaBaja" />

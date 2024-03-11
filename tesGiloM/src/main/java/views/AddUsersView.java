@@ -5,6 +5,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -195,7 +196,8 @@ public class AddUsersView extends javax.swing.JPanel {
             // Cerrar la sesión
         } catch (Exception e) {
             e.printStackTrace();
-            // Manejar cualquier excepción que pueda ocurrir al guardar datos
+            // Mostrar un cuadro de diálogo con el mensaje de error
+            JOptionPane.showMessageDialog(this, "Error al guardar los datos:\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 		} finally {
 			// Cerrar la sesión
 			sessionFactory.close();

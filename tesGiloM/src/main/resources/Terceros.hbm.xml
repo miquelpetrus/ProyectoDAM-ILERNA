@@ -7,13 +7,13 @@
 			<generator class="increment" />
         </id>
         <property name="nombre" />
-        <property name="cif" />
+        <property name="cif" column="cif" unique="true" length="10"/>
         <property name="direccion" />
         <property name="poblacion" />
         <property name="cp" />
         <property name="provincia" />
         <property name="telefono" />
-        <property name="email" />
+        <property name="email" column="email" unique="true"/>
         <property name="contacto" />
      </class>
  </hibernate-mapping>
