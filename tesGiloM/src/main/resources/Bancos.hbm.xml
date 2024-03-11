@@ -8,7 +8,7 @@
         </id>
                 <property name="nombre" />
                 <property name="entidad" />           
-                <property name="iban" /> 
+                <property name="iban" column="iban" unique="true" length="20"/> 
                 <property name="contacto" />           
                 <property name="saldo" />
      </class>

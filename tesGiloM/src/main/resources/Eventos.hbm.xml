@@ -10,6 +10,6 @@
                 <property name="fecha" />
                 <property name="descripcion" />
                 <property name="lugar" />
-                <property name="precio" />
+                <property name="aforo" />
      </class>
 </hibernate-mapping>

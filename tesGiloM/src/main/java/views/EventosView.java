@@ -37,7 +37,7 @@ public class EventosView extends javax.swing.JPanel {
     }
     
     private void initializeTableModel() {
-        Object[] columnNames = {"id", "Nombre", "Fecha", "Descripción", "Lugar", "Precio"};
+        Object[] columnNames = {"id", "Nombre", "Fecha", "Descripción", "Lugar", "Aforo"};
         Object[][] data = {};  // Puedes inicializarlo con datos si los tienes al inicio
         tableModel = new DefaultTableModel(data, columnNames) {
             private static final long serialVersionUID = 1L;
@@ -82,7 +82,7 @@ public class EventosView extends javax.swing.JPanel {
                     		evento.getFecha(),
                     		evento.getDescripcion(),
                     		evento.getLugar(),
-                    		evento.getPrecio(),
+                    		evento.getAforo(),
                     });
                 }
 

@@ -31,6 +31,7 @@ public class MainApp extends javax.swing.JFrame{
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        
     }
     
     public void actualizarTextoBienvenida() {
@@ -433,6 +434,9 @@ public class MainApp extends javax.swing.JFrame{
                 mainapp.setLocationRelativeTo(null); // para que se muestre en el centro de la pantalla
                 mainapp.setIconImage(new ImageIcon("src/main/resources/images/icono.png").getImage());
                 mainapp.setTitle("MolíGest");
+                
+                LoginView loginView = new LoginView(mainapp);
+                HibernateUtil.abrirVentana(loginView, "Conectar");
             }
         });
     }

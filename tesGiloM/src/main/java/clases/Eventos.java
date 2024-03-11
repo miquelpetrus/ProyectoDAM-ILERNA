@@ -16,7 +16,7 @@ public class Eventos {
 		private Date fecha;
         private String descripcion;
         private String lugar;
-        private String precio;
+        private int aforo;
     
     
 	public Eventos() {
@@ -28,6 +28,15 @@ public class Eventos {
 		this.fecha = fecha;
 		this.descripcion = descripcion;
 		this.lugar = lugar;
+	}
+	
+	public Eventos(int id, String nombre, Date fecha, String descripcion, String lugar, int aforo) {
+		this.id = id;
+		this.nombre = nombre;
+		this.fecha = fecha;
+		this.descripcion = descripcion;
+		this.lugar = lugar;
+		this.aforo = aforo;
 	}
 
 	public int getId() {
@@ -70,15 +79,15 @@ public class Eventos {
 	public void setLugar(String lugar) {
 		this.lugar = lugar;
 	}
-
-	public String getPrecio() {
-		return precio;
-	}
-
-	public void setPrecio(String precio) {
-		this.precio = precio;
-	}
 	
+	public int getAforo() {
+		return aforo;
+	}
+
+	public void setAforo(int aforo) {
+		this.aforo = aforo;
+	}
+
 	@Override
 	public String toString() {
 		return this.nombre;

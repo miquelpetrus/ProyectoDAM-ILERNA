@@ -4,6 +4,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -46,25 +48,28 @@ public class UsersController {
         return nombreUsuario + " " + apellido1Usuario;
 	}
 	
-	public static String validarUsuario(String usuario, String password) {
+	public static boolean validarUsuario(String usuario, String password) {
 	    List<Users> usuarios = getAllUsers();
 	    
-	    String mensaje = "";
-	    String passwordEncriptado = "";
-	    passwordEncriptado = encriptarPassword(password);
+	    String passwordEncriptado = encriptarPassword(password);
 
 	    for (Users user : usuarios) {
+	    	if (!(user.getEmail().trim().equals(usuario))) {
+	    		JOptionPane.showMessageDialog(null, "El usuario no existe", "Error", JOptionPane.ERROR_MESSAGE);
+        		return false;
+        	}
+	    	if (user.getEmail().trim().equals(usuario) && !user.getPassword().trim().equals(passwordEncriptado)) {
+	    	    JOptionPane.showMessageDialog(null, "Contraseña incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
+	    	    return false;  // Contraseña incorrecta
+	    	}
 	        if (user.getEmail().trim().equals(usuario) && user.getPassword().trim().equals(passwordEncriptado)) {
-	            mensaje = "Usuario correcto";
 	            UsuarioSesion.setIdUsuario(user.getId());
-	            break; 
-			} else {
-				mensaje = "Usuario incorrecto";
-			}
+	            return true;  // Usuario y contraseña son válidos
+	        }
 	    }
-
-	    return mensaje;
+	    return false;
 	}
+
 	
 	
     // Método para crear el usuario admin por defecto
