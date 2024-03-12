@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import controllers.HibernateUtil;
+import controllers.SociosController;
 import clases.Socios;
 
 /**
@@ -18,11 +19,33 @@ public class EditSociosView extends javax.swing.JPanel {
 
     private static final long serialVersionUID = 1L;
 	private SessionFactory sessionFactory;
+	private Object[] datosFila;
     
-    public EditSociosView() {
+    public EditSociosView(Object [] datosFila) {
         initComponents();
         this.sessionFactory = HibernateUtil.buildSessionFactory();
+        // Almacena los datos recibidos en la variable de instancia
+        this.datosFila = datosFila;
+        llenarCampos();
     }
+    
+	private void llenarCampos() {
+		jTextNombre.setText((String) datosFila[1]);
+        jTextApellido1.setText((String) datosFila[2]);
+        jTextApellido2.setText((String) datosFila[3]);
+        jTextNIF.setText((String) datosFila[4]);
+        jTextEmail.setText((String) datosFila[5]);
+        jTextTfno.setText((String) datosFila[6]);
+        // Obtener el valor booleano del campo "Estado"
+        boolean estado = (boolean) datosFila[7];
+
+        // Establecer el valor en el JComboBox
+        if (estado) {
+            jComboBoxEstado.setSelectedItem("Alta");
+        } else {
+            jComboBoxEstado.setSelectedItem("Baja");
+        }
+	}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,7 +71,7 @@ public class EditSociosView extends javax.swing.JPanel {
         jButtonCerrar = new javax.swing.JButton();
         jButtonGuardar = new javax.swing.JButton();
         jLabelEstado = new javax.swing.JLabel();
-        jTextEstado = new javax.swing.JTextField();
+        jComboBoxEstado = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(243, 243, 243));
@@ -81,6 +104,13 @@ public class EditSociosView extends javax.swing.JPanel {
 
         jLabelEstado.setText("Estado:");
 
+        jComboBoxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alta", "Baja" }));
+        jComboBoxEstado.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxEstadoItemStateChanged(evt);
+            }
+        });
+
         jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Editar Socio");
@@ -93,50 +123,52 @@ public class EditSociosView extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButtonCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(37, 37, 37)
-                                .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabelTfno, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jTextTfno, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jTextEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabelNIF, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jTextNIF, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabelApellido2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jTextApellido2, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabelApellido1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jTextApellido1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabelEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jTextEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 21, Short.MAX_VALUE))
+                        .addGap(152, 152, 152)
+                        .addComponent(jButtonCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)
+                        .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 23, Short.MAX_VALUE))
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelTfno, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextTfno, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelNIF, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextNIF, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelApellido2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextApellido2, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelApellido1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextApellido1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBoxEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -163,8 +195,8 @@ public class EditSociosView extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(73, 73, 73)
+                    .addComponent(jComboBoxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -182,13 +214,14 @@ public class EditSociosView extends javax.swing.JPanel {
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
         // TODO add your handling code here:
         // Obtener los valores ingresados por el usuario
+    	int id = (int) datosFila[0];
         String nombre = jTextNombre.getText();
         String apellido1 = jTextApellido1.getText();
         String apellido2 = jTextApellido2.getText();
         String nif = jTextNIF.getText();
         String email = jTextEmail.getText();
         String telefono = jTextTfno.getText();
-        boolean estado = Boolean.parseBoolean(jTextEstado.getText());
+        boolean estado = jComboBoxEstado.getSelectedItem().toString().equalsIgnoreCase("Alta");
 
 
         // Validar que los campos obligatorios no estén vacíos (puedes agregar más validaciones según tus requisitos)
@@ -197,47 +230,39 @@ public class EditSociosView extends javax.swing.JPanel {
             // (por ejemplo, puedes mostrar un JOptionPane)
             return;
         }
+        SociosController.actualizarSocio(id, nombre, apellido1, apellido2, nif, email, telefono, estado);
 
-        // Crear una nueva entidad User con los datos
-        Socios newSocio = new Socios();
-        newSocio.setNombre(nombre);
-        newSocio.setApellido1(apellido1);
-        newSocio.setApellido2(apellido2);
-        newSocio.setNif(nif);
-        newSocio.setEmail(email);
-        newSocio.setTelefono(telefono);
-        newSocio.setEstado(estado);
-
-        try (Session session = sessionFactory.openSession()) {
-            // Iniciar una transacción
-            Transaction tx = session.beginTransaction();
-
-            // Guardar la nueva entidad en la base de datos
-            session.save(newSocio);
-
-            // Confirmar la transacción
-            tx.commit();
-
-            // Cerrar la sesión
-        } catch (Exception e) {
-            e.printStackTrace();
-            // Manejar cualquier excepción que pueda ocurrir al guardar datos
-        }
-        
         // Volver a cargar los datos de la tabla
         HibernateUtil.abrirVentana(new SociosView(), "Socios");
         HibernateUtil.cerrarVentana(this);
-        sessionFactory.close();
         
     }//GEN-LAST:event_jButtonGuardarActionPerformed
-    
-    // Método para cerrar la ventana y abrir la anterior
 
+    private void jComboBoxEstadoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxEstadoItemStateChanged
+        // TODO add your handling code here:
+            if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
+        // Verificar qué elemento está seleccionado
+        String selectedValue = jComboBoxEstado.getSelectedItem().toString();
+
+        // Asignar el valor booleano correspondiente
+        boolean estado;
+        if (selectedValue.equals("Alta")) {
+            estado = true;
+        } else {
+            estado = false;
+        }
+
+        // Puedes hacer algo con el valor booleano, por ejemplo, imprimirlo
+        System.out.println("Estado: " + estado);
+    }
+    }//GEN-LAST:event_jComboBoxEstadoItemStateChanged
+    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCerrar;
     private javax.swing.JButton jButtonGuardar;
+    private javax.swing.JComboBox<String> jComboBoxEstado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelApellido1;
     private javax.swing.JLabel jLabelApellido2;
@@ -249,7 +274,6 @@ public class EditSociosView extends javax.swing.JPanel {
     private javax.swing.JTextField jTextApellido1;
     private javax.swing.JTextField jTextApellido2;
     private javax.swing.JTextField jTextEmail;
-    private javax.swing.JTextField jTextEstado;
     private javax.swing.JTextField jTextNIF;
     private javax.swing.JTextField jTextNombre;
     private javax.swing.JTextField jTextTfno;

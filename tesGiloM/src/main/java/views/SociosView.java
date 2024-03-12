@@ -2,6 +2,8 @@ package views;
 
 import clases.Socios;
 import controllers.HibernateUtil;
+import controllers.SociosController;
+import controllers.UsersController;
 
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
@@ -13,6 +15,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.awt.Window;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JFrame;
 
@@ -33,7 +36,7 @@ public class SociosView extends javax.swing.JPanel {
     }
 
     private void initializeTableModel() {
-        Object[] columnNames = {"id", "Nombre", "Apellido 1", "Apellido 2", "NIF", "Email"};
+        Object[] columnNames = {"id", "Nombre", "Apellido 1", "Apellido 2", "NIF", "Email", "Telefono", "Estado"};
         Object[][] data = {};  // Puedes inicializarlo con datos si los tienes al inicio
         tableModel = new DefaultTableModel(data, columnNames) {
             @Override
@@ -45,7 +48,7 @@ public class SociosView extends javax.swing.JPanel {
         jTableUsers.setModel(tableModel);
         
         // Establecer el tamaño de las columnas
-        int[] columnWidths = {30, 150, 150, 150, 90, 170}; // Ajusta los tamaños según tus necesidades
+        int[] columnWidths = {30, 150, 150, 150, 90, 170, 70, 50}; // Ajusta los tamaños según tus necesidades
 
         for (int i = 0; i < columnWidths.length; i++) {
             TableColumn column = jTableUsers.getColumnModel().getColumn(i);
@@ -77,6 +80,8 @@ public class SociosView extends javax.swing.JPanel {
                             socio.getApellido2(),
                             socio.getNif(),
                             socio.getEmail(),
+                            socio.getTelefono(),
+                            socio.isEstado()
                     });
                 }
 
@@ -125,6 +130,11 @@ public class SociosView extends javax.swing.JPanel {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTableUsers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableUsersMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jTableUsers);
@@ -203,6 +213,54 @@ public class SociosView extends javax.swing.JPanel {
         // TODO add your handling code here:
         HibernateUtil.cerrarVentana(this);
     }//GEN-LAST:event_jButtonCerrar1ActionPerformed
+
+    private void jTableUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableUsersMouseClicked
+        // TODO add your handling code here:
+        int row = jTableUsers.getSelectedRow();
+        int column = jTableUsers.getSelectedColumn();
+
+        // Verifica que el clic sea en una fila válida
+        if (row != -1 && column != -1) {
+            // Obtén los datos de la fila seleccionada
+            Object[] datosFila = new Object[tableModel.getColumnCount()];
+            for (int i = 0; i < tableModel.getColumnCount(); i++) {
+                datosFila[i] = tableModel.getValueAt(row, i);
+            }
+
+            // Muestra un menú emergente con opciones
+            javax.swing.JPopupMenu popupMenu = new javax.swing.JPopupMenu();
+
+            // Opción para editar el evento
+            javax.swing.JMenuItem editarMenuItem = new javax.swing.JMenuItem("Editar Socio");
+            editarMenuItem.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    abrirVistaEdicion(datosFila);
+                }
+            });
+            popupMenu.add(editarMenuItem);
+            
+            // Opción para eliminar el evento
+            javax.swing.JMenuItem eliminarMenuItem = new javax.swing.JMenuItem("Eliminar Socio");
+            eliminarMenuItem.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                	//Elimina el usuario
+                	SociosController.eliminarSocio((int) datosFila[0]);
+                	//Actualiza la tabla
+                	loadUserData();
+                }
+            });
+            popupMenu.add(eliminarMenuItem);
+            
+            // Muestra el menú emergente en la posición del clic
+            popupMenu.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_jTableUsersMouseClicked
+                                  
+    
+	private void abrirVistaEdicion(Object[] datosFila) {
+		HibernateUtil.abrirVentana(new EditSociosView(datosFila), "Editar socio");
+		HibernateUtil.cerrarVentana(this);
+	}
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

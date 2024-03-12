@@ -67,7 +67,7 @@ public class Socios {
 		this.idUser = idUser;
 	}
         
-        public Socios(int id, String nombre, String apellido1, String apellido2, String nif, String telefono, String email) {
+    public Socios(int id, String nombre, String apellido1, String apellido2, String nif, String telefono, String email) {
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido1 = apellido1;

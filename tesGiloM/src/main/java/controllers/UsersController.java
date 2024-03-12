@@ -70,8 +70,7 @@ public class UsersController {
 	    return false;
 	}
 	
-	public static void crearUsuario(String nombre, String apellido1, String apellido2, String nif, String email,
-			String password) {
+	public static void crearUsuario(String nombre, String apellido1, String apellido2, String nif, String email, String password) {
 		try (Session session = HibernateUtil.buildSessionFactory().openSession()) {
 			Transaction transaction = session.beginTransaction();
 			Users user = new Users();
