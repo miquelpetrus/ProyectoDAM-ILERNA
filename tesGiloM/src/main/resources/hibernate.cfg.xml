@@ -18,6 +18,7 @@
         <mapping resource="FamiliaProducto.hbm.xml"/>
         <mapping resource="Terceros.hbm.xml"/>
         <mapping resource="Eventos.hbm.xml"/>
+        <mapping resource="ParticipEventos.hbm.xml"/>
 		<mapping resource="Bancos.hbm.xml"/>
 		<mapping resource="MovimientosBancarios.hbm.xml"/>      
 

@@ -1,0 +1,21 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!--Mapeo de la clase Alumno con la tabla alumnos-->
+<hibernate-mapping>
+	<class name="clases.ParticipEventos" table="participeventos" catalog="moliGest">
+        <id name="id">
+            <column name="id"/>
+            <generator class="increment"/>
+        </id>
+        <property name="nombre" column="nombre" length="50" />"
+        <property name="numParticipantes" column="numParticipantes" length="10" />"
+        <property name="pagado"/>
+
+        <!-- Relación muchos a uno con Socios -->
+        <many-to-one name="socio" class="clases.Socios" column="idSocio" not-null="false"/>
+        <many-to-one name="evento" class="clases.Eventos" column="idEvento" not-null="true"/>
+
+        
+    </class>
+</hibernate-mapping>

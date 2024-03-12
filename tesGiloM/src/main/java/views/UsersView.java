@@ -2,6 +2,7 @@ package views;
 
 import clases.Users;
 import controllers.HibernateUtil;
+import controllers.UsersController;
 
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
@@ -34,7 +35,7 @@ public class UsersView extends javax.swing.JPanel {
     }
 
     private void initializeTableModel() {
-        Object[] columnNames = {"id", "Nombre", "Apellido 1", "Apellido 2", "NIF", "Email", "Rol", "Password"};
+        Object[] columnNames = {"id", "Nombre", "Apellido 1", "Apellido 2", "NIF", "Email", "Password"};
         Object[][] data = {};  // Puedes inicializarlo con datos si los tienes al inicio
         tableModel = new DefaultTableModel(data, columnNames) {
             private static final long serialVersionUID = 1L;
@@ -48,7 +49,7 @@ public class UsersView extends javax.swing.JPanel {
         jTableUsers.setModel(tableModel);
         
         // Establecer el tamaño de las columnas
-        int[] columnWidths = {30, 150, 150, 150, 90, 180, 70, 250}; // Ajusta los tamaños según tus necesidades
+        int[] columnWidths = {30, 150, 150, 150, 90, 180, 250}; // Ajusta los tamaños según tus necesidades
 
         for (int i = 0; i < columnWidths.length; i++) {
             TableColumn column = jTableUsers.getColumnModel().getColumn(i);
@@ -106,6 +107,9 @@ public class UsersView extends javax.swing.JPanel {
         jTableUsers = new javax.swing.JTable();
         jButtonCrearNuevo = new javax.swing.JButton();
         jButtonCerrar1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(243, 243, 243));
 
         jTableUsers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -121,6 +125,11 @@ public class UsersView extends javax.swing.JPanel {
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+        });
+        jTableUsers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableUsersMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jTableUsers);
@@ -139,37 +148,43 @@ public class UsersView extends javax.swing.JPanel {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Gestión de Usuarios");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1048, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
             .addGroup(layout.createSequentialGroup()
-                .addGap(338, 338, 338)
-                .addComponent(jButtonCrearNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(123, 123, 123)
-                    .addComponent(jButtonCerrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(814, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(133, 133, 133)
+                        .addComponent(jButtonCerrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonCrearNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(166, 166, 166)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(493, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(73, 73, 73)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(jButtonCrearNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(589, 589, 589)
-                    .addComponent(jButtonCerrar1, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
-                    .addContainerGap()))
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonCrearNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+                    .addComponent(jButtonCerrar1, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE))
+                .addGap(33, 33, 33))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -193,10 +208,59 @@ public class UsersView extends javax.swing.JPanel {
     	HibernateUtil.cerrarVentana(this);
     }//GEN-LAST:event_jButtonCerrar1ActionPerformed
 
+    private void jTableUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableUsersMouseClicked
+        // TODO add your handling code here:
+        int row = jTableUsers.getSelectedRow();
+        int column = jTableUsers.getSelectedColumn();
+
+        // Verifica que el clic sea en una fila válida
+        if (row != -1 && column != -1) {
+            // Obtén los datos de la fila seleccionada
+            Object[] datosFila = new Object[tableModel.getColumnCount()];
+            for (int i = 0; i < tableModel.getColumnCount(); i++) {
+                datosFila[i] = tableModel.getValueAt(row, i);
+            }
+
+            // Muestra un menú emergente con opciones
+            javax.swing.JPopupMenu popupMenu = new javax.swing.JPopupMenu();
+
+            // Opción para editar el evento
+            javax.swing.JMenuItem editarMenuItem = new javax.swing.JMenuItem("Editar Usuario");
+            editarMenuItem.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    abrirVistaEdicion(datosFila);
+                }
+            });
+            popupMenu.add(editarMenuItem);
+            
+            // Opción para eliminar el evento
+            javax.swing.JMenuItem eliminarMenuItem = new javax.swing.JMenuItem("Eliminar Usuario");
+            eliminarMenuItem.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                	//Elimina el usuario
+                	UsersController.eliminarUsuario((int) datosFila[0]);
+                	//Actualiza la tabla
+                	loadUserData();
+                }
+            });
+            popupMenu.add(eliminarMenuItem);
+            
+            // Muestra el menú emergente en la posición del clic
+            popupMenu.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_jTableUsersMouseClicked
+    
+	private void abrirVistaEdicion(Object[] datosFila) {
+        // Abre la vista de edición con los datos de la fila seleccionada
+		HibernateUtil.abrirVentana(new EditUsersView(datosFila), "Editar Usuario");
+		HibernateUtil.cerrarVentana(this);
+	}
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCerrar1;
     private javax.swing.JButton jButtonCrearNuevo;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableUsers;
     // End of variables declaration//GEN-END:variables

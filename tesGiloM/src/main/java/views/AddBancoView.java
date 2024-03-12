@@ -44,6 +44,8 @@ public class AddBancoView extends javax.swing.JPanel {
         jButtonGuardar = new javax.swing.JButton();
         jButtonCerrar = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(243, 243, 243));
+
         jLabelNombre.setText("Nombre");
 
         jLabelNombre1.setText("Entidad");

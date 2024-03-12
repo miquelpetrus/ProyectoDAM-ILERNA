@@ -69,8 +69,55 @@ public class UsersController {
 	    }
 	    return false;
 	}
-
 	
+	public static void crearUsuario(String nombre, String apellido1, String apellido2, String nif, String email,
+			String password) {
+		try (Session session = HibernateUtil.buildSessionFactory().openSession()) {
+			Transaction transaction = session.beginTransaction();
+			Users user = new Users();
+			user.setName(nombre);
+			user.setApellido1(apellido1);
+			user.setApellido2(apellido2);
+			user.setNif(nif);
+			user.setEmail(email);
+			user.setPassword(encriptarPassword(password));
+			session.save(user);
+			transaction.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error al crear el usuario", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	public static void actualizarUsuario(int id, String nombre, String apellido1, String apellido2, String nif, String email, String password) {
+		try (Session session = HibernateUtil.buildSessionFactory().openSession()) {
+            Transaction transaction = session.beginTransaction();
+            Users user = session.get(Users.class, id);
+            user.setName(nombre);
+            user.setApellido1(apellido1);
+            user.setApellido2(apellido2);
+            user.setNif(nif);
+            user.setEmail(email);
+            user.setPassword(encriptarPassword(password));
+            session.update(user);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al actualizar el usuario", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+	
+	public static void eliminarUsuario(int id) {
+		try (Session session = HibernateUtil.buildSessionFactory().openSession()) {
+			Transaction transaction = session.beginTransaction();
+			Users user = session.get(Users.class, id);
+			session.delete(user);
+			transaction.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error al eliminar el usuario", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+	}
 	
     // Método para crear el usuario admin por defecto
     public static void createDefaultAdminUser(SessionFactory sessionFactory) {

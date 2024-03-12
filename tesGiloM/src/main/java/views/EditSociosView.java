@@ -1,24 +1,25 @@
 package views;
 
+import java.awt.Window;
 
-import javax.swing.JOptionPane;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import controllers.HibernateUtil;
-import controllers.UsersController;
-import clases.Users;
+import clases.Socios;
 
 /**
  *
  * @author miquelpetrus
  */
-public class AddUsersView extends javax.swing.JPanel {
+public class EditSociosView extends javax.swing.JPanel {
 
     private static final long serialVersionUID = 1L;
-    private SessionFactory sessionFactory;
+	private SessionFactory sessionFactory;
     
-    public AddUsersView() {
+    public EditSociosView() {
         initComponents();
         this.sessionFactory = HibernateUtil.buildSessionFactory();
     }
@@ -42,10 +43,12 @@ public class AddUsersView extends javax.swing.JPanel {
         jTextNIF = new javax.swing.JTextField();
         jLabelEmail = new javax.swing.JLabel();
         jTextEmail = new javax.swing.JTextField();
-        jLabelPSW = new javax.swing.JLabel();
-        jPasswordField = new javax.swing.JPasswordField();
+        jLabelTfno = new javax.swing.JLabel();
+        jTextTfno = new javax.swing.JTextField();
         jButtonCerrar = new javax.swing.JButton();
         jButtonGuardar = new javax.swing.JButton();
+        jLabelEstado = new javax.swing.JLabel();
+        jTextEstado = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(243, 243, 243));
@@ -60,7 +63,7 @@ public class AddUsersView extends javax.swing.JPanel {
 
         jLabelEmail.setText("Email:");
 
-        jLabelPSW.setText("Password:");
+        jLabelTfno.setText("Teléfono:");
 
         jButtonCerrar.setText("Cerrar");
         jButtonCerrar.addActionListener(new java.awt.event.ActionListener() {
@@ -76,9 +79,11 @@ public class AddUsersView extends javax.swing.JPanel {
             }
         });
 
+        jLabelEstado.setText("Estado:");
+
         jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Añadir Usuario");
+        jLabel1.setText("Editar Socio");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -93,11 +98,11 @@ public class AddUsersView extends javax.swing.JPanel {
                                 .addComponent(jButtonCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(37, 37, 37)
                                 .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabelPSW, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelTfno, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jPasswordField))
+                                    .addComponent(jTextTfno, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -117,8 +122,12 @@ public class AddUsersView extends javax.swing.JPanel {
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 17, Short.MAX_VALUE))
+                                    .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabelEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jTextEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 21, Short.MAX_VALUE))
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -126,8 +135,8 @@ public class AddUsersView extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -148,21 +157,26 @@ public class AddUsersView extends javax.swing.JPanel {
                     .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelPSW, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelTfno, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextTfno, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(73, 73, 73)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(59, 59, 59))
+                .addGap(51, 51, 51))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarActionPerformed
         // TODO add your handling code here:
-    	HibernateUtil.abrirVentana(new UsersView(), "Usuarios");
-    	HibernateUtil.cerrarVentana(this);
+    	HibernateUtil.abrirVentana(new SociosView(), "Socios");
+        HibernateUtil.cerrarVentana(this);
+        
     }//GEN-LAST:event_jButtonCerrarActionPerformed
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
@@ -173,22 +187,52 @@ public class AddUsersView extends javax.swing.JPanel {
         String apellido2 = jTextApellido2.getText();
         String nif = jTextNIF.getText();
         String email = jTextEmail.getText();
-        String password = jPasswordField.getText();
+        String telefono = jTextTfno.getText();
+        boolean estado = Boolean.parseBoolean(jTextEstado.getText());
+
 
         // Validar que los campos obligatorios no estén vacíos (puedes agregar más validaciones según tus requisitos)
-        if (nombre.isEmpty() || nif.isEmpty() || email.isEmpty() || password.isEmpty()) {
+        if (nombre.isEmpty() || nif.isEmpty() || email.isEmpty()) {
             // Muestra un mensaje de error o realiza alguna acción en caso de campos vacíos
             // (por ejemplo, puedes mostrar un JOptionPane)
             return;
         }
-        
-        UsersController.crearUsuario(nombre, apellido1, apellido2, nif, email, password);
 
-        // Cerrar la ventana después de guardar
-        HibernateUtil.abrirVentana(new UsersView(), "Usuarios");
+        // Crear una nueva entidad User con los datos
+        Socios newSocio = new Socios();
+        newSocio.setNombre(nombre);
+        newSocio.setApellido1(apellido1);
+        newSocio.setApellido2(apellido2);
+        newSocio.setNif(nif);
+        newSocio.setEmail(email);
+        newSocio.setTelefono(telefono);
+        newSocio.setEstado(estado);
+
+        try (Session session = sessionFactory.openSession()) {
+            // Iniciar una transacción
+            Transaction tx = session.beginTransaction();
+
+            // Guardar la nueva entidad en la base de datos
+            session.save(newSocio);
+
+            // Confirmar la transacción
+            tx.commit();
+
+            // Cerrar la sesión
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Manejar cualquier excepción que pueda ocurrir al guardar datos
+        }
+        
+        // Volver a cargar los datos de la tabla
+        HibernateUtil.abrirVentana(new SociosView(), "Socios");
         HibernateUtil.cerrarVentana(this);
+        sessionFactory.close();
         
     }//GEN-LAST:event_jButtonGuardarActionPerformed
+    
+    // Método para cerrar la ventana y abrir la anterior
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -198,14 +242,16 @@ public class AddUsersView extends javax.swing.JPanel {
     private javax.swing.JLabel jLabelApellido1;
     private javax.swing.JLabel jLabelApellido2;
     private javax.swing.JLabel jLabelEmail;
+    private javax.swing.JLabel jLabelEstado;
     private javax.swing.JLabel jLabelNIF;
     private javax.swing.JLabel jLabelNombre;
-    private javax.swing.JLabel jLabelPSW;
-    private javax.swing.JPasswordField jPasswordField;
+    private javax.swing.JLabel jLabelTfno;
     private javax.swing.JTextField jTextApellido1;
     private javax.swing.JTextField jTextApellido2;
     private javax.swing.JTextField jTextEmail;
+    private javax.swing.JTextField jTextEstado;
     private javax.swing.JTextField jTextNIF;
     private javax.swing.JTextField jTextNombre;
+    private javax.swing.JTextField jTextTfno;
     // End of variables declaration//GEN-END:variables
 }

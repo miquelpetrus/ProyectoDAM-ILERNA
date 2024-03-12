@@ -30,8 +30,17 @@ public class EventosController {
             return Collections.emptyList();
         }
     }
+    
+	public static Eventos getEventoById(int id) {
+		try (Session session = HibernateUtil.buildSessionFactory().openSession()) {
+			return session.get(Eventos.class, id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 	
-	public static void crearEvento(String nombre, Date fecha, String lugar, String descripcion) {
+	public static void crearEvento(String nombre, Date fecha, String lugar, String descripcion, int aforo) {
 		// TODO Auto-generated method stub
         try (Session session = HibernateUtil.buildSessionFactory().openSession()) {
             Transaction transaction = null;
@@ -48,6 +57,7 @@ public class EventosController {
                 nuevoEvento.setFecha(fecha);
                 nuevoEvento.setLugar(lugar);
                 nuevoEvento.setDescripcion(descripcion);
+                nuevoEvento.setAforo(aforo);
 
 
                 session.save(nuevoEvento);
@@ -65,7 +75,8 @@ public class EventosController {
         }
 	}
 	
-	public static void eliminarEvento(int id) {
+	public static void actualizarEvento(int id, String nombre, Date fecha, String lugar, String descripcion,
+			int aforo) {
 		// TODO Auto-generated method stub
 		try (Session session = HibernateUtil.buildSessionFactory().openSession()) {
 			Transaction transaction = null;
@@ -73,8 +84,36 @@ public class EventosController {
 			try {
 				transaction = session.beginTransaction();
 
-				// Aquí debes realizar la lógica para eliminar un producto
-				// Puedes utilizar la entidad de productos y eliminarla de la base de datos
+				// Ejemplo (debes adaptarlo a tu modelo de datos):
+				Eventos evento = session.get(Eventos.class, id);
+				evento.setNombre(nombre);
+				evento.setFecha(fecha);
+				evento.setLugar(lugar);
+				evento.setDescripcion(descripcion);
+				evento.setAforo(aforo);
+
+				session.update(evento);
+
+				transaction.commit();
+			} catch (Exception e) {
+				if (transaction != null) {
+					transaction.rollback();
+				}
+				e.printStackTrace();
+				// Maneja cualquier excepción que pueda ocurrir al actualizar el producto
+			} finally {
+				session.close();
+			}
+		}
+	}
+	
+	public static void eliminarEvento(int id) {
+		// TODO Auto-generated method stub
+		try (Session session = HibernateUtil.buildSessionFactory().openSession()) {
+			Transaction transaction = null;
+
+			try {
+				transaction = session.beginTransaction();
 
 				// Ejemplo (debes adaptarlo a tu modelo de datos):
 				Eventos evento = session.get(Eventos.class, id);

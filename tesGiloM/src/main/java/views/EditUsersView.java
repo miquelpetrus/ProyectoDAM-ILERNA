@@ -13,15 +13,31 @@ import clases.Users;
  *
  * @author miquelpetrus
  */
-public class AddUsersView extends javax.swing.JPanel {
+public class EditUsersView extends javax.swing.JPanel {
 
     private static final long serialVersionUID = 1L;
     private SessionFactory sessionFactory;
+	private Object[] datosFila;
     
-    public AddUsersView() {
+    public EditUsersView(Object [] datosFila) {
         initComponents();
         this.sessionFactory = HibernateUtil.buildSessionFactory();
+        
+        // Almacena los datos recibidos en la variable de instancia
+        this.datosFila = datosFila;
+        
+        // Llena los campos con los datos recibidos
+        llenarCampos();
     }
+    
+	private void llenarCampos() {
+		jTextNombre.setText(datosFila[1].toString());
+		jTextApellido1.setText(datosFila[2].toString());
+		jTextApellido2.setText(datosFila[3].toString());
+		jTextNIF.setText(datosFila[4].toString());
+		jTextEmail.setText(datosFila[5].toString());
+		jPasswordField.setText(datosFila[6].toString());
+	}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -78,7 +94,7 @@ public class AddUsersView extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Añadir Usuario");
+        jLabel1.setText("Editar Usuario");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -168,6 +184,7 @@ public class AddUsersView extends javax.swing.JPanel {
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
         // TODO add your handling code here:
         // Obtener los valores ingresados por el usuario
+    	int id = Integer.parseInt(datosFila[0].toString());
         String nombre = jTextNombre.getText();
         String apellido1 = jTextApellido1.getText();
         String apellido2 = jTextApellido2.getText();
@@ -181,8 +198,7 @@ public class AddUsersView extends javax.swing.JPanel {
             // (por ejemplo, puedes mostrar un JOptionPane)
             return;
         }
-        
-        UsersController.crearUsuario(nombre, apellido1, apellido2, nif, email, password);
+        UsersController.actualizarUsuario(id, nombre, apellido1, apellido2, nif, email, password);
 
         // Cerrar la ventana después de guardar
         HibernateUtil.abrirVentana(new UsersView(), "Usuarios");
