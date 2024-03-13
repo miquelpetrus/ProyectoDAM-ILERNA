@@ -18,35 +18,34 @@ import org.hibernate.cfg.Configuration;
 import clases.Users;
 
 public class HibernateUtil {
-	
-	
-    public static SessionFactory buildSessionFactory() {
 
-        Configuration cfg = new Configuration().configure();
+	public static SessionFactory buildSessionFactory() {
 
-        return cfg.buildSessionFactory(new StandardServiceRegistryBuilder().configure().build());
+		Configuration cfg = new Configuration().configure();
 
-    }
-    
-    public static void abrirVentana(JPanel vistaAnterior, String tituloVistaAnterior) {
+		return cfg.buildSessionFactory(new StandardServiceRegistryBuilder().configure().build());
 
-        try {
-            JFrame frame = new JFrame(tituloVistaAnterior);
-            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            frame.getContentPane().add(vistaAnterior);
-            frame.pack();
-            frame.setVisible(true);
-            frame.setLocationRelativeTo(null);
-        } catch (Exception e) {
-            e.printStackTrace();
-		} 
-    }
-    
-    public static void cerrarVentana(java.awt.Component componente) {
-        Window ventana = SwingUtilities.getWindowAncestor(componente);
-        if (ventana != null) {
-            ventana.dispose();
-        } 
-    }
+	}
+
+	public static void abrirVentana(JPanel vistaAnterior, String tituloVistaAnterior) {
+
+		try {
+			JFrame frame = new JFrame(tituloVistaAnterior);
+			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			frame.getContentPane().add(vistaAnterior);
+			frame.pack();
+			frame.setVisible(true);
+			frame.setLocationRelativeTo(null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void cerrarVentana(java.awt.Component componente) {
+		Window ventana = SwingUtilities.getWindowAncestor(componente);
+		if (ventana != null) {
+			ventana.dispose();
+		}
+	}
 
 }

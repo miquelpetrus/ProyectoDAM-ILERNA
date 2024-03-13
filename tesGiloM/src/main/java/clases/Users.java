@@ -13,24 +13,24 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "users")
 public class Users {
-	
-    @ManyToOne
-    @JoinColumn(name = "idSocio")
-    private Socios socio;
 
-    // Otros campos y métodos de la clase
+	@ManyToOne
+	@JoinColumn(name = "idSocio")
+	private Socios socio;
 
-    public Socios getSocio() {
-        return socio;
-    }
+	// Otros campos y métodos de la clase
 
-    public void setSocio(Socios socio) {
-        this.socio = socio;
-    }
-	
+	public Socios getSocio() {
+		return socio;
+	}
+
+	public void setSocio(Socios socio) {
+		this.socio = socio;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+	private int id;
 	private String name;
 	private String apellido1;
 	private String apellido2;
@@ -40,39 +40,41 @@ public class Users {
 	@Column(unique = true, length = 9)
 	private String nif;
 	private int idSocio;
-	
-	public Users(String name, String apellido1, String apellido2, String password, String email, String nif, String status) {
-        this.name = name;
-        this.apellido1 = apellido1;
-        this.apellido2 = apellido2;
-        this.password = password;
-        this.email = email;
-        this.nif = nif;
-    }
-	
-	public Users(String name, String apellido1, String apellido2, String password, String email, String nif, String status, int idSocio) {
-        this.name = name;
-        this.apellido1 = apellido1;
-        this.apellido2 = apellido2;
-        this.password = password;
-        this.email = email;
-        this.nif = nif;
-        this.idSocio = idSocio;
-    }
-	
+
+	public Users(String name, String apellido1, String apellido2, String password, String email, String nif,
+			String status) {
+		this.name = name;
+		this.apellido1 = apellido1;
+		this.apellido2 = apellido2;
+		this.password = password;
+		this.email = email;
+		this.nif = nif;
+	}
+
+	public Users(String name, String apellido1, String apellido2, String password, String email, String nif,
+			String status, int idSocio) {
+		this.name = name;
+		this.apellido1 = apellido1;
+		this.apellido2 = apellido2;
+		this.password = password;
+		this.email = email;
+		this.nif = nif;
+		this.idSocio = idSocio;
+	}
+
 	public Users() {
-        this.name = "";
-        this.apellido1 = "";
-        this.apellido2 = "";
-        this.password = "";
-        this.email = "";
-        this.nif = "";
-    }
-	
-    public int getId() {
-        return id;
-    }
-    
+		this.name = "";
+		this.apellido1 = "";
+		this.apellido2 = "";
+		this.password = "";
+		this.email = "";
+		this.nif = "";
+	}
+
+	public int getId() {
+		return id;
+	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -125,7 +127,6 @@ public class Users {
 		this.nif = nif;
 	}
 
-
 	public int getIdSocio() {
 		return idSocio;
 	}
@@ -134,6 +135,4 @@ public class Users {
 		this.idSocio = idSocio;
 	}
 
-	
-	
 }

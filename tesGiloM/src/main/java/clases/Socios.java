@@ -18,17 +18,17 @@ import javax.persistence.Table;
 public class Socios {
 
 	@OneToOne(mappedBy = "socio")
-    private Users user;
-    
-    public Users getUser() {
-        return user;
-    }
+	private Users user;
 
-    public void setUser(Users user) {
-        this.user = user;
-    }
-        
-    @Id
+	public Users getUser() {
+		return user;
+	}
+
+	public void setUser(Users user) {
+		this.user = user;
+	}
+
+	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String nombre;
@@ -46,10 +46,9 @@ public class Socios {
 	private boolean estado;
 	private int idUser;
 
-
 	public Socios() {
 	}
-	
+
 	public Socios(int id, String nombre, String apellido1, String apellido2, String nif, String telefono, String email,
 			String direccion, String fechaNacimiento, Date fechaAlta, Date fechaBaja, boolean estado, int idUser) {
 		this.id = id;
@@ -66,8 +65,9 @@ public class Socios {
 		this.estado = false;
 		this.idUser = idUser;
 	}
-        
-    public Socios(int id, String nombre, String apellido1, String apellido2, String nif, String telefono, String email) {
+
+	public Socios(int id, String nombre, String apellido1, String apellido2, String nif, String telefono,
+			String email) {
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido1 = apellido1;
@@ -75,7 +75,7 @@ public class Socios {
 		this.nif = nif;
 		this.telefono = telefono;
 		this.email = email;
-        }
+	}
 
 	public int getId() {
 		return id;
@@ -152,15 +152,15 @@ public class Socios {
 	public Date getFechaAlta() {
 		return fechaAlta;
 	}
-	
+
 	public void setFechaAlta(Date fechaAlta) {
 		this.fechaAlta = fechaAlta;
 	}
-	
+
 	public Date getFechaBaja() {
 		return fechaBaja;
 	}
-	
+
 	public void setFechaBaja(Date fechaBaja) {
 		this.fechaBaja = fechaBaja;
 	}
@@ -168,7 +168,7 @@ public class Socios {
 	public boolean isEstado() {
 		return estado;
 	}
-	
+
 	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
@@ -180,10 +180,10 @@ public class Socios {
 	public void setIdUser(int idUser) {
 		this.idUser = idUser;
 	}
-	
-    @Override
-    public String toString() {
-        return this.nombre + " " + this.apellido1 + " " + this.apellido2;
-    }
+
+	@Override
+	public String toString() {
+		return this.nombre + " " + this.apellido1 + " " + this.apellido2;
+	}
 
 }

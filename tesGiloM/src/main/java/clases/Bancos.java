@@ -7,24 +7,24 @@ import javax.persistence.Id;
 
 @Entity
 public class Bancos {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+	private int id;
 	private String nombre;
 	private String entidad;
-    private String iban;
-    private String contacto;
-    private int saldo;
-    
+	private String iban;
+	private String contacto;
+	private int saldo;
+
 	public Bancos(String nombre, int id, int saldo) {
 		this.nombre = nombre;
 		this.id = id;
 		this.saldo = saldo;
 	}
-	
+
 	public Bancos() {
-	} 
+	}
 
 	public String getNombre() {
 		return nombre;
@@ -73,7 +73,7 @@ public class Bancos {
 	public void setContacto(String contacto) {
 		this.contacto = contacto;
 	}
-	
+
 	@Override
 	public String toString() {
 		return this.nombre;

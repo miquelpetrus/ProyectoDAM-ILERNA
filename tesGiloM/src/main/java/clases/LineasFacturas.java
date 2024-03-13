@@ -19,7 +19,8 @@ public class LineasFacturas {
 	private double iva;
 	private double total;
 
-	public LineasFacturas(int id, String idFactura, int idTercero, int idProducto, int cantidad, double precio, double iva, double total) {
+	public LineasFacturas(int id, String idFactura, int idTercero, int idProducto, int cantidad, double precio,
+			double iva, double total) {
 		this.id = id;
 		this.idFactura = idFactura;
 		this.idTercero = idTercero;
@@ -92,7 +93,7 @@ public class LineasFacturas {
 	public double getIva() {
 		return iva;
 	}
-	
+
 	public void setIva(double iva) {
 		this.iva = iva;
 	}
@@ -100,7 +101,7 @@ public class LineasFacturas {
 	public int getIdTercero() {
 		return idTercero;
 	}
-	
+
 	public void setIdTercero(int idTercero) {
 		this.idTercero = idTercero;
 	}
@@ -120,6 +121,5 @@ public class LineasFacturas {
 	public void setDescuento(double descuento) {
 		this.descuento = descuento;
 	}
-	
-	
+
 }

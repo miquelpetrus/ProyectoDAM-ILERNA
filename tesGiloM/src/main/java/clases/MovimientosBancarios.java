@@ -11,19 +11,19 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class MovimientosBancarios {
-	
-    @ManyToOne
-    @JoinColumn(name = "idEvento")
-    private Eventos evento;
-    
+
+	@ManyToOne
+	@JoinColumn(name = "idEvento")
+	private Eventos evento;
+
 	public Eventos getEvento() {
 		return evento;
 	}
-	
+
 	public void setEvento(Eventos evento) {
 		this.evento = evento;
 	}
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
@@ -36,13 +36,13 @@ public class MovimientosBancarios {
 	private String tipo;
 	private int idBanco;
 	private int idUser;
-	
+
 	public MovimientosBancarios() {
 		super();
 	}
-	
+
 	public MovimientosBancarios(int id, Date fecha, String concepto, double importe, String tipo, int idBanco,
-		int idUser) {
+			int idUser) {
 		super();
 		this.id = id;
 		this.fecha = fecha;
@@ -52,7 +52,7 @@ public class MovimientosBancarios {
 		this.idBanco = idBanco;
 		this.idUser = idUser;
 	}
-	
+
 	public MovimientosBancarios(int id, Date fecha, int idEvento, int idSocio, int idBanco, double importe) {
 		this.id = id;
 		this.fecha = fecha;
@@ -61,8 +61,9 @@ public class MovimientosBancarios {
 		this.idBanco = idBanco;
 		this.importe = importe;
 	}
-	
-	public MovimientosBancarios(int id, Date fecha, int idEvento, int idTercero,  int idSocio, int idBanco, double importe, String tipo) {
+
+	public MovimientosBancarios(int id, Date fecha, int idEvento, int idTercero, int idSocio, int idBanco,
+			double importe, String tipo) {
 		this.id = id;
 		this.fecha = fecha;
 		this.idEvento = idEvento;
@@ -72,6 +73,7 @@ public class MovimientosBancarios {
 		this.importe = importe;
 		this.tipo = tipo;
 	}
+
 	public int getIdEvento() {
 		return idEvento;
 	}
@@ -83,7 +85,7 @@ public class MovimientosBancarios {
 	public int getIdSocio() {
 		return idSocio;
 	}
-	
+
 	public void setIdSocio(int idSocio) {
 		this.idSocio = idSocio;
 	}
@@ -151,7 +153,5 @@ public class MovimientosBancarios {
 	public void setIdUser(int idUser) {
 		this.idUser = idUser;
 	}
-	
-	
 
 }

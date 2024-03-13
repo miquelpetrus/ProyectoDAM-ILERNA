@@ -10,8 +10,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "terceros")
 public class Terceros {
-        @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String nombre;
 	private String direccion;
@@ -24,12 +24,12 @@ public class Terceros {
 	private String provincia;
 	@Column(unique = true)
 	private String email;
-	
+
 	public Terceros() {
 	}
-	
-	public Terceros(int id, String nombre, String direccion, String telefono, String contacto,
-			String cif, String poblacion, String cp, String provincia, String email) {
+
+	public Terceros(int id, String nombre, String direccion, String telefono, String contacto, String cif,
+			String poblacion, String cp, String provincia, String email) {
 		this.id = id;
 		this.nombre = nombre;
 		this.direccion = direccion;
@@ -73,7 +73,6 @@ public class Terceros {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
-
 
 	public String getContacto() {
 		return contacto;
@@ -122,10 +121,10 @@ public class Terceros {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-    @Override
-    public String toString() {
-        return this.nombre; // or whatever property you want to display
-    }
+
+	@Override
+	public String toString() {
+		return this.nombre; // or whatever property you want to display
+	}
 
 }

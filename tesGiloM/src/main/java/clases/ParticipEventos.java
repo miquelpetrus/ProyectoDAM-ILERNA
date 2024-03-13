@@ -9,35 +9,35 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class ParticipEventos {
-	
-    @ManyToOne
-    @JoinColumn(name = "idSocio")
-    private Socios socio;
 
-    // Otros campos y métodos de la clase
+	@ManyToOne
+	@JoinColumn(name = "idSocio")
+	private Socios socio;
 
-    public Socios getSocio() {
-        return socio;
-    }
+	// Otros campos y métodos de la clase
 
-    public void setSocio(Socios socio) {
-        this.socio = socio;
-    }
-    
-    @ManyToOne
-    @JoinColumn(name = "idEvento")
-    private Eventos evento;
+	public Socios getSocio() {
+		return socio;
+	}
 
-    // Otros campos y métodos de la clase
+	public void setSocio(Socios socio) {
+		this.socio = socio;
+	}
 
-    public Eventos getEvento() {
-        return evento;
-    }
+	@ManyToOne
+	@JoinColumn(name = "idEvento")
+	private Eventos evento;
 
-    public void setEvento(Eventos evento) {
-        this.evento = evento;
-    }
-	
+	// Otros campos y métodos de la clase
+
+	public Eventos getEvento() {
+		return evento;
+	}
+
+	public void setEvento(Eventos evento) {
+		this.evento = evento;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -46,11 +46,11 @@ public class ParticipEventos {
 	int idSocio;
 	int numParticipantes;
 	boolean pagado;
-	
+
 	public ParticipEventos() {
 
 	}
-	
+
 	public ParticipEventos(String nombre, Eventos evento, Socios socio, int numParticipantes, boolean pagado) {
 		this.nombre = nombre;
 		this.evento = evento;
@@ -90,6 +90,5 @@ public class ParticipEventos {
 	public void setPagado(boolean pagado) {
 		this.pagado = pagado;
 	}
-	
 
 }

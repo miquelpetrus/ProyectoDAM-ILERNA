@@ -3,7 +3,7 @@ package clases;
 public class Roles {
 	private int id;
 	private String nombre;
-    private String descripcion;
+	private String descripcion;
 
 	public Roles() {
 	}
@@ -18,7 +18,7 @@ public class Roles {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -42,8 +42,5 @@ public class Roles {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	
-	
 
 }

@@ -7,16 +7,15 @@ import javax.persistence.Id;
 
 @Entity
 public class Productos {
-        @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String nombre;
 	private String descripcion;
 	private double precio;
 	private int idFamilia;
 	private int idTercero;
-	
-	
+
 	public Productos(int id, String nombre, String descripcion, double precio, int idFamilia, int idTercero) {
 		super();
 		this.id = id;
@@ -26,11 +25,11 @@ public class Productos {
 		this.idFamilia = idFamilia;
 		this.idTercero = idTercero;
 	}
-	
+
 	public int getIdTercero() {
 		return idTercero;
 	}
-	
+
 	public void setIdTercero(int idTercero) {
 		this.idTercero = idTercero;
 	}
@@ -38,7 +37,7 @@ public class Productos {
 	public int getIdFamilia() {
 		return idFamilia;
 	}
-	
+
 	public void setIdFamilia(int idFamilia) {
 		this.idFamilia = idFamilia;
 	}
@@ -77,10 +76,10 @@ public class Productos {
 	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
-	
-    @Override
-    public String toString() {
-        return this.nombre; 
-    }
+
+	@Override
+	public String toString() {
+		return this.nombre;
+	}
 
 }

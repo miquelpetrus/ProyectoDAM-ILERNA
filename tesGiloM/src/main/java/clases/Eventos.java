@@ -9,19 +9,18 @@ import javax.persistence.Id;
 
 @Entity
 public class Eventos {
-        @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
-		private int id;
-		private String nombre;
-		private Date fecha;
-        private String descripcion;
-        private String lugar;
-        private int aforo;
-    
-    
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
+	private String nombre;
+	private Date fecha;
+	private String descripcion;
+	private String lugar;
+	private int aforo;
+
 	public Eventos() {
 	}
-	
+
 	public Eventos(int id, String nombre, Date fecha, String descripcion, String lugar) {
 		this.id = id;
 		this.nombre = nombre;
@@ -29,7 +28,7 @@ public class Eventos {
 		this.descripcion = descripcion;
 		this.lugar = lugar;
 	}
-	
+
 	public Eventos(int id, String nombre, Date fecha, String descripcion, String lugar, int aforo) {
 		this.id = id;
 		this.nombre = nombre;
@@ -58,11 +57,10 @@ public class Eventos {
 	public Date getFecha() {
 		return fecha;
 	}
-	
+
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-
 
 	public String getDescripcion() {
 		return descripcion;
@@ -79,7 +77,7 @@ public class Eventos {
 	public void setLugar(String lugar) {
 		this.lugar = lugar;
 	}
-	
+
 	public int getAforo() {
 		return aforo;
 	}

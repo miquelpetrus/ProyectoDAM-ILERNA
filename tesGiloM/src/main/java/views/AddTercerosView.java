@@ -171,11 +171,11 @@ public class AddTercerosView extends javax.swing.JPanel {
         // TODO add your handling code here:
     	String nombre = jTextNombre.getText();
     	String cif = jTextCIF.getText();
+    	String direccion = jTextDireccion.getText();
     	String telefono = jTextTelefono.getText();
     	String email = jTextEmail.getText();
-    	String direccion = jTextDireccion.getText();
     	
-    	TercerosController.crearTercero(nombre, cif, telefono, email, direccion);
+    	TercerosController.crearTercero(nombre, cif, direccion, telefono, email);
     	HibernateUtil.abrirVentana(new TercerosView(), "Terceros");
     	HibernateUtil.cerrarVentana(this);
     }//GEN-LAST:event_jButtonGuardarActionPerformed

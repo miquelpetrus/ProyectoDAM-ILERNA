@@ -17,11 +17,12 @@ public class Ingresos {
 	private int idSocio;
 	private int idUser;
 	private int idEvento;
-	
+
 	public Ingresos() {
 	}
-	
-	public Ingresos(int idIngreso, Date fecha, String concepto, int idTercero, double importe, int idUser, int idEvento) {
+
+	public Ingresos(int idIngreso, Date fecha, String concepto, int idTercero, double importe, int idUser,
+			int idEvento) {
 		this.idIngreso = idIngreso;
 		this.fecha = fecha;
 		this.concepto = concepto;
@@ -34,27 +35,26 @@ public class Ingresos {
 	public Date getFecha() {
 		return fecha;
 	}
-	
+
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-	
+
 	public int getIdTercero() {
 		return idTercero;
 	}
-	
+
 	public void setIdTercero(int idTercero) {
 		this.idTercero = idTercero;
 	}
-	
+
 	public int getIdIngreso() {
 		return idIngreso;
 	}
-	
+
 	public void setIdIngreso(int idIngreso) {
 		this.idIngreso = idIngreso;
 	}
-
 
 	public String getConcepto() {
 		return concepto;
@@ -87,13 +87,13 @@ public class Ingresos {
 	public void setIdEvento(int idEvento) {
 		this.idEvento = idEvento;
 	}
-	
+
 	public int getIdUser() {
 		return idUser;
 	}
-	
+
 	public void setIdUser(int idUser) {
 		this.idUser = idUser;
 	}
-	
+
 }

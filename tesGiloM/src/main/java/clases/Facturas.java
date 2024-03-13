@@ -9,7 +9,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Facturas {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
@@ -23,12 +23,12 @@ public class Facturas {
 	private int idUser;
 	private int idEvento;
 	private String formaDePago;
-	
+
 	public Facturas() {
 	}
-	
-	public Facturas(int id, String idFactura, Date fecha, int idTercero,
-			double baseImponible, double iva, double total, boolean pagado, int idUser, int idEvento) {
+
+	public Facturas(int id, String idFactura, Date fecha, int idTercero, double baseImponible, double iva, double total,
+			boolean pagado, int idUser, int idEvento) {
 		this.id = id;
 		this.idFactura = idFactura;
 		this.fecha = fecha;
@@ -40,7 +40,7 @@ public class Facturas {
 		this.idUser = idUser;
 		this.idEvento = idEvento;
 	}
-	
+
 	public int getIdTercero() {
 		return idTercero;
 	}
@@ -76,7 +76,7 @@ public class Facturas {
 	public boolean isPagado() {
 		return pagado;
 	}
-	
+
 	public void setPagado(boolean pagado) {
 		this.pagado = pagado;
 	}
@@ -84,7 +84,7 @@ public class Facturas {
 	public int getIdUser() {
 		return idUser;
 	}
-	
+
 	public void setIdUser(int idUser) {
 		this.idUser = idUser;
 	}
@@ -108,11 +108,11 @@ public class Facturas {
 	public Date getFecha() {
 		return fecha;
 	}
-	
+
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -128,7 +128,5 @@ public class Facturas {
 	public void setIdFactura(String idFactura) {
 		this.idFactura = idFactura;
 	}
-
-
 
 }

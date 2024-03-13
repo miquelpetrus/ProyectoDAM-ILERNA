@@ -21,7 +21,7 @@ public class Gastos {
 
 	public Gastos() {
 	}
-	
+
 	public Gastos(int idGasto, String fecha, String concepto, double importe, String tipoGasto, String observaciones,
 			int idProveedor, int idEvento, int idFactura, int pagado, int idBanco) {
 		this.idGasto = idGasto;
@@ -124,6 +124,5 @@ public class Gastos {
 	public void setIdBanco(int idBanco) {
 		this.idBanco = idBanco;
 	}
-	
-	
+
 }
