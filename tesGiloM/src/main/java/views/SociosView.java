@@ -210,12 +210,10 @@ public class SociosView extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonCrearNuevoActionPerformed
 
     private void jButtonCerrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrar1ActionPerformed
-        // TODO add your handling code here:
         HibernateUtil.cerrarVentana(this);
     }//GEN-LAST:event_jButtonCerrar1ActionPerformed
 
     private void jTableUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableUsersMouseClicked
-        // TODO add your handling code here:
         int row = jTableUsers.getSelectedRow();
         int column = jTableUsers.getSelectedColumn();
 

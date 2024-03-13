@@ -17,6 +17,7 @@ import org.hibernate.query.Query;
 import clases.Productos;
 import clases.Terceros;
 import controllers.HibernateUtil;
+import controllers.SociosController;
 
 /**
  *
@@ -34,11 +35,11 @@ public class TercerosView extends javax.swing.JPanel {
         initComponents();
         this.sessionFactory = HibernateUtil.buildSessionFactory();
         initializeTableModel();
-        loadProductData();
+        loadTerceroData();
     }
     
     private void initializeTableModel() {
-        Object[] columnNames = {"Id", "Nombre", "CIF", "Dirección", "Población", "Provincia", "Teléfono", "Email", "Web", "Contacto"};
+        Object[] columnNames = {"Id", "Nombre", "CIF", "Teléfono", "Email", "Dirección"};
         Object[][] data = {};  // Puedes inicializarlo con datos si los tienes al inicio
         tableModel = new DefaultTableModel(data, columnNames) {
             private static final long serialVersionUID = 1L;
@@ -52,7 +53,7 @@ public class TercerosView extends javax.swing.JPanel {
         jTable1.setModel(tableModel);
         
         // Establecer el tamaño de las columnas
-        int[] columnWidths = {30, 150, 80, 150, 70, 70, 90, 150, 150, 120}; // Ajusta los tamaños según tus necesidades
+        int[] columnWidths = {30, 150, 80, 80, 170, 170}; // Ajusta los tamaños según tus necesidades
 
         for (int i = 0; i < columnWidths.length; i++) {
             TableColumn column = jTable1.getColumnModel().getColumn(i);
@@ -60,7 +61,7 @@ public class TercerosView extends javax.swing.JPanel {
         }
     }
     
-    private void loadProductData() {
+    private void loadTerceroData() {
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = null;
 
@@ -81,11 +82,9 @@ public class TercerosView extends javax.swing.JPanel {
                     		tercero.getId(),
                     		tercero.getNombre(),
                     		tercero.getCif(),
-                    		tercero.getDireccion(),
-                    		tercero.getPoblacion(),
                     		tercero.getTelefono(),
                     		tercero.getEmail(),
-                    		tercero.getContacto(),
+                    		tercero.getDireccion(),
                     });
                 }
 
@@ -128,6 +127,11 @@ public class TercerosView extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jButtonCerrar.setText("Cerrar");
@@ -194,6 +198,54 @@ public class TercerosView extends javax.swing.JPanel {
     	HibernateUtil.abrirVentana(new AddTercerosView(), "Crear Tercero");
     	HibernateUtil.cerrarVentana(this);
     }//GEN-LAST:event_jButtonCrearProvActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        int row = jTable1.getSelectedRow();
+        int column = jTable1.getSelectedColumn();
+
+        // Verifica que el clic sea en una fila válida
+        if (row != -1 && column != -1) {
+            // Obtén los datos de la fila seleccionada
+            Object[] datosFila = new Object[tableModel.getColumnCount()];
+            for (int i = 0; i < tableModel.getColumnCount(); i++) {
+                datosFila[i] = tableModel.getValueAt(row, i);
+            }
+
+            // Muestra un menú emergente con opciones
+            javax.swing.JPopupMenu popupMenu = new javax.swing.JPopupMenu();
+
+            // Opción para editar el evento
+            javax.swing.JMenuItem editarMenuItem = new javax.swing.JMenuItem("Editar Socio");
+            editarMenuItem.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    abrirVistaEdicion(datosFila);
+                }
+            });
+            popupMenu.add(editarMenuItem);
+            
+            // Opción para eliminar el evento
+            javax.swing.JMenuItem eliminarMenuItem = new javax.swing.JMenuItem("Eliminar Socio");
+            eliminarMenuItem.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                	//Elimina el usuario
+                	SociosController.eliminarSocio((int) datosFila[0]);
+                	//Actualiza la tabla
+                	loadTerceroData();
+                }
+            });
+            popupMenu.add(eliminarMenuItem);
+            
+            // Muestra el menú emergente en la posición del clic
+            popupMenu.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    	
+    }//GEN-LAST:event_jTable1MouseClicked
+    
+	private void abrirVistaEdicion(Object[] datosFila) {
+		// Abre la vista de edición
+		HibernateUtil.abrirVentana(new EditTercerosView(datosFila), "Editar Tercero");
+		HibernateUtil.cerrarVentana(this);
+	}
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

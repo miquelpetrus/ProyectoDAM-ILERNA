@@ -20,7 +20,7 @@ import clases.Users;
 public class HibernateUtil {
 
 	public static SessionFactory buildSessionFactory() {
-
+		
 		Configuration cfg = new Configuration().configure();
 
 		return cfg.buildSessionFactory(new StandardServiceRegistryBuilder().configure().build());
