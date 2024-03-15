@@ -32,19 +32,37 @@ public class ConfiguracionView extends javax.swing.JPanel {
         }
 
     private void cargarConfiguracion() {
-        cargarCampoDesdeConfiguracion("server", jTextNomSrv);
-        cargarCampoDesdeConfiguracion("ip", jTextNomIP);
-        cargarCampoDesdeConfiguracion("database", jTextNomBBDD);
-        cargarCampoDesdeConfiguracion("user", jTextNomUsr);
-        cargarCampoDesdeConfiguracion("password", jTextNomPSW);
+        Properties properties = new Properties();
+        try (FileInputStream fis = new FileInputStream("hibernate-config.properties")) {
+            properties.load(fis);
+            String url = properties.getProperty("hibernate.connection.url");
+
+            // Obtener la IP y el nombre de la base de datos del URL de conexión
+            int indexInicio = url.indexOf("//") + 2;
+            int indexFin = url.indexOf(":", indexInicio);
+            String ip = url.substring(indexInicio, indexFin);
+
+            indexInicio = url.indexOf("/", indexFin) + 1;
+            String database = url.substring(indexInicio);
+
+            // Rellenar los campos de texto con la IP y el nombre de la base de datos obtenidos
+            jTextNomIP.setText(ip);
+            jTextNomBBDD.setText(database);
+
+            // Rellenar los campos de texto con el usuario y la contraseña
+            jTextNomUsr.setText(properties.getProperty("hibernate.connection.username"));
+            jTextNomPSW.setText(properties.getProperty("hibernate.connection.password"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanelConf = new javax.swing.JPanel();
-        jLblNomSrv = new javax.swing.JLabel();
-        jTextNomSrv = new javax.swing.JTextField();
         jLblNomIP = new javax.swing.JLabel();
         jTextNomIP = new javax.swing.JTextField();
         jLblNomBBDD = new javax.swing.JLabel();
@@ -55,21 +73,11 @@ public class ConfiguracionView extends javax.swing.JPanel {
         jTextNomPSW = new javax.swing.JTextField();
         jButtonGuardar = new javax.swing.JButton();
         jButtonCerrar = new javax.swing.JButton();
-        jButtonCrearAdmin = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextAreaNoAdmin = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanelConf.setBackground(new java.awt.Color(204, 204, 204));
-
-        jLblNomSrv.setText("Nombre Servidor");
-
-        jTextNomSrv.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextNomSrvActionPerformed(evt);
-            }
-        });
+        jPanelConf.setBackground(new java.awt.Color(243, 243, 243));
 
         jLblNomIP.setText("Dirección IP");
 
@@ -117,77 +125,52 @@ public class ConfiguracionView extends javax.swing.JPanel {
             }
         });
 
-        jButtonCrearAdmin.setText("Crear admin");
-        jButtonCrearAdmin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCrearAdminActionPerformed(evt);
-            }
-        });
-
-        jTextAreaNoAdmin.setBackground(new java.awt.Color(204, 204, 204));
-        jTextAreaNoAdmin.setColumns(20);
-        jTextAreaNoAdmin.setForeground(new java.awt.Color(255, 0, 51));
-        jTextAreaNoAdmin.setRows(5);
-        jTextAreaNoAdmin.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                jTextAreaNoAdminAncestorAdded(evt);
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
-        jScrollPane1.setViewportView(jTextAreaNoAdmin);
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Configurar aplicación");
 
         javax.swing.GroupLayout jPanelConfLayout = new javax.swing.GroupLayout(jPanelConf);
         jPanelConf.setLayout(jPanelConfLayout);
         jPanelConfLayout.setHorizontalGroup(
             jPanelConfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelConfLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanelConfLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
                 .addGroup(jPanelConfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelConfLayout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addGroup(jPanelConfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanelConfLayout.createSequentialGroup()
-                                .addComponent(jLblNomPSW, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextNomPSW, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanelConfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanelConfLayout.createSequentialGroup()
-                                    .addComponent(jLblNomUsr, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextNomUsr, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanelConfLayout.createSequentialGroup()
-                                    .addComponent(jLblNomBBDD, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextNomBBDD, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanelConfLayout.createSequentialGroup()
-                                    .addComponent(jLblNomIP, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextNomIP, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanelConfLayout.createSequentialGroup()
-                                    .addComponent(jLblNomSrv, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextNomSrv, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelConfLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanelConfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButtonCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelConfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButtonGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonCrearAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE))))
-                .addContainerGap(80, Short.MAX_VALUE))
+                        .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelConfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanelConfLayout.createSequentialGroup()
+                            .addComponent(jLblNomPSW, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTextNomPSW, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanelConfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelConfLayout.createSequentialGroup()
+                                .addComponent(jLblNomUsr, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextNomUsr, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelConfLayout.createSequentialGroup()
+                                .addComponent(jLblNomBBDD, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextNomBBDD, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelConfLayout.createSequentialGroup()
+                                .addComponent(jLblNomIP, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextNomIP, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanelConfLayout.setVerticalGroup(
             jPanelConfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelConfLayout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addGroup(jPanelConfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLblNomSrv, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextNomSrv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelConfLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(57, 57, 57)
                 .addGroup(jPanelConfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLblNomIP, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextNomIP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -207,11 +190,7 @@ public class ConfiguracionView extends javax.swing.JPanel {
                 .addGroup(jPanelConfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
-                .addGroup(jPanelConfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonCrearAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -225,10 +204,6 @@ public class ConfiguracionView extends javax.swing.JPanel {
             .addComponent(jPanelConf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTextNomSrvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextNomSrvActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextNomSrvActionPerformed
 
     private void jTextNomIPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextNomIPActionPerformed
         // TODO add your handling code here:
@@ -247,27 +222,35 @@ public class ConfiguracionView extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextNomPSWActionPerformed
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {                                               
-        // TODO add your handling code here:
-        String server = jTextNomSrv.getText();
-        String ip = jTextNomIP.getText();
-        String database = jTextNomBBDD.getText();
-        String user = jTextNomUsr.getText();
-        String password = jTextNomPSW.getText();
+        String ip = jTextNomIP.getText().trim();
+        String database = jTextNomBBDD.getText().trim();
+        String user = jTextNomUsr.getText().trim();
+        String password = jTextNomPSW.getText().trim();
 
-        // Guardar la configuración en un archivo de propiedades
+        // Cargar la configuración existente desde el archivo hibernate-config.properties
         Properties properties = new Properties();
-        properties.setProperty("ip", ip);
-        properties.setProperty("database", database);
-        properties.setProperty("user", user);
-        properties.setProperty("password", password);
-        properties.setProperty("server", server);
-
-        try (FileOutputStream fos = new FileOutputStream("hibernate-config.properties")) {
-            properties.store(fos, "Configuración Hibernate");
+        try (FileInputStream fis = new FileInputStream("hibernate-config.properties")) {
+            properties.load(fis);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        // Actualizar la propiedad hibernate.connection.url con la IP proporcionada por el usuario
+        String connectionUrl = "jdbc:mysql://" + ip + ":3306/" + database;
+        properties.setProperty("hibernate.connection.url", connectionUrl);
+        properties.setProperty("hibernate.connection.username", user);
+        properties.setProperty("hibernate.connection.password", password);
+
+        // Guardar la configuración actualizada en el archivo hibernate-config.properties
+        try (FileOutputStream fos = new FileOutputStream("hibernate-config.properties")) {
+            properties.store(fos, "Configuración Hibernate");
+            JOptionPane.showMessageDialog(this, "Configuración guardada correctamente");
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error al guardar la configuración");
+        }
     }
+
 
     private void jButtonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarActionPerformed
         // TODO add your handling code here:
@@ -275,52 +258,25 @@ public class ConfiguracionView extends javax.swing.JPanel {
     	HibernateUtil.cerrarVentana(this);
     }//GEN-LAST:event_jButtonCerrarActionPerformed
 
-    private void jButtonCrearAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearAdminActionPerformed
-        // TODO add your handling code here:
-    	UsersController.createDefaultAdminUser(sessionFactory);
-        jTextAreaNoAdmin.setText("Usuario admin creado");
-    }//GEN-LAST:event_jButtonCrearAdminActionPerformed
-
-    private void jTextAreaNoAdminAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jTextAreaNoAdminAncestorAdded
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextAreaNoAdminAncestorAdded
-
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonCerrar;
-    private javax.swing.JButton jButtonCrearAdmin;
-    private javax.swing.JButton jButtonGuardar;
-    private javax.swing.JLabel jLblNomBBDD;
-    private javax.swing.JLabel jLblNomIP;
-    private javax.swing.JLabel jLblNomPSW;
-    private javax.swing.JLabel jLblNomSrv;
-    private javax.swing.JLabel jLblNomUsr;
-    private javax.swing.JPanel jPanelConf;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextAreaNoAdmin;
-    private javax.swing.JTextField jTextNomBBDD;
-    private javax.swing.JTextField jTextNomIP;
-    private javax.swing.JTextField jTextNomPSW;
-    private javax.swing.JTextField jTextNomSrv;
-    private javax.swing.JTextField jTextNomUsr;
-    // End of variables declaration//GEN-END:variables
-
-    private void cargarCampoDesdeConfiguracion(String clave, JTextField campo) {
-        Properties properties = new Properties();
-        try {
-            FileInputStream fis = new FileInputStream("hibernate-config.properties");
-            properties.load(fis);
-            fis.close();
-
-            campo.setText(properties.getProperty(clave));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
 	public Session openSession() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonCerrar;
+    private javax.swing.JButton jButtonGuardar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLblNomBBDD;
+    private javax.swing.JLabel jLblNomIP;
+    private javax.swing.JLabel jLblNomPSW;
+    private javax.swing.JLabel jLblNomUsr;
+    private javax.swing.JPanel jPanelConf;
+    private javax.swing.JTextField jTextNomBBDD;
+    private javax.swing.JTextField jTextNomIP;
+    private javax.swing.JTextField jTextNomPSW;
+    private javax.swing.JTextField jTextNomUsr;
+    // End of variables declaration//GEN-END:variables
 
 }

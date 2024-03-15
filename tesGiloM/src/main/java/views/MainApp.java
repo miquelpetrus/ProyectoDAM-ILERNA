@@ -24,12 +24,14 @@ public class MainApp extends javax.swing.JFrame {
 
 	public MainApp() {
 		initComponents();
-		// this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-
 		try {
 			HibernateUtil.buildSessionFactory();
 		} catch (Exception ex) {
 			ex.printStackTrace();
+			// Mostramos mensaje de error y abrimos ventana de configuración
+			JOptionPane.showMessageDialog(null,
+					"Error al conectar con la base de datos. Por favor, configure la conexión", "Error",
+					JOptionPane.ERROR_MESSAGE);
 		}
 
 	}
@@ -45,218 +47,237 @@ public class MainApp extends javax.swing.JFrame {
 
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed" desc="Generated
-	// Code">//GEN-BEGIN:initComponents
-	private void initComponents() {
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-		jPanelPrincipal = new javax.swing.JPanel();
-		jLabelBienvenida = new javax.swing.JLabel();
-		jLabelLogo = new javax.swing.JLabel();
-		jMenuBar1 = new javax.swing.JMenuBar();
-		jMenuFile = new javax.swing.JMenu();
-		jMenuConnect = new javax.swing.JMenuItem();
-		jMenuSalir = new javax.swing.JMenuItem();
-		jMenuGest = new javax.swing.JMenu();
-		jMenuTerceros = new javax.swing.JMenuItem();
-		jMenuFac = new javax.swing.JMenuItem();
-		jMenuProductos = new javax.swing.JMenuItem();
-		jMenuEventos = new javax.swing.JMenuItem();
-		jMenuCuentas = new javax.swing.JMenu();
-		jMenuBancos = new javax.swing.JMenuItem();
-		jMenuIngresos = new javax.swing.JMenuItem();
-		jMenuGastos = new javax.swing.JMenuItem();
-		jMenuMiembros = new javax.swing.JMenu();
-		jMenuUsers = new javax.swing.JMenuItem();
-		jMenuSocios = new javax.swing.JMenuItem();
+        jPanelPrincipal = new javax.swing.JPanel();
+        jLabelBienvenida = new javax.swing.JLabel();
+        jLabelLogo = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenuFile = new javax.swing.JMenu();
+        jMenuConnect = new javax.swing.JMenuItem();
+        jMenuConfig = new javax.swing.JMenuItem();
+        jMenuSalir = new javax.swing.JMenuItem();
+        jMenuGest = new javax.swing.JMenu();
+        jMenuTerceros = new javax.swing.JMenuItem();
+        jMenuFac = new javax.swing.JMenuItem();
+        jMenuProductos = new javax.swing.JMenuItem();
+        jMenuEventos = new javax.swing.JMenuItem();
+        jMenuCuentas = new javax.swing.JMenu();
+        jMenuBancos = new javax.swing.JMenuItem();
+        jMenuIngresos = new javax.swing.JMenuItem();
+        jMenuGastos = new javax.swing.JMenuItem();
+        jMenuMiembros = new javax.swing.JMenu();
+        jMenuUsers = new javax.swing.JMenuItem();
+        jMenuSocios = new javax.swing.JMenuItem();
 
-		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-		jPanelPrincipal.setBackground(new java.awt.Color(243, 243, 243));
+        jPanelPrincipal.setBackground(new java.awt.Color(243, 243, 243));
 
-		jLabelBienvenida.setFont(new java.awt.Font("Helvetica Neue", 1, 36)); // NOI18N
-		jLabelBienvenida.setForeground(new java.awt.Color(51, 102, 255));
-		jLabelBienvenida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		jLabelBienvenida.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabelBienvenida.setFont(new java.awt.Font("Helvetica Neue", 1, 36)); // NOI18N
+        jLabelBienvenida.setForeground(new java.awt.Color(51, 102, 255));
+        jLabelBienvenida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelBienvenida.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
-		jLabelLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		jLabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FondoJPanel.png"))); // NOI18N
+        jLabelLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FondoJPanel.png"))); // NOI18N
 
-		javax.swing.GroupLayout jPanelPrincipalLayout = new javax.swing.GroupLayout(jPanelPrincipal);
-		jPanelPrincipal.setLayout(jPanelPrincipalLayout);
-		jPanelPrincipalLayout.setHorizontalGroup(jPanelPrincipalLayout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addComponent(jLabelLogo, javax.swing.GroupLayout.DEFAULT_SIZE, 964, Short.MAX_VALUE)
-				.addComponent(jLabelBienvenida, javax.swing.GroupLayout.Alignment.TRAILING,
-						javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
-		jPanelPrincipalLayout
-				.setVerticalGroup(jPanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(jPanelPrincipalLayout.createSequentialGroup()
-								.addComponent(jLabelBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 90,
-										javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(jLabelLogo, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)));
+        javax.swing.GroupLayout jPanelPrincipalLayout = new javax.swing.GroupLayout(jPanelPrincipal);
+        jPanelPrincipal.setLayout(jPanelPrincipalLayout);
+        jPanelPrincipalLayout.setHorizontalGroup(
+            jPanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabelLogo, javax.swing.GroupLayout.DEFAULT_SIZE, 964, Short.MAX_VALUE)
+            .addComponent(jLabelBienvenida, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanelPrincipalLayout.setVerticalGroup(
+            jPanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelPrincipalLayout.createSequentialGroup()
+                .addComponent(jLabelBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelLogo, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE))
+        );
 
-		jMenuBar1.setBackground(new java.awt.Color(204, 204, 204));
-		jMenuBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-		jMenuBar1.setMargin(new java.awt.Insets(4, 4, 4, 4));
-		jMenuBar1.setPreferredSize(new java.awt.Dimension(164, 36));
+        jMenuBar1.setBackground(new java.awt.Color(204, 204, 204));
+        jMenuBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jMenuBar1.setMargin(new java.awt.Insets(4, 4, 4, 4));
+        jMenuBar1.setPreferredSize(new java.awt.Dimension(164, 36));
 
-		jMenuFile.setText("Archivo");
-		jMenuFile.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-		jMenuFile.setMargin(new java.awt.Insets(3, 10, 3, 10));
-		jMenuFile.setPreferredSize(new java.awt.Dimension(80, 32));
-		jMenuFile.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jMenuFileActionPerformed(evt);
-			}
-		});
+        jMenuFile.setText("Archivo");
+        jMenuFile.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        jMenuFile.setMargin(new java.awt.Insets(3, 10, 3, 10));
+        jMenuFile.setPreferredSize(new java.awt.Dimension(80, 32));
+        jMenuFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuFileActionPerformed(evt);
+            }
+        });
 
-		jMenuConnect.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-		jMenuConnect.setText("Conectar");
-		jMenuConnect.setPreferredSize(new java.awt.Dimension(103, 32));
-		jMenuConnect.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jMenuConnectActionPerformed(evt);
-			}
-		});
-		jMenuFile.add(jMenuConnect);
+        jMenuConnect.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        jMenuConnect.setText("Conectar");
+        jMenuConnect.setPreferredSize(new java.awt.Dimension(103, 32));
+        jMenuConnect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuConnectActionPerformed(evt);
+            }
+        });
+        jMenuFile.add(jMenuConnect);
 
-		jMenuSalir.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-		jMenuSalir.setText("Salir");
-		jMenuSalir.setPreferredSize(new java.awt.Dimension(73, 32));
-		jMenuSalir.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jMenuSalirActionPerformed(evt);
-			}
-		});
-		jMenuFile.add(jMenuSalir);
+        jMenuConfig.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        jMenuConfig.setText("Configurar");
+        jMenuConfig.setActionCommand("Configurar");
+        jMenuConfig.setPreferredSize(new java.awt.Dimension(103, 32));
+        jMenuConfig.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuConfigActionPerformed(evt);
+            }
+        });
+        jMenuFile.add(jMenuConfig);
 
-		jMenuBar1.add(jMenuFile);
+        jMenuSalir.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        jMenuSalir.setText("Salir");
+        jMenuSalir.setPreferredSize(new java.awt.Dimension(73, 32));
+        jMenuSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuSalirActionPerformed(evt);
+            }
+        });
+        jMenuFile.add(jMenuSalir);
 
-		jMenuGest.setText("Gestión");
-		jMenuGest.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-		jMenuGest.setPreferredSize(new java.awt.Dimension(80, 32));
+        jMenuBar1.add(jMenuFile);
 
-		jMenuTerceros.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-		jMenuTerceros.setText("Terceros");
-		jMenuTerceros.setPreferredSize(new java.awt.Dimension(90, 32));
-		jMenuTerceros.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jMenuTercerosActionPerformed(evt);
-			}
-		});
-		jMenuGest.add(jMenuTerceros);
+        jMenuGest.setText("Gestión");
+        jMenuGest.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        jMenuGest.setPreferredSize(new java.awt.Dimension(80, 32));
 
-		jMenuFac.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-		jMenuFac.setText("Facturas");
-		jMenuFac.setPreferredSize(new java.awt.Dimension(92, 32));
-		jMenuFac.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jMenuFacActionPerformed(evt);
-			}
-		});
-		jMenuGest.add(jMenuFac);
+        jMenuTerceros.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        jMenuTerceros.setText("Terceros");
+        jMenuTerceros.setPreferredSize(new java.awt.Dimension(90, 32));
+        jMenuTerceros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuTercerosActionPerformed(evt);
+            }
+        });
+        jMenuGest.add(jMenuTerceros);
 
-		jMenuProductos.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-		jMenuProductos.setText("Productos");
-		jMenuProductos.setPreferredSize(new java.awt.Dimension(102, 32));
-		jMenuProductos.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jMenuProductosActionPerformed(evt);
-			}
-		});
-		jMenuGest.add(jMenuProductos);
+        jMenuFac.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        jMenuFac.setText("Facturas");
+        jMenuFac.setPreferredSize(new java.awt.Dimension(92, 32));
+        jMenuFac.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuFacActionPerformed(evt);
+            }
+        });
+        jMenuGest.add(jMenuFac);
 
-		jMenuEventos.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-		jMenuEventos.setText("Eventos");
-		jMenuEventos.setPreferredSize(new java.awt.Dimension(89, 32));
-		jMenuEventos.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jMenuEventosActionPerformed(evt);
-			}
-		});
-		jMenuGest.add(jMenuEventos);
+        jMenuProductos.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        jMenuProductos.setText("Productos");
+        jMenuProductos.setPreferredSize(new java.awt.Dimension(102, 32));
+        jMenuProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuProductosActionPerformed(evt);
+            }
+        });
+        jMenuGest.add(jMenuProductos);
 
-		jMenuCuentas.setText("Cuentas");
-		jMenuCuentas.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-		jMenuCuentas.setPreferredSize(new java.awt.Dimension(101, 32));
+        jMenuEventos.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        jMenuEventos.setText("Eventos");
+        jMenuEventos.setPreferredSize(new java.awt.Dimension(89, 32));
+        jMenuEventos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuEventosActionPerformed(evt);
+            }
+        });
+        jMenuGest.add(jMenuEventos);
 
-		jMenuBancos.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-		jMenuBancos.setText("Bancos");
-		jMenuBancos.setPreferredSize(new java.awt.Dimension(86, 32));
-		jMenuBancos.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jMenuBancosActionPerformed(evt);
-			}
-		});
-		jMenuCuentas.add(jMenuBancos);
+        jMenuCuentas.setText("Cuentas");
+        jMenuCuentas.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jMenuCuentas.setPreferredSize(new java.awt.Dimension(101, 32));
 
-		jMenuIngresos.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-		jMenuIngresos.setText("Ingresos");
-		jMenuIngresos.setPreferredSize(new java.awt.Dimension(86, 32));
-		jMenuIngresos.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jMenuIngresosActionPerformed(evt);
-			}
-		});
-		jMenuCuentas.add(jMenuIngresos);
+        jMenuBancos.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        jMenuBancos.setText("Bancos");
+        jMenuBancos.setPreferredSize(new java.awt.Dimension(86, 32));
+        jMenuBancos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuBancosActionPerformed(evt);
+            }
+        });
+        jMenuCuentas.add(jMenuBancos);
 
-		jMenuGastos.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-		jMenuGastos.setText("Gastos");
-		jMenuGastos.setPreferredSize(new java.awt.Dimension(86, 32));
-		jMenuGastos.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jMenuGastosActionPerformed(evt);
-			}
-		});
-		jMenuCuentas.add(jMenuGastos);
+        jMenuIngresos.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        jMenuIngresos.setText("Ingresos");
+        jMenuIngresos.setPreferredSize(new java.awt.Dimension(86, 32));
+        jMenuIngresos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuIngresosActionPerformed(evt);
+            }
+        });
+        jMenuCuentas.add(jMenuIngresos);
 
-		jMenuGest.add(jMenuCuentas);
+        jMenuGastos.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        jMenuGastos.setText("Gastos");
+        jMenuGastos.setPreferredSize(new java.awt.Dimension(86, 32));
+        jMenuGastos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuGastosActionPerformed(evt);
+            }
+        });
+        jMenuCuentas.add(jMenuGastos);
 
-		jMenuBar1.add(jMenuGest);
+        jMenuGest.add(jMenuCuentas);
 
-		jMenuMiembros.setText("Miembros");
-		jMenuMiembros.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-		jMenuMiembros.setPreferredSize(new java.awt.Dimension(80, 32));
+        jMenuBar1.add(jMenuGest);
 
-		jMenuUsers.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-		jMenuUsers.setText("Usuarios");
-		jMenuUsers.setPreferredSize(new java.awt.Dimension(101, 32));
-		jMenuUsers.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jMenuUsersActionPerformed(evt);
-			}
-		});
-		jMenuMiembros.add(jMenuUsers);
+        jMenuMiembros.setText("Miembros");
+        jMenuMiembros.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        jMenuMiembros.setPreferredSize(new java.awt.Dimension(80, 32));
 
-		jMenuSocios.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-		jMenuSocios.setText("Socios");
-		jMenuSocios.setPreferredSize(new java.awt.Dimension(86, 32));
-		jMenuSocios.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jMenuSociosActionPerformed(evt);
-			}
-		});
-		jMenuMiembros.add(jMenuSocios);
+        jMenuUsers.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        jMenuUsers.setText("Usuarios");
+        jMenuUsers.setPreferredSize(new java.awt.Dimension(101, 32));
+        jMenuUsers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuUsersActionPerformed(evt);
+            }
+        });
+        jMenuMiembros.add(jMenuUsers);
 
-		jMenuBar1.add(jMenuMiembros);
+        jMenuSocios.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        jMenuSocios.setText("Socios");
+        jMenuSocios.setPreferredSize(new java.awt.Dimension(86, 32));
+        jMenuSocios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuSociosActionPerformed(evt);
+            }
+        });
+        jMenuMiembros.add(jMenuSocios);
 
-		setJMenuBar(jMenuBar1);
+        jMenuBar1.add(jMenuMiembros);
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup()
-						.addComponent(jPanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE,
-								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addGap(0, 0, Short.MAX_VALUE)));
-		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup()
-						.addComponent(jPanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE,
-								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addGap(0, 0, Short.MAX_VALUE)));
+        setJMenuBar(jMenuBar1);
 
-		pack();
-	}// </editor-fold>//GEN-END:initComponents
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuConfigActionPerformed
+    	HibernateUtil.abrirVentana(new ConfiguracionView(), "Configuración");
+        
+    }//GEN-LAST:event_jMenuConfigActionPerformed
 
 	// A partir de aquí van las acciones de los botones del menú
 
@@ -452,25 +473,26 @@ public class MainApp extends javax.swing.JFrame {
 		jMenuSalir.setVisible(visible);
 	}
 
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JLabel jLabelBienvenida;
-	private javax.swing.JLabel jLabelLogo;
-	private javax.swing.JMenuItem jMenuBancos;
-	private javax.swing.JMenuBar jMenuBar1;
-	private javax.swing.JMenuItem jMenuConnect;
-	private javax.swing.JMenu jMenuCuentas;
-	private javax.swing.JMenuItem jMenuEventos;
-	private javax.swing.JMenuItem jMenuFac;
-	private javax.swing.JMenu jMenuFile;
-	private javax.swing.JMenuItem jMenuGastos;
-	private javax.swing.JMenu jMenuGest;
-	private javax.swing.JMenuItem jMenuIngresos;
-	private javax.swing.JMenu jMenuMiembros;
-	private javax.swing.JMenuItem jMenuProductos;
-	private javax.swing.JMenuItem jMenuSalir;
-	private javax.swing.JMenuItem jMenuSocios;
-	private javax.swing.JMenuItem jMenuTerceros;
-	private javax.swing.JMenuItem jMenuUsers;
-	private javax.swing.JPanel jPanelPrincipal;
-	// End of variables declaration//GEN-END:variables
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabelBienvenida;
+    private javax.swing.JLabel jLabelLogo;
+    private javax.swing.JMenuItem jMenuBancos;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuConfig;
+    private javax.swing.JMenuItem jMenuConnect;
+    private javax.swing.JMenu jMenuCuentas;
+    private javax.swing.JMenuItem jMenuEventos;
+    private javax.swing.JMenuItem jMenuFac;
+    private javax.swing.JMenu jMenuFile;
+    private javax.swing.JMenuItem jMenuGastos;
+    private javax.swing.JMenu jMenuGest;
+    private javax.swing.JMenuItem jMenuIngresos;
+    private javax.swing.JMenu jMenuMiembros;
+    private javax.swing.JMenuItem jMenuProductos;
+    private javax.swing.JMenuItem jMenuSalir;
+    private javax.swing.JMenuItem jMenuSocios;
+    private javax.swing.JMenuItem jMenuTerceros;
+    private javax.swing.JMenuItem jMenuUsers;
+    private javax.swing.JPanel jPanelPrincipal;
+    // End of variables declaration//GEN-END:variables
 }
