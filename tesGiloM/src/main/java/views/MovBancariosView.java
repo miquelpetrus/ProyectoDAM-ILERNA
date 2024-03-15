@@ -22,6 +22,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import clases.Eventos;
 import clases.MovimientosBancarios;
 import clases.Socios;
 import clases.Terceros;
@@ -52,7 +53,7 @@ public class MovBancariosView extends javax.swing.JPanel {
     }
     
     private void initializeTableModel() {
-        Object[] columnNames = {"Fecha", "Tercero", "Socio", "Ingreso", "Gasto"};
+        Object[] columnNames = {"Fecha", "Evento", "Tercero", "Socio", "Ingreso", "Gasto"};
         Object[][] data = {};  // Puedes inicializarlo con datos si los tienes al inicio
         tableModel = new DefaultTableModel(data, columnNames) {
             @Override
@@ -64,7 +65,7 @@ public class MovBancariosView extends javax.swing.JPanel {
         jTableMovs.setModel(tableModel);
         
         // Establecer el tamaño de las columnas
-        int[] columnWidths = {80, 150, 180, 100, 100}; // Ajusta los tamaños según tus necesidades
+        int[] columnWidths = {80, 150, 150, 180, 100, 100}; // Ajusta los tamaños según tus necesidades
 
         for (int i = 0; i < columnWidths.length; i++) {
             TableColumn column = jTableMovs.getColumnModel().getColumn(i);
@@ -105,10 +106,12 @@ public class MovBancariosView extends javax.swing.JPanel {
                 for (MovimientosBancarios movbanc : allMovsbancos) {
                 	Terceros tercero = session.get(Terceros.class, movbanc.getIdTercero());
                 	Socios socio = session.get(Socios.class, movbanc.getIdSocio());
+                	Eventos evento = session.get(Eventos.class, movbanc.getIdEvento());
                     // Determina si es un ingreso o un gasto
                     if (movbanc.getTipo().equals("Ingreso")) {
                         tableModel.addRow(new Object[]{
                             movbanc.getFecha(),
+                            (evento != null) ? evento.getNombre(): "",
                             (tercero != null) ? tercero.getNombre() : "",
                             (socio != null) ? socio.getNombre() : "",
                             movbanc.getImporte(),
@@ -117,6 +120,7 @@ public class MovBancariosView extends javax.swing.JPanel {
                     } else {
                         tableModel.addRow(new Object[]{
                             movbanc.getFecha(),
+                            (evento != null) ? evento.getNombre() : "",
                             (tercero != null) ? tercero.getNombre() : "",
                             (socio != null) ? socio.getNombre() : "",
                             0, // Ingreso será 0 ya que es un gasto
@@ -309,7 +313,7 @@ public class MovBancariosView extends javax.swing.JPanel {
     
     private void filterMovimientosByYear(int year) {
         // Definir nombres de las columnas
-        String[] columnNames = {"Fecha", "Tercero", "Socio", "Ingreso", "Gasto"};
+        String[] columnNames = {"Fecha", "Evento", "Tercero", "Socio", "Ingreso", "Gasto"};
 
         // Crear un nuevo modelo filtrado con los nombres de las columnas definidos
         DefaultTableModel filteredModel = new DefaultTableModel(null, columnNames) {
@@ -342,7 +346,7 @@ public class MovBancariosView extends javax.swing.JPanel {
         jTableMovs.setModel(filteredModel);
         
         // Establecer el tamaño de las columnas
-        int[] columnWidths = {80, 150, 180, 100, 100}; // Ajusta los tamaños según tus necesidades
+        int[] columnWidths = {80, 150, 150, 180, 100, 100}; // Ajusta los tamaños según tus necesidades
 
         for (int i = 0; i < columnWidths.length; i++) {
             TableColumn column = jTableMovs.getColumnModel().getColumn(i);

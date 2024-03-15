@@ -9,6 +9,8 @@ import javax.swing.JOptionPane;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+
+import clases.Eventos;
 import clases.Ingresos;
 import clases.MovimientosBancarios;
 
@@ -69,7 +71,7 @@ public class MovsBancariosController {
 		}
 	}
 
-	public static void crearIngreso(Date fecha, int idTercero, int idBanco, int idSocio, int idEvento, double importe,
+	public static void crearIngreso(Date fecha, int idTercero, int idBanco, int idSocio, Eventos idEvento, double importe,
 			String tipo) {
 		try (Session session = HibernateUtil.buildSessionFactory().openSession()) {
 			Transaction transaction = null;
@@ -82,7 +84,7 @@ public class MovsBancariosController {
 				nuevoIngreso.setIdTercero(idTercero);
 				nuevoIngreso.setIdBanco(idBanco);
 				nuevoIngreso.setIdSocio(idSocio);
-				nuevoIngreso.setIdEvento(idEvento);
+				nuevoIngreso.setEvento(idEvento);
 				nuevoIngreso.setImporte(importe);
 				nuevoIngreso.setTipo(tipo);
 

@@ -23,6 +23,7 @@ public class MovimientosBancarios {
 	public void setEvento(Eventos evento) {
 		this.evento = evento;
 	}
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
