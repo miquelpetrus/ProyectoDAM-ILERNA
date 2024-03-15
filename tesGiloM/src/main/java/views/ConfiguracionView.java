@@ -22,11 +22,9 @@ import controllers.UsuarioSesion;
 public class ConfiguracionView extends javax.swing.JPanel {
 
     private Configuration hibernateConfiguration;
-	private SessionFactory sessionFactory;
 
     
     public ConfiguracionView() {
-        this.sessionFactory = HibernateUtil.buildSessionFactory();
         initComponents();
         cargarConfiguracion();
         }
@@ -249,6 +247,8 @@ public class ConfiguracionView extends javax.swing.JPanel {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error al guardar la configuración");
         }
+        
+        HibernateUtil.cerrarVentana(this);
     }
 
 

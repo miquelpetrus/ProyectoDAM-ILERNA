@@ -1,5 +1,7 @@
 package views;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -22,19 +24,39 @@ public class MainApp extends javax.swing.JFrame {
 	 * Creates new form MainApp
 	 */
 
-	public MainApp() {
-		initComponents();
-		try {
-			HibernateUtil.buildSessionFactory();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			// Mostramos mensaje de error y abrimos ventana de configuración
-			JOptionPane.showMessageDialog(null,
-					"Error al conectar con la base de datos. Por favor, configure la conexión", "Error",
-					JOptionPane.ERROR_MESSAGE);
-		}
+    public MainApp() {
+        initComponents();
+        conectarConTiempoDeEspera();
+    }
 
-	}
+    private void conectarConTiempoDeEspera() {
+        Timer timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Si después de 1 segundo no se ha conectado, mostrar mensaje de error y abrir la ventana de configuración
+                JOptionPane.showMessageDialog(null, "No se pudo conectar con el servidor en el tiempo especificado. Por favor, configure la conexión.",
+                        "Error de conexión", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+        timer.setRepeats(false);
+        timer.start();
+
+        // Lógica de conexión en un hilo separado
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    HibernateUtil.buildSessionFactory();
+                    // Si se conecta antes de que el temporizador termine, detener el temporizador
+                    timer.stop();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    abrirConfiguracionView();
+                }
+            }
+        });
+        thread.start();
+    }
 
 	public void actualizarTextoBienvenida() {
 		int idUsuario = UsuarioSesion.getIdUsuario();
@@ -44,6 +66,12 @@ public class MainApp extends javax.swing.JFrame {
 		jLabelBienvenida.setText("<html><br>Bienvenido a MolíGest, " + "<br>" + "<strong>" + nombreUsuario + "</strong>"
 				+ " " + horaFormateada + "</html>");
 	}
+	
+    // Método para abrir la ventana de configuración
+    private void abrirConfiguracionView() {
+        ConfiguracionView configuracionView = new ConfiguracionView();
+        HibernateUtil.abrirVentana(configuracionView, "Configuración");
+    }
 
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed" desc="Generated
