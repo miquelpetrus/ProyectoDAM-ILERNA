@@ -1,5 +1,6 @@
 package clases;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -12,35 +13,33 @@ import javax.persistence.ManyToOne;
 @Entity
 public class MovimientosBancarios {
 
-	@ManyToOne
-	@JoinColumn(name = "idEvento")
-	private Eventos evento;
+    @ManyToOne
+    @JoinColumn(name = "idEvento")
+    private Eventos evento;
 
-	public Eventos getEvento() {
-		return evento;
-	}
+    public Eventos getEvento() {
+        return evento;
+    }
 
-	public void setEvento(Eventos evento) {
-		this.evento = evento;
-	}
-	
+    public void setEvento(Eventos evento) {
+        this.evento = evento;
+    }
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
-	private Date fecha;
-	private String concepto;
-	private int idEvento;
-	private int idSocio;
-	private int idTercero;
-	private double importe;
-	private String tipo;
-	private int idBanco;
-	private int idUser;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+    private Date fecha;
+    private String concepto;
+    private int idSocio;
+    private int idTercero;
+    private double importe;
+    private String tipo;
+    private int idBanco;
+    private int idUser;
 
-	public MovimientosBancarios() {
-		super();
-	}
+    public MovimientosBancarios() {
+        super();
+    }
 
 	public MovimientosBancarios(int id, Date fecha, String concepto, double importe, String tipo, int idBanco,
 			int idUser) {
@@ -54,20 +53,20 @@ public class MovimientosBancarios {
 		this.idUser = idUser;
 	}
 
-	public MovimientosBancarios(int id, Date fecha, int idEvento, int idSocio, int idBanco, double importe) {
+	public MovimientosBancarios(int id, Date fecha, Eventos evento, int idSocio, int idBanco, double importe) {
 		this.id = id;
 		this.fecha = fecha;
-		this.idEvento = idEvento;
+	    this.evento = evento;
 		this.idSocio = idSocio;
 		this.idBanco = idBanco;
 		this.importe = importe;
 	}
 
-	public MovimientosBancarios(int id, Date fecha, int idEvento, int idTercero, int idSocio, int idBanco,
+	public MovimientosBancarios(int id, Date fecha, Eventos evento, int idTercero, int idSocio, int idBanco,
 			double importe, String tipo) {
 		this.id = id;
 		this.fecha = fecha;
-		this.idEvento = idEvento;
+	    this.evento = evento;
 		this.idTercero = idTercero;
 		this.idSocio = idSocio;
 		this.idBanco = idBanco;
@@ -75,13 +74,6 @@ public class MovimientosBancarios {
 		this.tipo = tipo;
 	}
 
-	public int getIdEvento() {
-		return idEvento;
-	}
-
-	public void setIdEvento(int idEvento) {
-		this.idEvento = idEvento;
-	}
 
 	public int getIdSocio() {
 		return idSocio;
@@ -110,6 +102,13 @@ public class MovimientosBancarios {
 	public Date getFecha() {
 		return fecha;
 	}
+	
+    public String getFechaEnFormato() {
+        // Define el formato deseado para la fecha
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        // Formatea la fecha y devuelve la representación en formato de cadena
+        return sdf.format(this.fecha);
+    }
 
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;

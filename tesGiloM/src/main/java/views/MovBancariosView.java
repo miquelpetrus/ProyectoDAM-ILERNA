@@ -106,12 +106,11 @@ public class MovBancariosView extends javax.swing.JPanel {
                 for (MovimientosBancarios movbanc : allMovsbancos) {
                 	Terceros tercero = session.get(Terceros.class, movbanc.getIdTercero());
                 	Socios socio = session.get(Socios.class, movbanc.getIdSocio());
-                	Eventos evento = session.get(Eventos.class, movbanc.getIdEvento());
                     // Determina si es un ingreso o un gasto
                     if (movbanc.getTipo().equals("Ingreso")) {
                         tableModel.addRow(new Object[]{
-                            movbanc.getFecha(),
-                            (evento != null) ? evento.getNombre(): "",
+                            movbanc.getFechaEnFormato(),
+                            movbanc.getEvento().getNombre(),
                             (tercero != null) ? tercero.getNombre() : "",
                             (socio != null) ? socio.getNombre() : "",
                             movbanc.getImporte(),
@@ -119,9 +118,9 @@ public class MovBancariosView extends javax.swing.JPanel {
                         });
                     } else {
                         tableModel.addRow(new Object[]{
-                            movbanc.getFecha(),
-                            (evento != null) ? evento.getNombre() : "",
-                            (tercero != null) ? tercero.getNombre() : "",
+                            movbanc.getFechaEnFormato(),
+                            movbanc.getEvento().getNombre(),
+                            (tercero != null) ? tercero.getId() : "",
                             (socio != null) ? socio.getNombre() : "",
                             0, // Ingreso será 0 ya que es un gasto
                             movbanc.getImporte()

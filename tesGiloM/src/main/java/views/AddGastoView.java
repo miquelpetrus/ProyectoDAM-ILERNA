@@ -213,10 +213,6 @@ public class AddGastoView extends javax.swing.JPanel {
         int banco = bancoSeleccionado.getId();
         double importe = Double.parseDouble(jTextFieldImporte.getText());
         Eventos eventoSeleccionado = (Eventos) jComboBoxEvento.getSelectedItem();
-        int idEvento = 0;
-		if (eventoSeleccionado != null) {
-			idEvento = eventoSeleccionado.getId();
-		}
         Socios socioSeleccionado = (Socios) jComboBoxSocio.getSelectedItem();
         int idSocio = 0;
 		if (socioSeleccionado != null) {
@@ -224,9 +220,9 @@ public class AddGastoView extends javax.swing.JPanel {
 		}
         String tipo = "Gasto";
     	
-    	System.out.println("Fecha: " + fecha + " Tercero: " + idTercero + " Banco: " + banco + " Importe: " + importe + " Evento: " + idEvento + " Socio: " + idSocio);
+    	System.out.println("Fecha: " + fecha + " Tercero: " + idTercero + " Banco: " + banco + " Importe: " + importe + " Evento: " + eventoSeleccionado + " Socio: " + idSocio);
     	
-        MovsBancariosController.crearGasto(fecha, idTercero, banco, idSocio, idEvento, importe, tipo);
+        MovsBancariosController.crearGasto(fecha, idTercero, banco, idSocio, eventoSeleccionado, importe, tipo);
         HibernateUtil.cerrarVentana(this);
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 

@@ -1,5 +1,6 @@
 package clases;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -108,6 +109,13 @@ public class Facturas {
 	public Date getFecha() {
 		return fecha;
 	}
+	
+    public String getFechaEnFormato() {
+        // Define el formato deseado para la fecha
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        // Formatea la fecha y devuelve la representación en formato de cadena
+        return sdf.format(this.fecha);
+    }
 
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;

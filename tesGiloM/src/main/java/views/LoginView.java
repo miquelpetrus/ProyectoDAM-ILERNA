@@ -8,6 +8,7 @@ import controllers.HibernateUtil;
 import controllers.UsersController;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.event.KeyEvent;
 
 /**
  *
@@ -57,6 +58,11 @@ public class LoginView extends javax.swing.JPanel {
         jLabelPSW.setText("Contraseña:");
 
         jPasswordPSW.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jPasswordPSW.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPasswordPSWKeyPressed(evt);
+            }
+        });
 
         jButtonLogin.setBackground(new java.awt.Color(0, 102, 204));
         jButtonLogin.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
@@ -68,7 +74,6 @@ public class LoginView extends javax.swing.JPanel {
         jButtonLogin.setFocusPainted(false);
         jButtonLogin.setFocusTraversalKeysEnabled(false);
         jButtonLogin.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        jButtonLogin.setOpaque(false);
         jButtonLogin.setRolloverEnabled(false);
         jButtonLogin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -168,6 +173,13 @@ public class LoginView extends javax.swing.JPanel {
         c.setBackground(new Color(0, 102, 204));
         c.setForeground(new Color(236, 252, 250));
     }//GEN-LAST:event_jButtonLoginMouseExited
+
+    private void jPasswordPSWKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordPSWKeyPressed
+    	// Escucha el evento de pulsación de la tecla Enter
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            realizarLogin();
+        }
+    }//GEN-LAST:event_jPasswordPSWKeyPressed
 
         
     private void realizarLogin() {

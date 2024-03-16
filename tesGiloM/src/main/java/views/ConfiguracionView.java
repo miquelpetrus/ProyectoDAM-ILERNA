@@ -49,7 +49,7 @@ public class ConfiguracionView extends javax.swing.JPanel {
 
             // Rellenar los campos de texto con el usuario y la contraseña
             jTextNomUsr.setText(properties.getProperty("hibernate.connection.username"));
-            jTextNomPSW.setText(properties.getProperty("hibernate.connection.password"));
+            jPasswordField.setText(properties.getProperty("hibernate.connection.password"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -68,10 +68,10 @@ public class ConfiguracionView extends javax.swing.JPanel {
         jLblNomUsr = new javax.swing.JLabel();
         jTextNomUsr = new javax.swing.JTextField();
         jLblNomPSW = new javax.swing.JLabel();
-        jTextNomPSW = new javax.swing.JTextField();
         jButtonGuardar = new javax.swing.JButton();
         jButtonCerrar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jPasswordField = new javax.swing.JPasswordField();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -103,12 +103,6 @@ public class ConfiguracionView extends javax.swing.JPanel {
 
         jLblNomPSW.setText("Nombre PSW");
 
-        jTextNomPSW.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextNomPSWActionPerformed(evt);
-            }
-        });
-
         jButtonGuardar.setText("Guardar");
         jButtonGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,41 +121,46 @@ public class ConfiguracionView extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Configurar aplicación");
 
+        jPasswordField.setText("jPasswordField1");
+
         javax.swing.GroupLayout jPanelConfLayout = new javax.swing.GroupLayout(jPanelConf);
         jPanelConf.setLayout(jPanelConfLayout);
         jPanelConfLayout.setHorizontalGroup(
             jPanelConfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelConfLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jPanelConfLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
                 .addGroup(jPanelConfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelConfLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButtonCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelConfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanelConfLayout.createSequentialGroup()
-                            .addComponent(jLblNomPSW, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextNomPSW, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelConfLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanelConfLayout.createSequentialGroup()
                         .addGroup(jPanelConfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelConfLayout.createSequentialGroup()
-                                .addComponent(jLblNomUsr, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelConfLayout.createSequentialGroup()
+                                .addGap(139, 139, 139)
+                                .addComponent(jButtonCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextNomUsr, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanelConfLayout.createSequentialGroup()
-                                .addComponent(jLblNomBBDD, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextNomBBDD, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanelConfLayout.createSequentialGroup()
-                                .addComponent(jLblNomIP, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextNomIP, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(26, Short.MAX_VALUE))
+                                .addGap(26, 26, 26)
+                                .addGroup(jPanelConfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(jPanelConfLayout.createSequentialGroup()
+                                        .addComponent(jLblNomPSW, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jPasswordField))
+                                    .addGroup(jPanelConfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanelConfLayout.createSequentialGroup()
+                                            .addComponent(jLblNomUsr, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jTextNomUsr, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanelConfLayout.createSequentialGroup()
+                                            .addComponent(jLblNomBBDD, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jTextNomBBDD, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanelConfLayout.createSequentialGroup()
+                                            .addComponent(jLblNomIP, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jTextNomIP, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                        .addGap(0, 20, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanelConfLayout.setVerticalGroup(
             jPanelConfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,7 +182,7 @@ public class ConfiguracionView extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelConfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLblNomPSW, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextNomPSW, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addGroup(jPanelConfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -215,15 +214,11 @@ public class ConfiguracionView extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextNomUsrActionPerformed
 
-    private void jTextNomPSWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextNomPSWActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextNomPSWActionPerformed
-
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {                                               
         String ip = jTextNomIP.getText().trim();
         String database = jTextNomBBDD.getText().trim();
         String user = jTextNomUsr.getText().trim();
-        String password = jTextNomPSW.getText().trim();
+        String password = jPasswordField.getText().trim();
 
         // Cargar la configuración existente desde el archivo hibernate-config.properties
         Properties properties = new Properties();
@@ -273,9 +268,9 @@ public class ConfiguracionView extends javax.swing.JPanel {
     private javax.swing.JLabel jLblNomPSW;
     private javax.swing.JLabel jLblNomUsr;
     private javax.swing.JPanel jPanelConf;
+    private javax.swing.JPasswordField jPasswordField;
     private javax.swing.JTextField jTextNomBBDD;
     private javax.swing.JTextField jTextNomIP;
-    private javax.swing.JTextField jTextNomPSW;
     private javax.swing.JTextField jTextNomUsr;
     // End of variables declaration//GEN-END:variables
 

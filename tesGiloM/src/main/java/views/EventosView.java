@@ -79,7 +79,7 @@ public class EventosView extends javax.swing.JPanel {
                     tableModel.addRow(new Object[]{
                     		evento.getId(),
                     		evento.getNombre(),
-                    		evento.getFecha(),
+                    		evento.getFechaEnFormato(),
                     		evento.getDescripcion(),
                     		evento.getLugar(),
                     		evento.getAforo(),
