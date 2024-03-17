@@ -205,7 +205,7 @@ public class EditarProductosView extends javax.swing.JPanel {
     	        FamiliaProducto familiaSeleccionada = (FamiliaProducto) jComboBoxFam.getSelectedItem();
     	        int idFamilia = familiaSeleccionada.getId();
     	        ProductosController.actualizarProducto(id, nombre, descripcion, precioCompra, idProveedor, idFamilia);
-    	        HibernateUtil.abrirVentana(new UsersView(), "Usuarios");
+    	        HibernateUtil.abrirVentana(new ProductosView(), "Productos");
     	        HibernateUtil.cerrarVentana(this);
     	                
     }//GEN-LAST:event_jButtonGuardarActionPerformed

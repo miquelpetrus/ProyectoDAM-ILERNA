@@ -11,6 +11,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import clases.Eventos;
+import clases.Facturas;
 import clases.Ingresos;
 import clases.MovimientosBancarios;
 
@@ -133,6 +134,62 @@ public class MovsBancariosController {
 			}
 		}
 	}
+	
+    public static void pagarFactura(String idFactura) {
+        try (Session session = HibernateUtil.buildSessionFactory().openSession()) {
+            Transaction transaction = null;
+
+            try {
+                transaction = session.beginTransaction();
+
+                String hql = "SELECT fecha, total, idTercero, idEvento FROM Facturas WHERE idFactura = :idFactura";
+                Query<Object[]> query = session.createQuery(hql);
+                query.setParameter("idFactura", idFactura);
+                Object[] factura = query.uniqueResult();
+                Date fecha = (Date) factura[0];
+                double importe = (double) factura[1];
+                int idTercero = (int) factura[2];
+                int idEvento = (int) factura[3];
+
+                // Obtenemos el evento y el banco asociado a la factura
+                Eventos evento = session.get(Eventos.class, idEvento);
+                
+                
+                System.out.println("Los datos que voy a introducir son:" + fecha + " " + importe + " " + idTercero + " " + evento + " " + idFactura);
+
+                // Creamos el nuevo gasto en el banco
+                MovimientosBancarios nuevoGasto = new MovimientosBancarios();
+                nuevoGasto.setFecha(fecha);
+                nuevoGasto.setIdTercero(idTercero);
+                nuevoGasto.setEvento(evento);
+                nuevoGasto.setImporte(importe);
+                nuevoGasto.setConcepto("Pago de factura " + idFactura);
+                nuevoGasto.setTipo("Gasto");
+
+                session.save(nuevoGasto);
+                
+                // Necesito determinar el id de la factura
+                String hql2 = "SELECT id FROM Facturas WHERE idFactura = :idFactura";
+                Query<Integer> query2 = session.createQuery(hql2);
+                query2.setParameter("idFactura", idFactura);
+                int id = query2.uniqueResult();
+
+                // Actualizamos el estado de la factura
+                Facturas facturaPagada = session.get(Facturas.class, id);
+                facturaPagada.setPagado(true);
+                session.update(facturaPagada);
+
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) {
+                    JOptionPane.showMessageDialog(null, "Error al pagar la factura", "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                    transaction.rollback();
+                }
+                e.printStackTrace();
+            }
+        }
+    }
 
 	public double calcularSumaIngresos() {
 		List<MovimientosBancarios> ingresos = getAllIngresos();

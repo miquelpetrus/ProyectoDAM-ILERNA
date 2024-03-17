@@ -16,6 +16,7 @@ import org.hibernate.query.Query;
 
 import clases.Facturas;
 import controllers.HibernateUtil;
+import controllers.MovsBancariosController;
 
 /**
  *
@@ -80,7 +81,7 @@ public class FacturasView extends javax.swing.JPanel {
                 for (Facturas factura : facturas) {
                     tableModel.addRow(new Object[]{
                             factura.getIdFactura(),
-                            factura.getFecha(),
+                            factura.getFechaEnFormato(),
                             factura.getIdTercero(),
                             factura.getBaseImponible(),
                             factura.getIva(),
@@ -235,7 +236,8 @@ public class FacturasView extends javax.swing.JPanel {
     // Método para procesar el pago de la factura
     private void pagarFactura(String numeroFactura) {
         System.out.println("Factura pagada: " + numeroFactura);
-
+        // Mandamos al controlador de facturas para que registre el movimiento de gasto y marque la factura como pagada
+        MovsBancariosController.pagarFactura(numeroFactura);
         // Actualiza la tabla después de pagar la factura
         loadFacturasData();
     }

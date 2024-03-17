@@ -114,7 +114,7 @@ public class MovBancariosView extends javax.swing.JPanel {
                             (tercero != null) ? tercero.getNombre() : "",
                             (socio != null) ? socio.getNombre() : "",
                             movbanc.getConcepto(),
-                            movbanc.getImporte(),
+                            movbanc.getImporte() + "€",
                             0 // Gasto será 0 ya que es un ingreso
                         });
                     } else {
@@ -125,7 +125,7 @@ public class MovBancariosView extends javax.swing.JPanel {
                             (socio != null) ? socio.getNombre() : "",
                             movbanc.getConcepto(),
                             0, // Ingreso será 0 ya que es un gasto
-                            movbanc.getImporte()
+                            movbanc.getImporte() + "€"
                         });
                     }
                 }
@@ -360,9 +360,9 @@ public class MovBancariosView extends javax.swing.JPanel {
         double saldo = movsBancariosController.calcularSaldo(year);
 
         // Actualizar las etiquetas con los nuevos saldos
-        jLabelIngresosR.setText(String.valueOf(sumaIngresos));
-        jLabelGastosR.setText(String.valueOf(sumaGastos));
-        jLabelSaldoR.setText(String.valueOf(saldo));
+        jLabelIngresosR.setText(String.valueOf(sumaIngresos) + "€");
+        jLabelGastosR.setText(String.valueOf(sumaGastos) + "€");
+        jLabelSaldoR.setText(String.valueOf(saldo) + "€");
 
     }
     
@@ -373,9 +373,9 @@ public class MovBancariosView extends javax.swing.JPanel {
 	    double sumaGastos = movsBancariosController.calcularSumaGastos();
 	    double saldo = movsBancariosController.calcularSaldo();
 
-	    jLabelIngresosR.setText(String.valueOf(sumaIngresos));
-	    jLabelGastosR.setText(String.valueOf(sumaGastos));
-	    jLabelSaldoR.setText(String.valueOf(saldo));
+	    jLabelIngresosR.setText(String.valueOf(sumaIngresos) + "€");
+	    jLabelGastosR.setText(String.valueOf(sumaGastos) + "€");
+	    jLabelSaldoR.setText(String.valueOf(saldo) + "€");
 	}
 	
 
