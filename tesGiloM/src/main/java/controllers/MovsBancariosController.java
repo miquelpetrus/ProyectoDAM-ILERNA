@@ -71,7 +71,7 @@ public class MovsBancariosController {
 		}
 	}
 
-	public static void crearIngreso(Date fecha, int idTercero, int idBanco, int idSocio, Eventos idEvento, double importe,
+	public static void crearIngreso(Date fecha, int idTercero, int idBanco, int idSocio, Eventos idEvento, String obs, double importe,
 			String tipo) {
 		try (Session session = HibernateUtil.buildSessionFactory().openSession()) {
 			Transaction transaction = null;
@@ -85,6 +85,7 @@ public class MovsBancariosController {
 				nuevoIngreso.setIdBanco(idBanco);
 				nuevoIngreso.setIdSocio(idSocio);
 				nuevoIngreso.setEvento(idEvento);
+				nuevoIngreso.setConcepto(obs);
 				nuevoIngreso.setImporte(importe);
 				nuevoIngreso.setTipo(tipo);
 
@@ -102,7 +103,7 @@ public class MovsBancariosController {
 		}
 	}
 
-	public static void crearGasto(Date fecha, int idTercero, int idBanco, int idSocio, Eventos evento, double importe,
+	public static void crearGasto(Date fecha, int idTercero, int idBanco, int idSocio, Eventos evento, String obs, double importe,
 			String tipo) {
 		try (Session session = HibernateUtil.buildSessionFactory().openSession()) {
 			Transaction transaction = null;
@@ -117,6 +118,7 @@ public class MovsBancariosController {
 				nuevoIngreso.setIdSocio(idSocio);
 				nuevoIngreso.setEvento(evento);
 				nuevoIngreso.setImporte(importe);
+				nuevoIngreso.setConcepto(obs);
 				nuevoIngreso.setTipo(tipo);
 
 				session.save(nuevoIngreso);

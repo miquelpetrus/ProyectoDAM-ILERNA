@@ -53,7 +53,7 @@ public class MovBancariosView extends javax.swing.JPanel {
     }
     
     private void initializeTableModel() {
-        Object[] columnNames = {"Fecha", "Evento", "Tercero", "Socio", "Ingreso", "Gasto"};
+        Object[] columnNames = {"Fecha", "Evento", "Tercero", "Socio", "Observaciones", "Ingreso", "Gasto"};
         Object[][] data = {};  // Puedes inicializarlo con datos si los tienes al inicio
         tableModel = new DefaultTableModel(data, columnNames) {
             @Override
@@ -65,7 +65,7 @@ public class MovBancariosView extends javax.swing.JPanel {
         jTableMovs.setModel(tableModel);
         
         // Establecer el tamaño de las columnas
-        int[] columnWidths = {80, 150, 150, 180, 100, 100}; // Ajusta los tamaños según tus necesidades
+        int[] columnWidths = {80, 150, 150, 180, 150, 100, 100}; // Ajusta los tamaños según tus necesidades
 
         for (int i = 0; i < columnWidths.length; i++) {
             TableColumn column = jTableMovs.getColumnModel().getColumn(i);
@@ -113,6 +113,7 @@ public class MovBancariosView extends javax.swing.JPanel {
                             movbanc.getEvento().getNombre(),
                             (tercero != null) ? tercero.getNombre() : "",
                             (socio != null) ? socio.getNombre() : "",
+                            movbanc.getConcepto(),
                             movbanc.getImporte(),
                             0 // Gasto será 0 ya que es un ingreso
                         });
@@ -122,6 +123,7 @@ public class MovBancariosView extends javax.swing.JPanel {
                             movbanc.getEvento().getNombre(),
                             (tercero != null) ? tercero.getId() : "",
                             (socio != null) ? socio.getNombre() : "",
+                            movbanc.getConcepto(),
                             0, // Ingreso será 0 ya que es un gasto
                             movbanc.getImporte()
                         });
