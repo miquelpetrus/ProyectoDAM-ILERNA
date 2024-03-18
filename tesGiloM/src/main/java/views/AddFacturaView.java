@@ -327,9 +327,11 @@ public class AddFacturaView extends javax.swing.JPanel {
         double total = Double.parseDouble(jTextFieldTotal.getText());
         UsuarioSesion.getInstancia();
 		int idUsuario = UsuarioSesion.getIdUsuario();
+		Eventos eventoSeleccionado = (Eventos) jComboBoxEvento.getSelectedItem();
+		int idEvento = eventoSeleccionado.getId();
 
         // Llamar al método de FacturasController para guardar la factura
-        FacturasController.guardarFactura(idFactura, idProveedor, fecha, baseImponible, baseIVA, total, idUsuario);
+        FacturasController.guardarFactura(idFactura, idProveedor, fecha, baseImponible, baseIVA, total, idUsuario, idEvento);
         HibernateUtil.abrirVentana(new FacturasView(), "Facturas");
         HibernateUtil.cerrarVentana(this);
         

@@ -142,7 +142,7 @@ public class MovsBancariosController {
             try {
                 transaction = session.beginTransaction();
 
-                String hql = "SELECT fecha, total, idTercero, idEvento FROM Facturas WHERE idFactura = :idFactura";
+                String hql = "SELECT fecha, total, idTercero, idEvento, idBanco FROM Facturas WHERE idFactura = :idFactura";
                 Query<Object[]> query = session.createQuery(hql);
                 query.setParameter("idFactura", idFactura);
                 Object[] factura = query.uniqueResult();

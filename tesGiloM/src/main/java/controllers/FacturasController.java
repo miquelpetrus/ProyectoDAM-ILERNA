@@ -116,7 +116,7 @@ public class FacturasController {
 	}
 
 	public static void guardarFactura(String idFactura, int idTercero, Date fecha, double baseImponible, double baseIVA,
-			double total, int idUser) {
+			double total, int idUser, int idEvento) {
 		// Obtén la sesión de Hibernate (asegúrate de tener la configuración adecuada)
 		Session session = HibernateUtil.buildSessionFactory().openSession();
 
@@ -136,6 +136,7 @@ public class FacturasController {
 			factura.setIva(baseIVA);
 			factura.setTotal(total);
 			factura.setIdUser(idUser);
+			factura.setIdEvento(idEvento);
 
 			// Guarda la factura en la base de datos
 			session.save(factura);

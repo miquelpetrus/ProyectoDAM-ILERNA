@@ -14,6 +14,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import clases.Bancos;
 import clases.Facturas;
 import controllers.HibernateUtil;
 import controllers.MovsBancariosController;
@@ -215,13 +216,14 @@ public class FacturasView extends javax.swing.JPanel {
         if (row != -1 && column != -1) {
             // Obtén el número de factura de la fila seleccionada
             String numeroFactura = (String) jTable1.getValueAt(row, 0);
+            
 
             // Muestra un menú emergente con opciones, por ejemplo, "Pagar Factura"
             javax.swing.JPopupMenu popupMenu = new javax.swing.JPopupMenu();
             javax.swing.JMenuItem pagarMenuItem = new javax.swing.JMenuItem("Pagar Factura");
             pagarMenuItem.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    // Aquí puedes llamar al método para procesar el pago de la factura
+                	
                     pagarFactura(numeroFactura);
                 }
             });
@@ -241,7 +243,6 @@ public class FacturasView extends javax.swing.JPanel {
         // Actualiza la tabla después de pagar la factura
         loadFacturasData();
     }
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
