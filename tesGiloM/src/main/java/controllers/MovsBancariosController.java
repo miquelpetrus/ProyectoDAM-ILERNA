@@ -150,12 +150,10 @@ public class MovsBancariosController {
                 double importe = (double) factura[1];
                 int idTercero = (int) factura[2];
                 int idEvento = (int) factura[3];
+                int idBanco = (int) factura[4];
 
                 // Obtenemos el evento y el banco asociado a la factura
                 Eventos evento = session.get(Eventos.class, idEvento);
-                
-                
-                System.out.println("Los datos que voy a introducir son:" + fecha + " " + importe + " " + idTercero + " " + evento + " " + idFactura);
 
                 // Creamos el nuevo gasto en el banco
                 MovimientosBancarios nuevoGasto = new MovimientosBancarios();
@@ -165,6 +163,7 @@ public class MovsBancariosController {
                 nuevoGasto.setImporte(importe);
                 nuevoGasto.setConcepto("Pago de factura " + idFactura);
                 nuevoGasto.setTipo("Gasto");
+                nuevoGasto.setIdBanco(idBanco);
 
                 session.save(nuevoGasto);
                 

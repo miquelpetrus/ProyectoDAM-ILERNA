@@ -13,6 +13,7 @@
 		<property name="iva" />
 		<property name="descuento" />
 		<property name="total" />
+		<property name="traspasado"/>
 
      </class>
 </hibernate-mapping>

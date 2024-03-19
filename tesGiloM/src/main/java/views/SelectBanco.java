@@ -12,6 +12,7 @@ import org.hibernate.SessionFactory;
 
 import clases.Bancos;
 import controllers.BancosController;
+import controllers.FacturasController;
 import controllers.HibernateUtil;
 
 /**
@@ -24,10 +25,12 @@ public class SelectBanco extends javax.swing.JPanel {
      * Creates new form SelectBanco
      */
 	private SessionFactory sessionFactory;
+	private String numeroFactura;
 	
-    public SelectBanco() {
-        initComponents();
+    public SelectBanco(String numeroFactura) {
         this.sessionFactory = HibernateUtil.buildSessionFactory();
+        initComponents();
+        this.numeroFactura = numeroFactura;
         cargarBancos();
     }
    
@@ -109,14 +112,13 @@ public class SelectBanco extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+    	
         // Obtener el ID del banco seleccionado desde el objeto Bancos en el ComboBox
         Bancos bancoSeleccionado = (Bancos) jComboBox1.getSelectedItem();
         int idBanco = bancoSeleccionado.getId();
-        
-        // Cerrar la ventana de diálogo
-        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        frame.dispose();
+        FacturasController.insertarFactura(idBanco, numeroFactura, sessionFactory);
+
+        HibernateUtil.cerrarVentana(this);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

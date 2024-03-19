@@ -69,7 +69,7 @@ public class FacturasController {
 	}
 
 	public static void insertarLineaFactura(String idFactura, int idProveedor, int IdProducto, int cantidad, int iva,
-			double total) {
+			double total, boolean traspasado) {
 		try {
 			// Inicializar la sesión de Hibernate
 			Session session = HibernateUtil.buildSessionFactory().openSession();
@@ -89,6 +89,9 @@ public class FacturasController {
 
 			// Calcular el total (importe con IVA)
 			double importeTotal = importeSinIVA + ivaTotal;
+			
+			// Estado traspasado es falso al insertar líneas
+			traspasado = false;
 
 			// Crear una nueva instancia de LineasFacturas
 			LineasFacturas lineaFactura = new LineasFacturas();
@@ -99,8 +102,7 @@ public class FacturasController {
 			lineaFactura.setPrecio(precioProducto);
 			lineaFactura.setIva(porcentajeIVA);
 			lineaFactura.setTotal(importeTotal);
-
-			System.out.println("Linea de factura creada: " + lineaFactura);
+			lineaFactura.setTraspasado(traspasado);
 
 			// Guardar la nueva línea de factura
 			session.save(lineaFactura);
@@ -143,6 +145,10 @@ public class FacturasController {
 
 			// Confirma la transacción
 			transaction.commit();
+			
+	        // Actualiza las líneas de factura relacionadas
+	        actualizarLineasFactura(session, idFactura);
+	        
 		} catch (Exception e) {
 			// Si hay algún error, realiza un rollback de la transacción
 			if (transaction != null) {
@@ -155,5 +161,84 @@ public class FacturasController {
 			session.close();
 		}
 	}
+	
+	private static void actualizarLineasFactura(Session session, String idFactura) {
+	    Transaction transaction = null;
+	    try {
+	        // Inicia la transacción
+	        transaction = session.beginTransaction();
+
+	        // Busca las líneas de factura asociadas a la factura con el idFactura proporcionado
+	        String hql = "FROM LineasFacturas WHERE idFactura = :idFactura";
+	        Query<LineasFacturas> query = session.createQuery(hql, LineasFacturas.class);
+	        query.setParameter("idFactura", idFactura);
+	        List<LineasFacturas> lineasFactura = query.list();
+	        System.out.println("Lineas de factura encontradas: " + lineasFactura.size() + " id factura: " + idFactura);
+
+	        // Actualiza cada línea de factura encontrada
+	        for (LineasFacturas linea : lineasFactura) {
+	            linea.setTraspasado(true);
+	            session.update(linea);
+	        }
+
+	        // Confirma la transacción
+	        transaction.commit();
+	    } catch (Exception e) {
+	        // Si hay algún error, realiza un rollback de la transacción
+	        if (transaction != null) {
+	            transaction.rollback();
+	        }
+	        e.printStackTrace();
+	        JOptionPane.showMessageDialog(null, "Error al actualizar las líneas de factura", "Error", JOptionPane.ERROR_MESSAGE);
+	    }
+	}
+
+	
+	public static void insertarFactura(int idBanco, String numeroFactura, SessionFactory sessionFactory) {
+	    try (Session session = sessionFactory.openSession()) {
+	        // Obtén el id de la factura con el número dado
+	        String hql = "SELECT id FROM Facturas WHERE idFactura = :numeroFactura";
+	        Query<Integer> query = session.createQuery(hql, Integer.class);
+	        query.setParameter("numeroFactura", numeroFactura);
+	        Integer id = query.uniqueResult();
+	        
+	        // Verifica si se encontró la factura con el número dado
+	        if (id == null) {
+	            throw new RuntimeException("No se encontró la factura con el número: " + numeroFactura);
+	        }
+
+	        // Inicia una transacción
+	        Transaction transaction = null;
+	        try {
+	            transaction = session.beginTransaction();
+
+	            // Recupera la entidad Facturas de la base de datos utilizando el id obtenido
+	            Facturas factura = session.get(Facturas.class, id);
+	            if (factura == null) {
+	                throw new RuntimeException("No se encontró la factura con el id: " + id);
+	            }
+
+	            // Actualiza el idBanco en la factura
+	            factura.setIdBanco(idBanco);
+
+	            // Actualiza la factura en la base de datos
+	            session.update(factura);
+
+	            // Confirma la transacción
+	            transaction.commit();
+	        } catch (Exception e) {
+	            // Si hay algún error, realiza un rollback de la transacción
+	            if (transaction != null) {
+	                transaction.rollback();
+	            }
+	            e.printStackTrace();
+	            JOptionPane.showMessageDialog(null, "Error al guardar la factura", "Error", JOptionPane.ERROR_MESSAGE);
+	        }
+	    } catch (Exception ex) {
+	        ex.printStackTrace();
+	    }
+	}
+
+
 
 }

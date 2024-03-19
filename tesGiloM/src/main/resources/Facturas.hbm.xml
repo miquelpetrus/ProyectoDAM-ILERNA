@@ -17,7 +17,7 @@
         <property name="pagado"/>
         <property name="idUser"/>
         <property name="idEvento"/>
-        <property name="formaDePago"/>
+        <property name="idBanco"/>
         
         <!-- Mapeo de la clase Facturas con la tabla facturas
 	    <set name="lineasFacturas" table="lineas_facturas" cascade="all">

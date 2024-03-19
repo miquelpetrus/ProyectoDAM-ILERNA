@@ -18,6 +18,7 @@ public class LineasFacturas {
 	private double descuento;
 	private double iva;
 	private double total;
+	private boolean traspasado;
 
 	public LineasFacturas(int id, String idFactura, int idTercero, int idProducto, int cantidad, double precio,
 			double iva, double total) {
@@ -120,6 +121,14 @@ public class LineasFacturas {
 
 	public void setDescuento(double descuento) {
 		this.descuento = descuento;
+	}
+	
+	public boolean isTraspasado() {
+		return traspasado;
+	}
+	
+	public void setTraspasado(boolean traspasado) {
+		this.traspasado = traspasado;
 	}
 
 }

@@ -7,6 +7,7 @@ package views;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -314,7 +315,7 @@ public class MovBancariosView extends javax.swing.JPanel {
     
     private void filterMovimientosByYear(int year) {
         // Definir nombres de las columnas
-        String[] columnNames = {"Fecha", "Evento", "Tercero", "Socio", "Ingreso", "Gasto"};
+        String[] columnNames = {"Fecha", "Evento", "Tercero", "Socio", "Observaciones", "Ingreso", "Gasto"};
 
         // Crear un nuevo modelo filtrado con los nombres de las columnas definidos
         DefaultTableModel filteredModel = new DefaultTableModel(null, columnNames) {
@@ -327,10 +328,10 @@ public class MovBancariosView extends javax.swing.JPanel {
         // Recorrer cada fila de la tabla actual
         for (int i = 0; i < tableModel.getRowCount(); i++) {
             // Obtener la fecha de la fila actual
-            Timestamp timestamp = (Timestamp) tableModel.getValueAt(i, 0); // Suponiendo que la fecha está almacenada como Timestamp
+            String fecha = (String) tableModel.getValueAt(i, 0);
 
             // Convertir la fecha a LocalDate para obtener el año
-            LocalDate localDate = timestamp.toLocalDateTime().toLocalDate();
+            LocalDate localDate = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
             int rowYear = localDate.getYear();
 
             // Si la fecha corresponde al año seleccionado, agregar la fila al modelo filtrado
@@ -347,7 +348,7 @@ public class MovBancariosView extends javax.swing.JPanel {
         jTableMovs.setModel(filteredModel);
         
         // Establecer el tamaño de las columnas
-        int[] columnWidths = {80, 150, 150, 180, 100, 100}; // Ajusta los tamaños según tus necesidades
+        int[] columnWidths = {80, 150, 150, 180, 150, 100, 100}; // Ajusta los tamaños según tus necesidades
 
         for (int i = 0; i < columnWidths.length; i++) {
             TableColumn column = jTableMovs.getColumnModel().getColumn(i);

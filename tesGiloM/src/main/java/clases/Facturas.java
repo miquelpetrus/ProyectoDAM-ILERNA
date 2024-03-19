@@ -23,13 +23,13 @@ public class Facturas {
 	private boolean pagado;
 	private int idUser;
 	private int idEvento;
-	private String formaDePago;
+	private int idBanco;
 
 	public Facturas() {
 	}
 
 	public Facturas(int id, String idFactura, Date fecha, int idTercero, double baseImponible, double iva, double total,
-			boolean pagado, int idUser, int idEvento) {
+			boolean pagado, int idUser, int idEvento, int idBanco) {
 		this.id = id;
 		this.idFactura = idFactura;
 		this.fecha = fecha;
@@ -40,6 +40,7 @@ public class Facturas {
 		this.pagado = false;
 		this.idUser = idUser;
 		this.idEvento = idEvento;
+		this.idBanco = idBanco;
 	}
 
 	public int getIdTercero() {
@@ -98,14 +99,14 @@ public class Facturas {
 		this.idEvento = idEvento;
 	}
 
-	public String getFormaDePago() {
-		return formaDePago;
+	public int getIdBanco() {
+		return idBanco;
 	}
-
-	public void setFormaDePago(String formaDePago) {
-		this.formaDePago = formaDePago;
+	
+	public void setIdBanco(int idBanco) {
+		this.idBanco = idBanco;
 	}
-
+	
 	public Date getFecha() {
 		return fecha;
 	}

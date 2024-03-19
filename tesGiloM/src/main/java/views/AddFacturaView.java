@@ -347,9 +347,10 @@ public class AddFacturaView extends javax.swing.JPanel {
 	    int cantidad = Integer.parseInt((String) jComboBoxCant.getSelectedItem());
 	    int iva = Integer.parseInt((String) jComboBoxIVA.getSelectedItem());
 	    double total = 0;
+	    boolean traspasado = false;
 	    
 	    // Llamar al controlador para insertar en LineasFacturas
-	    FacturasController.insertarLineaFactura(idFactura, idProveedor, idProducto, cantidad, iva, total);
+	    FacturasController.insertarLineaFactura(idFactura, idProveedor, idProducto, cantidad, iva, total, traspasado);
 
 	    // Actualizar la tabla o realizar cualquier acción adicional si es necesario
 	    actualizarTabla(idFactura);

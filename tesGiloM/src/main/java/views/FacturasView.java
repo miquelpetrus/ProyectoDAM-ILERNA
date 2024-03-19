@@ -6,6 +6,7 @@ package views;
 
 import java.util.List;
 
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
@@ -35,7 +36,11 @@ public class FacturasView extends javax.swing.JPanel {
         initComponents();
         this.sessionFactory = HibernateUtil.buildSessionFactory();
         initializeTableModel();
-        loadFacturasData();
+        loadFacturasData(); // lo arrango así para que se cargue la tabla al iniciar el panel
+        // Es una chapucilla, pero así siempre tengo las lineas de facturas actualizadas
+        Timer timer = new Timer(5000, e -> loadFacturasData());
+        // Inicia el temporizador
+        timer.start();
 		jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
 				jTable1MouseClicked(evt);
@@ -44,7 +49,7 @@ public class FacturasView extends javax.swing.JPanel {
     }
     
     private void initializeTableModel() {
-        Object[] columnNames = {"Nº Fac.", "Fecha", "Proveedor", "Precio", "IVA", "Total", "pagado", "Evento"};
+        Object[] columnNames = {"Nº Fac.", "Fecha", "Proveedor", "Precio", "IVA", "Total", "pagado", "Evento", "idBanco"};
         Object[][] data = {};  // Puedes inicializarlo con datos si los tienes al inicio
         tableModel = new DefaultTableModel(data, columnNames) {
             @Override
@@ -55,7 +60,7 @@ public class FacturasView extends javax.swing.JPanel {
         };
         jTable1.setModel(tableModel);
         // Establecer el tamaño de las columnas
-        int[] columnWidths = {80, 100, 150, 70, 70, 70, 90, 150}; // Ajusta los tamaños según tus necesidades
+        int[] columnWidths = {80, 100, 150, 70, 70, 70, 90, 150, 70}; // Ajusta los tamaños según tus necesidades
 
         for (int i = 0; i < columnWidths.length; i++) {
             TableColumn column = jTable1.getColumnModel().getColumn(i);
@@ -89,6 +94,7 @@ public class FacturasView extends javax.swing.JPanel {
                             factura.getTotal(),
                             factura.isPagado(),
                             factura.getIdEvento(),
+                            factura.getIdBanco()
                     });
                 }
 
@@ -216,10 +222,9 @@ public class FacturasView extends javax.swing.JPanel {
         if (row != -1 && column != -1) {
             // Obtén el número de factura de la fila seleccionada
             String numeroFactura = (String) jTable1.getValueAt(row, 0);
-            
+            javax.swing.JPopupMenu popupMenu = new javax.swing.JPopupMenu();
 
             // Muestra un menú emergente con opciones, por ejemplo, "Pagar Factura"
-            javax.swing.JPopupMenu popupMenu = new javax.swing.JPopupMenu();
             javax.swing.JMenuItem pagarMenuItem = new javax.swing.JMenuItem("Pagar Factura");
             pagarMenuItem.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -228,6 +233,16 @@ public class FacturasView extends javax.swing.JPanel {
                 }
             });
             popupMenu.add(pagarMenuItem);
+            
+            // Muestra un menú emergente para "Asignar Banco Factura"
+            javax.swing.JMenuItem selectBancoMenuItem = new javax.swing.JMenuItem("Asignar Banco");
+            selectBancoMenuItem.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                	
+                    HibernateUtil.abrirVentana(new SelectBanco(numeroFactura), "Asignar Banco a Factura");
+                }
+            });
+            popupMenu.add(selectBancoMenuItem);
 
             // Muestra el menú emergente en la posición del clic
             popupMenu.show(evt.getComponent(), evt.getX(), evt.getY());
