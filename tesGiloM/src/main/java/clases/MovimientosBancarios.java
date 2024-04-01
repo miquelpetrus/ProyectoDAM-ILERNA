@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,7 +14,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class MovimientosBancarios {
 
-    @ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idEvento")
     private Eventos evento;
 
