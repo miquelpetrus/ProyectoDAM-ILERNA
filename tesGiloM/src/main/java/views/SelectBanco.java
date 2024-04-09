@@ -116,7 +116,8 @@ public class SelectBanco extends javax.swing.JPanel {
         // Obtener el ID del banco seleccionado desde el objeto Bancos en el ComboBox
         Bancos bancoSeleccionado = (Bancos) jComboBox1.getSelectedItem();
         int idBanco = bancoSeleccionado.getId();
-        FacturasController.insertarFactura(idBanco, numeroFactura, sessionFactory);
+        FacturasController.insertarFactura(bancoSeleccionado, numeroFactura, sessionFactory);
+        System.out.println("Banco seleccionado: " + bancoSeleccionado);
 
         HibernateUtil.cerrarVentana(this);
     }//GEN-LAST:event_jButton2ActionPerformed

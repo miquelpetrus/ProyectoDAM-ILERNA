@@ -4,9 +4,36 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Productos {
+	
+	@ManyToOne
+	@JoinColumn(name = "idFamilia")
+    private FamiliaProducto familiaProducto;
+	
+	public FamiliaProducto getFamiliaProducto() {
+		return familiaProducto;
+	}
+	
+	public void setFamiliaProducto(FamiliaProducto familiaProducto) {
+		this.familiaProducto = familiaProducto;
+	}
+	
+	@ManyToOne
+	@JoinColumn(name = "idTercero")
+    private Terceros terceros;
+
+	public Terceros getTerceros() {
+		return terceros;
+	}
+	
+	public void setTerceros(Terceros terceros) {
+		this.terceros = terceros;
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;

@@ -318,7 +318,6 @@ public class AddFacturaView extends javax.swing.JPanel {
         // Obtener la información necesaria para la factura
         String idFactura = jTextFieldIdFac.getText();
         Terceros proveedorSeleccionado = (Terceros) jComboBoxProv.getSelectedItem();
-        int idProveedor = proveedorSeleccionado.getId();
         // Otros datos necesarios para la factura (fecha, etc.)
         Date fecha = jDateChooser1.getDate();
         // Obtener las sumas desde los JTextField
@@ -331,7 +330,7 @@ public class AddFacturaView extends javax.swing.JPanel {
 		int idEvento = eventoSeleccionado.getId();
 
         // Llamar al método de FacturasController para guardar la factura
-        FacturasController.guardarFactura(idFactura, idProveedor, fecha, baseImponible, baseIVA, total, idUsuario, idEvento);
+        FacturasController.guardarFactura(idFactura, proveedorSeleccionado, fecha, baseImponible, baseIVA, total, idUsuario, idEvento);
         HibernateUtil.abrirVentana(new FacturasView(), "Facturas");
         HibernateUtil.cerrarVentana(this);
         

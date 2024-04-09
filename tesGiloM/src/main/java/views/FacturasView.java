@@ -75,7 +75,7 @@ public class FacturasView extends javax.swing.JPanel {
             try {
                 transaction = session.beginTransaction();
 
-                // Utiliza HQL para obtener todos los usuarios de la base de datos
+                // Utiliza HQL para obtener todas las facturas de la base de datos
                 String hql = "FROM Facturas";
                 Query<Facturas> query = session.createQuery(hql, Facturas.class);
                 List<Facturas> facturas = query.list();
@@ -83,19 +83,20 @@ public class FacturasView extends javax.swing.JPanel {
                 // Limpia la tabla antes de cargar nuevos datos
                 tableModel.setRowCount(0);
 
-                // Agrega los usuarios al modelo de la tabla
+                // Agrega las facturas al modelo de la tabla
                 for (Facturas factura : facturas) {
-                    tableModel.addRow(new Object[]{
+                    Object[] rowData = new Object[]{
                             factura.getIdFactura(),
                             factura.getFechaEnFormato(),
-                            factura.getIdTercero(),
+                            factura.getTerceros().getNombre(),
                             factura.getBaseImponible(),
                             factura.getIva(),
                             factura.getTotal(),
                             factura.isPagado(),
                             factura.getIdEvento(),
-                            factura.getIdBanco()
-                    });
+                            (factura.getBanco() != null) ? factura.getBanco().getId() : "null" // Manejo de valores null
+                    };
+                    tableModel.addRow(rowData);
                 }
 
                 transaction.commit();

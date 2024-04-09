@@ -8,8 +8,10 @@
         </id>
         <property name="nombre" />
         <property name="precio" />
-        <property name="idFamilia" />
-        <property name="idTercero" />
         <property name="descripcion" />
+        
+        <many-to-one name="familiaProducto" class="clases.FamiliaProducto" column="idFamilia" not-null="false"/>
+        <many-to-one name="terceros" class="clases.Terceros" column="idTercero" not-null="false"/>
+        
     </class>
 </hibernate-mapping>

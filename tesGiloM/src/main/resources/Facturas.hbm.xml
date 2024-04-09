@@ -9,7 +9,6 @@
             <generator class="increment"/>
         </id>
         <property name="idFactura" column="idFactura" unique="true"/>
-        <property name="idTercero"/>
         <property name="fecha"/>
         <property name="baseImponible"/>
         <property name="iva"/>
@@ -17,13 +16,9 @@
         <property name="pagado"/>
         <property name="idUser"/>
         <property name="idEvento"/>
-        <property name="idBanco"/>
         
-        <!-- Mapeo de la clase Facturas con la tabla facturas
-	    <set name="lineasFacturas" table="lineas_facturas" cascade="all">
-	        <key column="idFactura" />
-	        <one-to-many class="clases.LineasFacturas" />
-	    </set> -->
+        <many-to-one name="banco" class="clases.Bancos" column="idBanco" not-null="false"/>
+        <many-to-one name="terceros" class="clases.Terceros" column="idTercero" not-null="false"/>
         
     </class>
 </hibernate-mapping>

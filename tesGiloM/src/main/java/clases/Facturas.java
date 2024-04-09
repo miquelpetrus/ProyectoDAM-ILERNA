@@ -7,9 +7,36 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Facturas {
+	
+	@ManyToOne
+	@JoinColumn(name = "idBanco")
+	private Bancos banco;
+	
+	public Bancos getBanco() {
+		return banco;
+	}
+	
+	public void setBanco(Bancos banco) {
+		this.banco = banco;
+	}
+	
+	@ManyToMany
+	@JoinColumn(name = "idTercero")
+	private Terceros terceros;
+	
+	public Terceros getTerceros() {
+		return terceros;
+	}
+	
+	public void setTerceros(Terceros terceros) {
+		this.terceros = terceros;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,12 +55,12 @@ public class Facturas {
 	public Facturas() {
 	}
 
-	public Facturas(int id, String idFactura, Date fecha, int idTercero, double baseImponible, double iva, double total,
+	public Facturas(int id, String idFactura, Date fecha, Terceros tercero, double baseImponible, double iva, double total,
 			boolean pagado, int idUser, int idEvento, int idBanco) {
 		this.id = id;
 		this.idFactura = idFactura;
 		this.fecha = fecha;
-		this.idTercero = idTercero;
+		this.terceros = tercero;
 		this.baseImponible = baseImponible;
 		this.iva = iva;
 		this.total = total;

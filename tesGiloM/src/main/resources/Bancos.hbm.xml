@@ -11,6 +11,7 @@
                 <property name="iban" column="iban" unique="true" length="20"/> 
                 <property name="contacto" />           
                 <property name="saldo" />
+                
      </class>
      </hibernate-mapping>
      

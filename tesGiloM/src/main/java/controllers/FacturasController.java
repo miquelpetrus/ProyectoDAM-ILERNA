@@ -11,6 +11,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import clases.Bancos;
 import clases.Facturas;
 import clases.LineasFacturas;
 import clases.Productos;
@@ -117,7 +118,7 @@ public class FacturasController {
 		}
 	}
 
-	public static void guardarFactura(String idFactura, int idTercero, Date fecha, double baseImponible, double baseIVA,
+	public static void guardarFactura(String idFactura, Terceros tercero, Date fecha, double baseImponible, double baseIVA,
 			double total, int idUser, int idEvento) {
 		// Obtén la sesión de Hibernate (asegúrate de tener la configuración adecuada)
 		Session session = HibernateUtil.buildSessionFactory().openSession();
@@ -132,7 +133,7 @@ public class FacturasController {
 			// Crea la entidad Facturas con los datos proporcionados
 			Facturas factura = new Facturas();
 			factura.setIdFactura(idFactura);
-			factura.setIdTercero(idTercero);
+			factura.setTerceros(tercero);
 			factura.setFecha(fecha);
 			factura.setBaseImponible(baseImponible);
 			factura.setIva(baseIVA);
@@ -194,7 +195,7 @@ public class FacturasController {
 	}
 
 	
-	public static void insertarFactura(int idBanco, String numeroFactura, SessionFactory sessionFactory) {
+	public static void insertarFactura(Bancos bancoSeleccionado, String numeroFactura, SessionFactory sessionFactory) {
 	    try (Session session = sessionFactory.openSession()) {
 	        // Obtén el id de la factura con el número dado
 	        String hql = "SELECT id FROM Facturas WHERE idFactura = :numeroFactura";
@@ -219,7 +220,8 @@ public class FacturasController {
 	            }
 
 	            // Actualiza el idBanco en la factura
-	            factura.setIdBanco(idBanco);
+                factura.setBanco(bancoSeleccionado);
+                System.out.println("Banco seleccionado: " + bancoSeleccionado.getId());
 
 	            // Actualiza la factura en la base de datos
 	            session.update(factura);
