@@ -46,26 +46,32 @@ public class UsersController {
 	}
 
 	public static boolean validarUsuario(String usuario, String password) {
-		List<Users> usuarios = getAllUsers();
+	    List<Users> usuarios = getAllUsers();
 
-		String passwordEncriptado = encriptarPassword(password);
+	    String passwordEncriptado = encriptarPassword(password);
 
-		for (Users user : usuarios) {
-			if (!(user.getEmail().trim().equals(usuario))) {
-				JOptionPane.showMessageDialog(null, "El usuario no existe", "Error", JOptionPane.ERROR_MESSAGE);
-				return false;
-			}
-			if (user.getEmail().trim().equals(usuario) && !user.getPassword().trim().equals(passwordEncriptado)) {
-				JOptionPane.showMessageDialog(null, "Contraseña incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
-				return false; // Contraseña incorrecta
-			}
-			if (user.getEmail().trim().equals(usuario) && user.getPassword().trim().equals(passwordEncriptado)) {
-				UsuarioSesion.setIdUsuario(user.getId());
-				return true; // Usuario y contraseña son válidos
-			}
-		}
-		return false;
+	    boolean usuarioEncontrado = false;
+	    for (Users user : usuarios) {
+	        if (user.getEmail().equals(usuario)) {
+	            usuarioEncontrado = true;
+	            if (user.getPassword().equals(passwordEncriptado)) {
+	                UsuarioSesion.setIdUsuario(user.getId());
+	                return true; 
+	            } else {
+	                JOptionPane.showMessageDialog(null, "Contraseña incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
+	                return false;
+	            }
+	        }
+	    }
+	    
+	    if (!usuarioEncontrado) {
+	        JOptionPane.showMessageDialog(null, "Usuario no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
+	        return false;
+	    }
+	    
+	    return false;
 	}
+
 
 	public static void crearUsuario(String nombre, String apellido1, String apellido2, String nif, String email,
 			String password) {

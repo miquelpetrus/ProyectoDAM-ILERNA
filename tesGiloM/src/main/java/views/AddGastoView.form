@@ -41,34 +41,42 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jDateChooser1" min="-2" pref="170" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="160" max="-2" attributes="0"/>
+                                      <EmptySpace min="160" pref="169" max="32767" attributes="0"/>
                                   </Group>
-                                  <Group type="103" alignment="1" groupAlignment="1" attributes="0">
-                                      <Component id="jComboBox1" alignment="0" pref="342" max="32767" attributes="0"/>
-                                      <Component id="jComboBoxSocio" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="jComboBox1" alignment="0" pref="328" max="32767" attributes="0"/>
+                                          <Component id="jComboBoxSocio" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabelEvento" min="-2" pref="140" max="-2" attributes="0"/>
-                                  <Component id="jLabelBanco" min="-2" pref="134" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabelImporte" min="-2" pref="140" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jTextFieldImporte" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jLabelEvento" min="-2" pref="140" max="-2" attributes="0"/>
+                                          <Component id="jLabelBanco" min="-2" pref="134" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jComboBoxBanco" pref="328" max="32767" attributes="0"/>
+                                          <Component id="jComboBoxEvento" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabelObs" min="-2" pref="140" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jTextFieldObs" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jComboBoxEvento" max="32767" attributes="0"/>
-                                  <Component id="jComboBoxBanco" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabelImporte" min="-2" pref="140" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jTextFieldImporte" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabelObs" min="-2" pref="140" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jTextFieldObs" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -97,9 +105,9 @@
                   <Component id="jLabelFecha" min="-2" pref="46" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jLabelTercero" max="32767" attributes="0"/>
-                  <Component id="jComboBox1" min="-2" pref="49" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabelTercero" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
+                  <Component id="jComboBox1" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -126,7 +134,7 @@
                   <Component id="jLabelImporte" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
                   <Component id="jTextFieldImporte" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="37" max="32767" attributes="0"/>
+              <EmptySpace pref="46" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jButtonCerrar" alignment="3" min="-2" pref="52" max="-2" attributes="0"/>
                   <Component id="jButtonGuardar" alignment="3" min="-2" pref="52" max="-2" attributes="0"/>
@@ -139,7 +147,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabelFecha">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Fecha Ingreso:"/>
+        <Property name="text" type="java.lang.String" value="Fecha Gasto:"/>
       </Properties>
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">

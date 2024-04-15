@@ -26,7 +26,7 @@ import controllers.SociosController;
 public class TercerosView extends javax.swing.JPanel {
 
     /**
-     * Creates new form ProveedoresView
+     * Creates new form TercerosView
      */
     private DefaultTableModel tableModel;
     private SessionFactory sessionFactory;
@@ -215,7 +215,7 @@ public class TercerosView extends javax.swing.JPanel {
             javax.swing.JPopupMenu popupMenu = new javax.swing.JPopupMenu();
 
             // Opción para editar el evento
-            javax.swing.JMenuItem editarMenuItem = new javax.swing.JMenuItem("Editar Socio");
+            javax.swing.JMenuItem editarMenuItem = new javax.swing.JMenuItem("Editar Tercero");
             editarMenuItem.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
                     abrirVistaEdicion(datosFila);
@@ -224,7 +224,7 @@ public class TercerosView extends javax.swing.JPanel {
             popupMenu.add(editarMenuItem);
             
             // Opción para eliminar el evento
-            javax.swing.JMenuItem eliminarMenuItem = new javax.swing.JMenuItem("Eliminar Socio");
+            javax.swing.JMenuItem eliminarMenuItem = new javax.swing.JMenuItem("Eliminar Tercero");
             eliminarMenuItem.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
                 	//Elimina el usuario

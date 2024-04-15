@@ -88,8 +88,8 @@ public class MainApp extends javax.swing.JFrame {
         jMenuSalir = new javax.swing.JMenuItem();
         jMenuGest = new javax.swing.JMenu();
         jMenuTerceros = new javax.swing.JMenuItem();
-        jMenuFac = new javax.swing.JMenuItem();
         jMenuProductos = new javax.swing.JMenuItem();
+        jMenuFac = new javax.swing.JMenuItem();
         jMenuEventos = new javax.swing.JMenuItem();
         jMenuCuentas = new javax.swing.JMenu();
         jMenuBancos = new javax.swing.JMenuItem();
@@ -153,7 +153,6 @@ public class MainApp extends javax.swing.JFrame {
 
         jMenuConfig.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
         jMenuConfig.setText("Configurar");
-        jMenuConfig.setActionCommand("Configurar");
         jMenuConfig.setPreferredSize(new java.awt.Dimension(103, 32));
         jMenuConfig.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -188,16 +187,6 @@ public class MainApp extends javax.swing.JFrame {
         });
         jMenuGest.add(jMenuTerceros);
 
-        jMenuFac.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-        jMenuFac.setText("Facturas");
-        jMenuFac.setPreferredSize(new java.awt.Dimension(92, 32));
-        jMenuFac.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuFacActionPerformed(evt);
-            }
-        });
-        jMenuGest.add(jMenuFac);
-
         jMenuProductos.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
         jMenuProductos.setText("Productos");
         jMenuProductos.setPreferredSize(new java.awt.Dimension(102, 32));
@@ -207,6 +196,16 @@ public class MainApp extends javax.swing.JFrame {
             }
         });
         jMenuGest.add(jMenuProductos);
+
+        jMenuFac.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        jMenuFac.setText("Facturas");
+        jMenuFac.setPreferredSize(new java.awt.Dimension(92, 32));
+        jMenuFac.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuFacActionPerformed(evt);
+            }
+        });
+        jMenuGest.add(jMenuFac);
 
         jMenuEventos.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
         jMenuEventos.setText("Eventos");
@@ -379,7 +378,7 @@ public class MainApp extends javax.swing.JFrame {
 		// TODO add your handling code here:
 		try {
 			TercerosView proveedoresView = new TercerosView();
-			HibernateUtil.abrirVentana(proveedoresView, "Proveedores");
+			HibernateUtil.abrirVentana(proveedoresView, "Terceros");
 
 		} catch (Exception e) {
 			e.printStackTrace();
