@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import clases.FamiliaProducto;
 import clases.Productos;
 import clases.Terceros;
 
@@ -34,8 +35,8 @@ public class ProductosController {
 		}
 	}
 
-	public static void crearProducto(String nombre, String descripcion, double precioCompra, int tercero,
-			int familiaProducto) {
+	public static void crearProducto(String nombre, String descripcion, double precioCompra, Terceros tercero,
+			FamiliaProducto familiaProducto) {
 		try (Session session = HibernateUtil.buildSessionFactory().openSession()) {
 			Transaction transaction = null;
 
@@ -46,8 +47,8 @@ public class ProductosController {
 				nuevoProducto.setNombre(nombre);
 				nuevoProducto.setDescripcion(descripcion);
 				nuevoProducto.setPrecio(precioCompra);
-				nuevoProducto.setIdTercero(tercero);
-				nuevoProducto.setIdFamilia(familiaProducto);
+				nuevoProducto.setTerceros(tercero);
+				nuevoProducto.setFamiliaProducto(familiaProducto);
 
 				session.save(nuevoProducto);
 
@@ -64,8 +65,8 @@ public class ProductosController {
 		}
 	}
 
-	public static void actualizarProducto(int id, String nombre, String descripcion, double precioCompra, int tercero,
-			int familiaProducto) {
+	public static void actualizarProducto(int id, String nombre, String descripcion, double precioCompra, Terceros tercero,
+			FamiliaProducto familiaProducto) {
 		try (Session session = HibernateUtil.buildSessionFactory().openSession()) {
 			Transaction transaction = null;
 
@@ -76,8 +77,8 @@ public class ProductosController {
 				producto.setNombre(nombre);
 				producto.setDescripcion(descripcion);
 				producto.setPrecio(precioCompra);
-				producto.setIdTercero(tercero);
-				producto.setIdFamilia(familiaProducto);
+				producto.setTerceros(tercero);
+				producto.setFamiliaProducto(familiaProducto);
 
 				session.update(producto);
 

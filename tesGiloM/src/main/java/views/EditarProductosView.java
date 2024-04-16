@@ -199,12 +199,10 @@ public class EditarProductosView extends javax.swing.JPanel {
     	        String descripcion = jTextDescP.getText();	
     	        double precioCompra = Double.parseDouble(jTextPrecioC.getText());
     	        // Obtener el proveedor seleccionado y su ID
-    	        Terceros proveedorSeleccionado = (Terceros) jComboBoxProv.getSelectedItem();
-    	        int idProveedor = proveedorSeleccionado.getId();
+    	        Terceros terceroSeleccionado = (Terceros) jComboBoxProv.getSelectedItem();
     	        // Obtener la familia de productos seleccionada y su ID
     	        FamiliaProducto familiaSeleccionada = (FamiliaProducto) jComboBoxFam.getSelectedItem();
-    	        int idFamilia = familiaSeleccionada.getId();
-    	        ProductosController.actualizarProducto(id, nombre, descripcion, precioCompra, idProveedor, idFamilia);
+    	        ProductosController.actualizarProducto(id, nombre, descripcion, precioCompra, terceroSeleccionado, familiaSeleccionada);
     	        HibernateUtil.abrirVentana(new ProductosView(), "Productos");
     	        HibernateUtil.cerrarVentana(this);
     	                

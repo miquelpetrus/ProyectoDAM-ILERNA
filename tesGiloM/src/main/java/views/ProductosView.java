@@ -1,6 +1,8 @@
 package views;
 
+import clases.FamiliaProducto;
 import clases.Productos;
+import clases.Terceros;
 import controllers.HibernateUtil;
 import controllers.ProductosController;
 
@@ -78,13 +80,15 @@ public class ProductosView extends javax.swing.JPanel {
 
                 // Agrega los usuarios al modelo de la tabla
                 for (Productos producto : productos) {
+                	Terceros tercero = producto.getTerceros();
+                	FamiliaProducto familia = producto.getFamiliaProducto();
                     tableModel.addRow(new Object[]{
                             producto.getId(),
                             producto.getNombre(),
                             producto.getDescripcion(),
                             producto.getPrecio(),
-                            producto.getIdFamilia(),
-                            producto.getIdTercero(),
+                            (familia != null) ? familia.getId() : "",
+                            (tercero != null) ? tercero.getId() : "",
                     });
                 }
 
