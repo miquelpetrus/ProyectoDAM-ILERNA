@@ -85,6 +85,7 @@ public class MainApp extends javax.swing.JFrame {
         jMenuFile = new javax.swing.JMenu();
         jMenuConnect = new javax.swing.JMenuItem();
         jMenuConfig = new javax.swing.JMenuItem();
+        jMenuAbout = new javax.swing.JMenuItem();
         jMenuSalir = new javax.swing.JMenuItem();
         jMenuGest = new javax.swing.JMenu();
         jMenuTerceros = new javax.swing.JMenuItem();
@@ -160,6 +161,16 @@ public class MainApp extends javax.swing.JFrame {
             }
         });
         jMenuFile.add(jMenuConfig);
+
+        jMenuAbout.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        jMenuAbout.setText("Acerca de");
+        jMenuAbout.setPreferredSize(new java.awt.Dimension(103, 32));
+        jMenuAbout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuAboutActionPerformed(evt);
+            }
+        });
+        jMenuFile.add(jMenuAbout);
 
         jMenuSalir.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
         jMenuSalir.setText("Salir");
@@ -305,6 +316,11 @@ public class MainApp extends javax.swing.JFrame {
     	HibernateUtil.abrirVentana(new ConfiguracionView(), "Configuración");
         
     }//GEN-LAST:event_jMenuConfigActionPerformed
+
+    private void jMenuAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAboutActionPerformed
+        // TODO add your handling code here:
+    	HibernateUtil.abrirVentana(new About(), "Acerca de");
+    }//GEN-LAST:event_jMenuAboutActionPerformed
 
 	// A partir de aquí van las acciones de los botones del menú
 
@@ -503,6 +519,7 @@ public class MainApp extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabelBienvenida;
     private javax.swing.JLabel jLabelLogo;
+    private javax.swing.JMenuItem jMenuAbout;
     private javax.swing.JMenuItem jMenuBancos;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuConfig;
